@@ -5,16 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mutinous Technology</title>
     <style>
+        /* Genel Sayfa Ayarları */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
             background-color: #f0f2f5;
             margin: 0;
-            padding: 5px 10px;
+            padding: 10px;
+            box-sizing: border-box;
         }
         .header {
             margin-top: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
         .profile-img {
             width: 113px;
@@ -27,57 +29,101 @@
             margin: 0 auto;
         }
         h3 {
-            margin: 5px 0 0 0;
+            margin: 10px 0 0 0;
             color: #333;
         }
         .description {
             font-size: 16px;
             color: #333;
-            max-width: 400px;
-            margin: 2px auto 10px auto;
+            max-width: 500px;
+            margin: 5px auto 15px auto;
             font-weight: 500;
+            padding: 0 10px;
         }
+
+        /* AKILLI ESNEK DÜZEN (RESPONSIVE GRID) */
+        /* Varsayılan olarak mobil uyumlu (Tek sütun, alt alta) */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .links-container {
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+
+        .media-container {
+            width: 100%;
+            max-width: 550px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* BİLGİSAYAR (MASAÜSTÜ) TARAYICI UYUMU */
+        /* Ekran genişliği 768px'den büyükse otomatik yan yana iki sütun yap */
+        @media (min-width: 768px) {
+            .main-layout {
+                grid-template-columns: 4fr 6fr; /* Sol taraf %40, Sağ taraf %60 genişlik */
+                align-items: start;
+            }
+            .links-container {
+                max-width: 100%;
+            }
+            .media-container {
+                max-width: 100%;
+            }
+        }
+
+        /* Buton Tasarımları */
         .btn {
             display: block;
-            width: 94%; 
-            max-width: 400px;
-            margin: 12px auto;
-            padding: 13px 0;
+            width: 100%;
+            margin: 8px 0;
+            padding: 14px 0;
             text-decoration: none;
             color: white;
             border-radius: 12px;
             font-weight: bold;
             font-size: 16px;
-            transition: transform 0.2s;
+            transition: transform 0.2s, opacity 0.2s;
+            box-sizing: border-box;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
         .btn:hover { transform: scale(1.02); opacity: 0.9; }
         
-        /* Renkler */
+        /* Renk Kodları */
         .yt { background-color: #FF0000; }
+        .dm { background-color: #0066DC; }
+        .ms { background-color: #6364FF; }
         .tt { background-color: #000000; }
         .rumble { background-color: #87C232; }
-        .dm { background-color: #0066DC; }
         .tg { background-color: #0088cc; }
         .ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
         .tw { background-color: #1DA1F2; }
-        .ms { background-color: #6364FF; }
         .wa { background-color: #25D366; }
         .pt { background-color: #FF424D; }
         .fb { background-color: #4267B2; }
         .com { background-color: #555; }
         .mail { background-color: #D44638; }
 
-        /* Video Oynatıcı Alanı */
+        /* Video Oyantıcı Kapsayıcı (16:9 Oranı) */
         .video-container {
-            width: 94%;
-            max-width: 400px;
-            margin: 25px auto;
+            width: 100%;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 Oranı */
+            padding-bottom: 56.25%; 
             height: 0;
+            background: #000;
         }
         .video-container iframe, .video-container div {
             position: absolute;
@@ -88,16 +134,13 @@
             border: 0;
         }
         
-        /* Telegram Resmi Yerleşim Alanı */
+        /* Telegram Bölümü */
         .telegram-container {
-            width: 94%;
-            max-width: 400px;
-            margin: 25px auto;
+            width: 100%;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             background: #fff;
-            display: inline-block;
             text-align: left;
         }
     </style>
@@ -116,95 +159,61 @@
         <p class="description">Bağımsız Yayıncılığıma Hoşgeldiniz Tüm Güncel İçeriklerime Buradan Ulaşabilirsiniz.</p>
     </div>
 
-    <a href="https://youtube.com/MutinousTube" class="btn yt">YouTube</a>
-    <a href="https://www.youtube.com/channel/UCNQpjQqIsdUkKjsulWjngJA/join" class="btn dm">Özel Katıl Üyeliği</a>
-    <a href="https://www.youtube.com/playlist?list=UUMONQpjQqIsdUkKjsulWjngJA" class="btn ms">Katıl Üyeliği Videoları</a>
-    <a href="https://www.tiktok.com/@mutinoustube" class="btn tt">TikTok</a>
-    <a href="https://www.rumble.com/user/MutinousTube" class="btn rumble">Rumble</a>
-    <a href="https://www.dailymotion.com/MutinousTube" class="btn dm">Dailymotion</a>
-    <a href="https://t.me/MutinousTube" class="btn tg">Telegram</a>
-    <a href="https://www.instagram.com/MutinousTube" class="btn ig">Instagram</a>
-    <a href="https://www.x.com/MutinousTube" class="btn tw">Twitter (X)</a>
-    <a href="https://mastodon.social/@MutinousTube" class="btn ms">Mastodon</a>
-    <a href="https://whatsapp.com/channel/0029Vb4JKWmIyPtbv15mol0F" class="btn wa">WhatsApp</a>
-    <a href="https://www.patreon.com/MutinousTube" class="btn pt">Patreon</a>
-    <a href="https://odysee.com/@MutinousTube" class="btn dm">Odysee</a>
-    <a href="https://www.facebook.com/MutinousTube" class="btn fb">Facebook</a>
-    <a href="https://youtube.com/@MutinousTube/community" class="btn com">Topluluk</a>
-    <a href="mailto:MutinousTube@gmail.com" class="btn mail">İletişim</a>
+    <div class="main-layout">
+        
+        <div class="links-container">
+            <a href="https://youtube.com/MutinousTube" class="btn yt">YouTube</a>
+            <a href="https://www.youtube.com/channel/UCNQpjQqIsdUkKjsulWjngJA/join" class="btn dm">Özel Katıl Üyeliği</a>
+            <a href="https://www.youtube.com/playlist?list=UUMONQpjQqIsdUkKjsulWjngJA" class="btn ms">Katıl Üyeliği Videoları</a>
+            <a href="https://www.tiktok.com/@mutinoustube" class="btn tt">TikTok</a>
+            <a href="https://www.rumble.com/user/MutinousTube" class="btn rumble">Rumble</a>
+            <a href="https://www.dailymotion.com/MutinousTube" class="btn dm">Dailymotion</a>
+            <a href="https://t.me/MutinousTube" class="btn tg">Telegram</a>
+            <a href="https://www.instagram.com/MutinousTube" class="btn ig">Instagram</a>
+            <a href="https://www.x.com/MutinousTube" class="btn tw">Twitter (X)</a>
+            <a href="https://mastodon.social/@MutinousTube" class="btn ms">Mastodon</a>
+            <a href="https://whatsapp.com/channel/0029Vb4JKWmIyPtbv15mol0F" class="btn wa">WhatsApp</a>
+            <a href="https://www.patreon.com/MutinousTube" class="btn pt">Patreon</a>
+            <a href="https://odysee.com/@MutinousTube" class="btn dm">Odysee</a>
+            <a href="https://www.facebook.com/MutinousTube" class="btn fb">Facebook</a>
+            <a href="https://youtube.com/@MutinousTube/community" class="btn com">Topluluk</a>
+            <a href="mailto:MutinousTube@gmail.com" class="btn mail">İletişim</a>
+        </div>
 
-    <div class="video-container">
-        <div id="player"></div>
-    </div>
+        <div class="media-container">
+            
+            <div class="video-container">
+                <iframe 
+                    id="yt-player"
+                    src="https://www.youtube-nocookie.com/embed/videoseries?list=PLs8e_3KWChB_qb5k_r-lYlg31Xyl5AKhu&autoplay=1&mute=1&playsinline=1&rel=0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
 
-    <div class="video-container">
-        <iframe 
-            src="https://www.dailymotion.com/embed/playlist/xbx1yy?autoplay=0&mute=0&queue-autoplay-next=0" 
-            allow="clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen>
-        </iframe>
-    </div>
+            <div class="video-container">
+                <iframe 
+                    id="dm-player"
+                    src="https://www.dailymotion.com/embed/playlist/xbx1yy?autoplay=0&mute=1&ui-start-screen-info=0&queue-autoplay-next=0" 
+                    allow="clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
 
-    <div class="video-container">
-        <div id="rumble_v76n2f8"></div>
-    </div>
+            <div class="video-container">
+                <div id="rumble_v76n2f8"></div>
+            </div>
 
-    <div class="telegram-container">
-        <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="MutinousTube/111" data-width="100%"></script>
+            <div class="telegram-container">
+                <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="MutinousTube/111" data-width="100%"></script>
+            </div>
+
+        </div>
     </div>
 
     <script>
         !function(r,u,m,b,l,e){r._Rumble=b,r[b]||(r[b]=function(){(r[b]._=r[b]._||[]).push(arguments);if(r[b]._.length==1){l=u.createElement(m),e=u.getElementsByTagName(m)[0],l.async=1,l.src="https://rumble.com/embedJS/u4p7gvi"+(arguments[1].video?'.'+arguments[1].video:'')+"/?url="+encodeURIComponent(location.href)+"&args="+encodeURIComponent(JSON.stringify([].slice.apply(arguments))),e.parentNode.insertBefore(l,e)}})}(window, document, "script", "Rumble");
         Rumble("play", {"video":"v76n2f8","div":"rumble_v76n2f8"});
-    </script>
-
-    <script>
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        var player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '100%',
-                width: '100%',
-                playerVars: {
-                    'listType': 'playlist',
-                    'list': 'PLs8e_3KWChB_qb5k_r-lYlg31Xyl5AKhu',
-                    'autoplay': 1,
-                    'mute': 1, 
-                    'playsinline': 1,
-                    'rel': 0
-                },
-                events: {
-                    'onReady': onPlayerReady
-                }
-            });
-        }
-
-        function onPlayerReady(event) {
-            // İlk açılışta sessiz olarak oynatmayı dene
-            event.target.playVideo();
-            
-            // Tarayıcı engelini aşmak için kullanıcı etkileşimi tetikleyicisi
-            var activatePlayer = function() {
-                if (player && typeof player.playVideo === 'function') {
-                    player.unMute();     // Sesi aç
-                    player.setVolume(100); // Ses seviyesini %100 yap
-                    player.playVideo();   // Oynatmayı garantiye al
-                }
-                // Tetikleyicileri temizle (Sadece bir kez çalışması için)
-                window.removeEventListener('click', activatePlayer);
-                window.removeEventListener('touchstart', activatePlayer);
-                window.removeEventListener('scroll', activatePlayer);
-            };
-
-            // Kullanıcı sayfada tıkladığında, kaydırdığında veya dokunduğunda YouTube'u canlandır
-            window.addEventListener('click', activatePlayer);
-            window.addEventListener('touchstart', activatePlayer);
-            window.addEventListener('scroll', activatePlayer);
-        }
     </script>
 
 </body>
