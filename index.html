@@ -140,7 +140,7 @@
     <div class="video-container">
         <iframe 
             src="https://www.dailymotion.com/embed/playlist/xbx1yy?autoplay=0&mute=0&queue-autoplay-next=0" 
-            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allow="clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
             allowfullscreen>
         </iframe>
     </div>
@@ -173,7 +173,7 @@
                     'listType': 'playlist',
                     'list': 'PLs8e_3KWChB_qb5k_r-lYlg31Xyl5AKhu',
                     'autoplay': 1,
-                    'mute': 1, // Tarayıcıların engellememesi için ilk başta sessiz başlamalı
+                    'mute': 1, 
                     'playsinline': 1,
                     'rel': 0
                 },
@@ -184,22 +184,26 @@
         }
 
         function onPlayerReady(event) {
+            // İlk açılışta sessiz olarak oynatmayı dene
             event.target.playVideo();
             
-            var unlockSound = function() {
-                if (player && typeof player.unMute === 'function') {
-                    player.unMute();
-                    player.setVolume(100); 
-                    // playVideo() çağrısını sildim çünkü zaten oynuyor, sadece sesi açıyoruz.
+            // Tarayıcı engelini aşmak için kullanıcı etkileşimi tetikleyicisi
+            var activatePlayer = function() {
+                if (player && typeof player.playVideo === 'function') {
+                    player.unMute();     // Sesi aç
+                    player.setVolume(100); // Ses seviyesini %100 yap
+                    player.playVideo();   // Oynatmayı garantiye al
                 }
-                window.removeEventListener('click', unlockSound);
-                window.removeEventListener('touchstart', unlockSound);
-                window.removeEventListener('scroll', unlockSound);
+                // Tetikleyicileri temizle (Sadece bir kez çalışması için)
+                window.removeEventListener('click', activatePlayer);
+                window.removeEventListener('touchstart', activatePlayer);
+                window.removeEventListener('scroll', activatePlayer);
             };
 
-            window.addEventListener('click', unlockSound);
-            window.addEventListener('touchstart', unlockSound);
-            window.addEventListener('scroll', unlockSound);
+            // Kullanıcı sayfada tıkladığında, kaydırdığında veya dokunduğunda YouTube'u canlandır
+            window.addEventListener('click', activatePlayer);
+            window.addEventListener('touchstart', activatePlayer);
+            window.addEventListener('scroll', activatePlayer);
         }
     </script>
 
