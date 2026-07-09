@@ -975,7 +975,7 @@
 
 
 
-        <!DOCTYPE html>
+                    <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
@@ -1017,7 +1017,7 @@
     <div id="updateStatus">🔄 Güncelleniyor...</div>
     <h1>📊 Piyasa Analizleri (Canlı)</h1>
 
-    <!-- Döviz Kurları -->
+    <!-- Döviz -->
     <div class="section">
         <h2>💱 Döviz Kurları</h2>
         <table>
@@ -1043,7 +1043,7 @@
         </table>
     </div>
 
-    <!-- Diğer Metaller -->
+    <!-- Metaller (Gümüş, Platin, Paladyum) -->
     <div class="section">
         <h2>🥈 Diğer Metaller</h2>
         <table>
@@ -1052,39 +1052,6 @@
                 <tr><td>Gümüş</td><td id="silverPrice">Yükleniyor...</td><td id="silverTl">Yükleniyor...</td></tr>
                 <tr><td>Platin</td><td id="platinumPrice">Yükleniyor...</td><td id="platinumTl">Yükleniyor...</td></tr>
                 <tr><td>Paladyum</td><td id="palladiumPrice">Yükleniyor...</td><td id="palladiumTl">Yükleniyor...</td></tr>
-                <tr><td>Bakır</td><td id="copperPrice">Yükleniyor...</td><td id="copperTl">Yükleniyor...</td></tr>
-                <tr><td>Alüminyum</td><td id="aluminumPrice">Yükleniyor...</td><td id="aluminumTl">Yükleniyor...</td></tr>
-                <tr><td>Demir</td><td id="ironPrice">Yükleniyor...</td><td id="ironTl">Yükleniyor...</td></tr>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Gıda Emtiaları -->
-    <div class="section">
-        <h2>🌾 Gıda Emtiaları</h2>
-        <table>
-            <thead><tr><th>Emtia</th><th>Birim</th><th>Fiyat (USD)</th><th>Fiyat (TL)</th></tr></thead>
-            <tbody>
-                <tr><td>Buğday</td><td>Bushel</td><td id="wheatPrice">Yükleniyor...</td><td id="wheatTl">Yükleniyor...</td></tr>
-                <tr><td>Mısır</td><td>Bushel</td><td id="cornPrice">Yükleniyor...</td><td id="cornTl">Yükleniyor...</td></tr>
-                <tr><td>Kahve</td><td>Lb</td><td id="coffeePrice">Yükleniyor...</td><td id="coffeeTl">Yükleniyor...</td></tr>
-                <tr><td>Şeker</td><td>Lb</td><td id="sugarPrice">Yükleniyor...</td><td id="sugarTl">Yükleniyor...</td></tr>
-                <tr><td>Pamuk</td><td>Lb</td><td id="cottonPrice">Yükleniyor...</td><td id="cottonTl">Yükleniyor...</td></tr>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Borsalar -->
-    <div class="section">
-        <h2>📈 Borsalar</h2>
-        <table>
-            <thead><tr><th>Borsa</th><th>Endeks</th></tr></thead>
-            <tbody>
-                <tr><td>BIST 100</td><td id="bistPrice">Yükleniyor...</td></tr>
-                <tr><td>S&P 500</td><td id="spPrice">Yükleniyor...</td></tr>
-                <tr><td>Nasdaq</td><td id="nasdaqPrice">Yükleniyor...</td></tr>
-                <tr><td>DAX</td><td id="daxPrice">Yükleniyor...</td></tr>
-                <tr><td>Nikkei 225</td><td id="nikkeiPrice">Yükleniyor...</td></tr>
             </tbody>
         </table>
     </div>
@@ -1182,7 +1149,7 @@
                     document.getElementById('goldTl').innerText = 'Veri yok';
                 }
 
-                // 3. Diğer Metaller (Metals.Live)
+                // 3. Metaller (Gümüş, Platin, Paladyum) - Metals.Live
                 try {
                     const metalRes = await fetch('https://api.metals.live/v1/spot/');
                     const metalData = await metalRes.json();
@@ -1192,10 +1159,7 @@
                     const metals = [
                         { id: 'silver', symbol: 'XAG' },
                         { id: 'platinum', symbol: 'XPT' },
-                        { id: 'palladium', symbol: 'XPD' },
-                        { id: 'copper', symbol: 'XCU' },
-                        { id: 'aluminum', symbol: 'XAL' },
-                        { id: 'iron', symbol: 'XIR' }
+                        { id: 'palladium', symbol: 'XPD' }
                     ];
                     metals.forEach(m => {
                         const price = metalMap[m.symbol];
@@ -1212,45 +1176,7 @@
                     // Metals.Live çalışmazsa boş bırak
                 }
 
-                // 4. Gıda Emtiaları (Yahoo Finance)
-                const foodSymbols = {
-                    wheat: 'ZW=F', corn: 'ZC=F', coffee: 'KC=F', sugar: 'SB=F', cotton: 'CT=F'
-                };
-                for (const [key, symbol] of Object.entries(foodSymbols)) {
-                    try {
-                        const res = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${symbol}`);
-                        const data = await res.json();
-                        const price = data?.chart?.result?.[0]?.meta?.regularMarketPrice;
-                        if (price) {
-                            document.getElementById(key + 'Price').innerText = `$${price.toFixed(2)}`;
-                            const tl = usdRate ? price * usdRate : 0;
-                            document.getElementById(key + 'Tl').innerText = tl ? `${tl.toFixed(2)} TL` : 'Veri yok';
-                        } else {
-                            document.getElementById(key + 'Price').innerText = 'Veri yok';
-                            document.getElementById(key + 'Tl').innerText = 'Veri yok';
-                        }
-                    } catch (e) {
-                        document.getElementById(key + 'Price').innerText = 'Veri yok';
-                        document.getElementById(key + 'Tl').innerText = 'Veri yok';
-                    }
-                }
-
-                // 5. Borsalar (Yahoo Finance)
-                const indexSymbols = {
-                    bist: 'XU100.IS', sp: '^GSPC', nasdaq: '^IXIC', dax: '^GDAXI', nikkei: '^N225'
-                };
-                for (const [key, symbol] of Object.entries(indexSymbols)) {
-                    try {
-                        const res = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${symbol}`);
-                        const data = await res.json();
-                        const price = data?.chart?.result?.[0]?.meta?.regularMarketPrice;
-                        document.getElementById(key + 'Price').innerText = price ? price.toFixed(2) : 'Veri yok';
-                    } catch (e) {
-                        document.getElementById(key + 'Price').innerText = 'Veri yok';
-                    }
-                }
-
-                // 6. Kripto (CoinGecko)
+                // 4. Kripto (CoinGecko)
                 const cryptoRes = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,solana,ripple,dogecoin,cardano,avalanche-2,polkadot,shiba-inu&vs_currencies=usd');
                 const cryptoData = await cryptoRes.json();
                 const cryptoMap = {
