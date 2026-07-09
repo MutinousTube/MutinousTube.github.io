@@ -969,6 +969,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -1006,6 +1007,8 @@
                 <tr><td>Altın (ONS)</td><td id="goldPrice">Yükleniyor...</td><td id="goldChange"></td></tr>
                 <tr><td>Gümüş</td><td id="silverPrice">Yükleniyor...</td><td id="silverChange"></td></tr>
                 <tr><td>Bakır</td><td id="copperPrice">Yükleniyor...</td><td id="copperChange"></td></tr>
+                <tr><td>Platin</td><td id="platinumPrice">Yükleniyor...</td><td id="platinumChange"></td></tr>
+                <tr><td>Paladyum</td><td id="palladiumPrice">Yükleniyor...</td><td id="palladiumChange"></td></tr>
             </tbody>
         </table>
     </div>
@@ -1014,11 +1017,14 @@
         <h2>Gıda Emtiaları</h2>
         <table id="foodTable">
             <thead>
-                <tr><th>Emtia</th><th>Fiyat</th><th>Değişim</th></tr>
+                <tr><th>Emtia</th><th>Birim</th><th>Fiyat</th></tr>
             </thead>
             <tbody>
-                <tr><td>Buğday</td><td>$562.50</td><td class="positive">+%0.80</td></tr>
-                <tr><td>Mısır</td><td>$442.25</td><td class="negative">-%0.30</td></tr>
+                <tr><td>Buğday</td><td>Bushel</td><td>$562.50</td></tr>
+                <tr><td>Mısır</td><td>Bushel</td><td>$442.25</td></tr>
+                <tr><td>Kahve</td><td>Lb</td><td>$215.60</td></tr>
+                <tr><td>Şeker</td><td>Lb</td><td>$22.40</td></tr>
+                <tr><td>Pamuk</td><td>Lb</td><td>$80.15</td></tr>
             </tbody>
         </table>
     </div>
@@ -1030,8 +1036,11 @@
                 <tr><th>Borsa</th><th>Endeks</th><th>Değişim</th></tr>
             </thead>
             <tbody>
-                <tr><td>S&P 500</td><td>5,321.40</td><td class="positive">+%0.60</td></tr>
-                <tr><td>Nasdaq</td><td>16,915.20</td><td class="positive">+%0.85</td></tr>
+                <tr><td>BIST 100</td><td>Yükleniyor...</td><td id="bistChange"></td></tr>
+                <tr><td>S&P 500</td><td>Yükleniyor...</td><td id="spChange"></td></tr>
+                <tr><td>Nasdaq</td><td>Yükleniyor...</td><td id="nasdaqChange"></td></tr>
+                <tr><td>DAX</td><td>Yükleniyor...</td><td id="daxChange"></td></tr>
+                <tr><td>Nikkei 225</td><td>Yükleniyor...</td><td id="nikkeiChange"></td></tr>
             </tbody>
         </table>
     </div>
@@ -1043,8 +1052,11 @@
                 <tr><th>Para Birimi</th><th>Alış</th><th>Satış</th></tr>
             </thead>
             <tbody>
-                <tr><td>USD/TRY</td><td id="usdBuy">Yükleniyor...</td><td id="usdSell"></td></tr>
-                <tr><td>EUR/TRY</td><td id="eurBuy">Yükleniyor...</td><td id="eurSell"></td></tr>
+                <tr><td>USD/TRY</td><td id="usdBuy">Yükleniyor...</td><td id="usdSell">Yükleniyor...</td></tr>
+                <tr><td>EUR/TRY</td><td id="eurBuy">Yükleniyor...</td><td id="eurSell">Yükleniyor...</td></tr>
+                <tr><td>GBP/TRY</td><td id="gbpBuy">Yükleniyor...</td><td id="gbpSell">Yükleniyor...</td></tr>
+                <tr><td>JPY/TRY</td><td id="jpyBuy">Yükleniyor...</td><td id="jpySell">Yükleniyor...</td></tr>
+                <tr><td>RUB/TRY</td><td id="rubBuy">Yükleniyor...</td><td id="rubSell">Yükleniyor...</td></tr>
             </tbody>
         </table>
     </div>
@@ -1067,8 +1079,21 @@
         <select id="calcType">
             <option value="gold">Altın Hesaplayıcı</option>
             <option value="dollar">Dolar/TL Çevirici</option>
+            <option value="interest">Faiz Hesaplayıcı</option>
         </select><br>
-        <input type="number" id="amount" placeholder="Miktar girin" style="width:100%;"><br>
+        
+        <div id="goldInput">
+            <input type="number" id="gramAmount" placeholder="Gram altın miktarını girin" style="width:100%;">
+        </div>
+        <div id="dollarInput" style="display:none;">
+            <input type="number" id="usdAmount" placeholder="USD miktarını girin" style="width:100%;">
+        </div>
+        <div id="interestInput" style="display:none;">
+            <input type="number" id="principal" placeholder="Ana para miktarını girin (TL)" style="width:100%;">
+            <input type="number" id="rate" placeholder="Yıllık faiz oranı (%)" style="width:100%;">
+            <input type="number" id="days" placeholder="Vade (Gün sayısı)" style="width:100%;">
+        </div>
+
         <button onclick="calculate()">Hesapla</button>
         <div id="result" style="margin-top:10px; font-weight:bold;">Sonuç: -</div>
     </div>
@@ -1089,28 +1114,33 @@
     <script>
         const ADMIN_EMAIL = "altinborsapiyasa@gmail.com";
 
+        document.getElementById('calcType').addEventListener('change', function() {
+            document.getElementById('goldInput').style.display = 'none';
+            document.getElementById('dollarInput').style.display = 'none';
+            document.getElementById('interestInput').style.display = 'none';
+            
+            if (this.value === 'gold') document.getElementById('goldInput').style.display = 'block';
+            if (this.value === 'dollar') document.getElementById('dollarInput').style.display = 'block';
+            if (this.value === 'interest') document.getElementById('interestInput').style.display = 'block';
+        });
+
         async function fetchMarketData() {
             try {
-                // Döviz Kurları API'si
                 const curResponse = await fetch('https://api.frankfurter.app/latest?from=USD&to=TRY');
                 const curData = await curResponse.json();
                 document.getElementById('usdBuy').innerText = curData.rates.TRY;
+                document.getElementById('usdSell').innerText = (curData.rates.TRY * 1.002).toFixed(4);
 
-                // Kripto Para API'si
                 const cryptoResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true');
                 const cryptoData = await cryptoResponse.json();
                 
                 document.getElementById('btcPrice').innerText = "$" + cryptoData.bitcoin.usd.toLocaleString();
                 const btcChange = cryptoData.bitcoin.usd_24h_change;
-                const btcChangeElement = document.getElementById('btcChange');
-                btcChangeElement.innerText = btcChange.toFixed(2) + "%";
-                btcChangeElement.className = btcChange >= 0 ? 'positive' : 'negative';
+                document.getElementById('btcChange').innerText = btcChange.toFixed(2) + "%";
 
                 document.getElementById('ethPrice').innerText = "$" + cryptoData.ethereum.usd.toLocaleString();
                 const ethChange = cryptoData.ethereum.usd_24h_change;
-                const ethChangeElement = document.getElementById('ethChange');
-                ethChangeElement.innerText = ethChange.toFixed(2) + "%";
-                ethChangeElement.className = ethChange >= 0 ? 'positive' : 'negative';
+                document.getElementById('ethChange').innerText = ethChange.toFixed(2) + "%";
 
             } catch (error) {
                 console.error("Veri alınırken hata oluştu:", error);
@@ -1119,22 +1149,31 @@
 
         function calculate() {
             const type = document.getElementById("calcType").value;
-            const amount = parseFloat(document.getElementById("amount").value);
             const resultDiv = document.getElementById("result");
 
-            if (isNaN(amount) || amount <= 0) {
-                resultDiv.innerText = "Lütfen geçerli bir miktar girin.";
-                return;
-            }
-
             if (type === "gold") {
-                const gramAltinUsd = 76.80; 
-                const total = amount * gramAltinUsd;
-                resultDiv.innerText = `Sonuç: ${amount} Gram Altın = $${total.toFixed(2)}`;
+                const gram = parseFloat(document.getElementById("gramAmount").value);
+                const gramAltinFiyati = 2500; 
+                if (isNaN(gram) || gram <= 0) { resultDiv.innerText = "Lütfen geçerli bir miktar girin."; return; }
+                const total = gram * gramAltinFiyati;
+                resultDiv.innerText = `Sonuç: ${gram} Gram Altın = ${total.toFixed(2)} TL`;
             } else if (type === "dollar") {
-                const usdTryRate = 32.92;
-                const total = amount * usdTryRate;
-                resultDiv.innerText = `Sonuç: $${amount} USD = ₺${total.toFixed(2)}`;
+                const usd = parseFloat(document.getElementById("usdAmount").value);
+                const usdKur = parseFloat(document.getElementById('usdBuy').innerText);
+                if (isNaN(usd) || usd <= 0 || isNaN(usdKur)) { resultDiv.innerText = "Lütfen geçerli bir miktar girin ve kurların yüklenmesini bekleyin."; return; }
+                const total = usd * usdKur;
+                resultDiv.innerText = `Sonuç: ${usd} USD = ${total.toFixed(2)} TL`;
+            } else if (type === "interest") {
+                const P = parseFloat(document.getElementById("principal").value);
+                const R = parseFloat(document.getElementById("rate").value);
+                const D = parseFloat(document.getElementById("days").value);
+                if (isNaN(P) || isNaN(R) || isNaN(D) || P <= 0 || R <= 0 || D <= 0) {
+                    resultDiv.innerText = "Lütfen tüm alanları doğru ve eksiksiz doldurun.";
+                    return;
+                }
+                const interest = (P * R * D) / (36500); 
+                const total = P + interest;
+                resultDiv.innerText = `Faiz Getirisi: ${interest.toFixed(2)} TL | Toplam Tutar: ${total.toFixed(2)} TL`;
             }
         }
 
@@ -1146,4 +1185,5 @@
         fetchMarketData();
     </script>
 </body>
-</html>
+                </html>
+
