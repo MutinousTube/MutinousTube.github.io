@@ -967,76 +967,119 @@
 
 
 
+
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Piyasalar</title>
+    <title>Piyasa Analizleri</title>
     <style>
-        body {font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f8f9fa;}
-        h1 {text-align: center; color: #1a1a1a;}
-        .section {background: white; margin: 20px auto; padding: 20px; border-radius: 8px; max-width: 1100px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);}
-        table {width: 100%; border-collapse: collapse; margin-top: 10px;}
-        th, td {padding: 12px; text-align: left; border-bottom: 1px solid #ddd;}
-        th {background: #f0f0f0;}
-        .calculator {margin-top: 20px; padding: 15px; background: #f9f9f9; border-radius: 8px;}
-        input, button, select {padding: 10px; margin: 5px; font-size: 16px;}
-        button {background: #0066cc; color: white; border: none; border-radius: 5px; cursor: pointer;}
-        button:hover {background: #0055aa;}
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f8f9fa; }
+        h1 { text-align: center; color: #1a1a1a; }
+        .section { background: white; margin: 20px auto; padding: 20px; border-radius: 8px; max-width: 1100px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background: #f0f0f0; }
+        .calculator { margin-top: 20px; padding: 15px; background: #f9f9f9; border-radius: 8px; }
+        input, button, select, textarea { padding: 10px; margin: 5px 0; font-size: 16px; box-sizing: border-box; }
+        .form-row { display: flex; gap: 4%; }
+        .form-row input { width: 48%; }
+        button { background: #0066cc; color: white; border: none; border-radius: 5px; cursor: pointer; width: 100%; }
+        button:hover { background: #0055aa; }
+        .positive { color: #28a745; font-weight: bold; }
+        .negative { color: #dc3545; font-weight: bold; }
+        #result { padding: 10px; background: #eef2f5; border-radius: 5px; }
     </style>
 </head>
 <body>
-    <h1>Piyasalar</h1>
+    <h1>Piyasa Analizleri</h1>
 
-    <!-- Değerli & Sanayi Metaller -->
     <div class="section">
         <h2>Emtia Piyasaları</h2>
-        <table id="metalsTable"><tr><th>Emtia</th><th>Fiyat</th><th>Değişim</th></tr></table>
+        <table id="metalsTable">
+            <thead>
+                <tr><th>Emtia</th><th>Fiyat (USD)</th><th>Değişim</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Altın (ONS)</td><td id="goldPrice">Yükleniyor...</td><td id="goldChange"></td></tr>
+                <tr><td>Gümüş</td><td id="silverPrice">Yükleniyor...</td><td id="silverChange"></td></tr>
+                <tr><td>Bakır</td><td id="copperPrice">Yükleniyor...</td><td id="copperChange"></td></tr>
+            </tbody>
+        </table>
     </div>
 
-    <!-- Gıda Emtiaları -->
     <div class="section">
         <h2>Gıda Emtiaları</h2>
-        <table id="foodTable"><tr><th>Emtia</th><th>Fiyat</th><th>Değişim</th></tr></table>
+        <table id="foodTable">
+            <thead>
+                <tr><th>Emtia</th><th>Fiyat</th><th>Değişim</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Buğday</td><td>$562.50</td><td class="positive">+%0.80</td></tr>
+                <tr><td>Mısır</td><td>$442.25</td><td class="negative">-%0.30</td></tr>
+            </tbody>
+        </table>
     </div>
 
-    <!-- Dünya Borsaları -->
     <div class="section">
         <h2>Dünya Borsaları</h2>
-        <table id="stockTable"><tr><th>Borsa</th><th>Endeks</th><th>Değişim</th></tr></table>
+        <table id="stockTable">
+            <thead>
+                <tr><th>Borsa</th><th>Endeks</th><th>Değişim</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>S&P 500</td><td>5,321.40</td><td class="positive">+%0.60</td></tr>
+                <tr><td>Nasdaq</td><td>16,915.20</td><td class="positive">+%0.85</td></tr>
+            </tbody>
+        </table>
     </div>
 
-    <!-- Döviz Kurları -->
     <div class="section">
         <h2>Döviz Kurları</h2>
-        <table id="currencyTable"><tr><th>Para Birimi</th><th>Alış</th><th>Satış</th><th>Değişim</th></tr></table>
+        <table id="currencyTable">
+            <thead>
+                <tr><th>Para Birimi</th><th>Alış</th><th>Satış</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>USD/TRY</td><td id="usdBuy">Yükleniyor...</td><td id="usdSell"></td></tr>
+                <tr><td>EUR/TRY</td><td id="eurBuy">Yükleniyor...</td><td id="eurSell"></td></tr>
+            </tbody>
+        </table>
     </div>
 
-    <!-- Kripto Paralar -->
     <div class="section">
         <h2>Kripto Paralar</h2>
-        <table id="cryptoTable"><tr><th>Coin</th><th>Fiyat (USD)</th><th>Değişim</th></tr></table>
+        <table id="cryptoTable">
+            <thead>
+                <tr><th>Coin</th><th>Fiyat (USD)</th><th>Değişim</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Bitcoin (BTC)</td><td id="btcPrice">Yükleniyor...</td><td id="btcChange"></td></tr>
+                <tr><td>Ethereum (ETH)</td><td id="ethPrice">Yükleniyor...</td><td id="ethChange"></td></tr>
+            </tbody>
+        </table>
     </div>
 
-    <!-- Hesaplayıcı -->
     <div class="section calculator">
-        <h2>Hesaplayıcı</h2>
+        <h2>Hesaplayıcı ve Çevirici</h2>
         <select id="calcType">
             <option value="gold">Altın Hesaplayıcı</option>
-            <option value="dollar">Dolar Hesaplayıcı</option>
-        </select>
-        <input type="number" id="amount" placeholder="Miktar girin">
+            <option value="dollar">Dolar/TL Çevirici</option>
+        </select><br>
+        <input type="number" id="amount" placeholder="Miktar girin" style="width:100%;"><br>
         <button onclick="calculate()">Hesapla</button>
-        <div id="result" style="margin-top:10px; font-weight:bold;"></div>
+        <div id="result" style="margin-top:10px; font-weight:bold;">Sonuç: -</div>
     </div>
 
-    <!-- Yorum Bölümü -->
     <div class="section">
         <h2>Yorum Yap</h2>
         <form id="commentForm">
-            <input type="text" name="ad" placeholder="Adınız" required style="width:48%">
-            <input type="text" name="soyad" placeholder="Soyadınız" required style="width:48%">
+            <div class="form-row">
+                <input type="text" name="ad" placeholder="Adınız" required>
+                <input type="text" name="soyad" placeholder="Soyadınız" required>
+            </div>
             <input type="text" name="sehir" placeholder="Şehir (İsteğe bağlı)" style="width:100%">
             <textarea name="yorum" placeholder="Yorumunuzu yazın..." required style="width:100%; height:100px;"></textarea>
             <button type="submit">Yorum Gönder</button>
@@ -1046,24 +1089,61 @@
     <script>
         const ADMIN_EMAIL = "altinborsapiyasa@gmail.com";
 
-        // Form gönderimi
+        async function fetchMarketData() {
+            try {
+                // Döviz Kurları API'si
+                const curResponse = await fetch('https://api.frankfurter.app/latest?from=USD&to=TRY');
+                const curData = await curResponse.json();
+                document.getElementById('usdBuy').innerText = curData.rates.TRY;
+
+                // Kripto Para API'si
+                const cryptoResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true');
+                const cryptoData = await cryptoResponse.json();
+                
+                document.getElementById('btcPrice').innerText = "$" + cryptoData.bitcoin.usd.toLocaleString();
+                const btcChange = cryptoData.bitcoin.usd_24h_change;
+                const btcChangeElement = document.getElementById('btcChange');
+                btcChangeElement.innerText = btcChange.toFixed(2) + "%";
+                btcChangeElement.className = btcChange >= 0 ? 'positive' : 'negative';
+
+                document.getElementById('ethPrice').innerText = "$" + cryptoData.ethereum.usd.toLocaleString();
+                const ethChange = cryptoData.ethereum.usd_24h_change;
+                const ethChangeElement = document.getElementById('ethChange');
+                ethChangeElement.innerText = ethChange.toFixed(2) + "%";
+                ethChangeElement.className = ethChange >= 0 ? 'positive' : 'negative';
+
+            } catch (error) {
+                console.error("Veri alınırken hata oluştu:", error);
+            }
+        }
+
+        function calculate() {
+            const type = document.getElementById("calcType").value;
+            const amount = parseFloat(document.getElementById("amount").value);
+            const resultDiv = document.getElementById("result");
+
+            if (isNaN(amount) || amount <= 0) {
+                resultDiv.innerText = "Lütfen geçerli bir miktar girin.";
+                return;
+            }
+
+            if (type === "gold") {
+                const gramAltinUsd = 76.80; 
+                const total = amount * gramAltinUsd;
+                resultDiv.innerText = `Sonuç: ${amount} Gram Altın = $${total.toFixed(2)}`;
+            } else if (type === "dollar") {
+                const usdTryRate = 32.92;
+                const total = amount * usdTryRate;
+                resultDiv.innerText = `Sonuç: $${amount} USD = ₺${total.toFixed(2)}`;
+            }
+        }
+
         document.getElementById("commentForm").addEventListener("submit", async function(e) {
             e.preventDefault();
-            
-            const formData = new FormData(this);
-            
-            try {
-                await fetch("https://script.google.com/macros/s/BURAYA_GOOGLE_SCRIPT_LINKINIZI_YAPISTIRIN/exec", {
-                    method: "POST",
-                    body: formData
-                });
-                
-                alert("Yorumunuz alındı. Teşekkürler!");
-                this.reset();
-            } catch(err) {
-                alert("Bir hata oluştu. Lütfen tekrar deneyin.");
-            }
+            alert("Yorum gönderme işlemini aktifleştirmek için Google Apps Script bağlamanız gerekir.");
         });
+
+        fetchMarketData();
     </script>
 </body>
 </html>
