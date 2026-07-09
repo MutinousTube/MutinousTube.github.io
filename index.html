@@ -982,7 +982,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Piyasa Analizleri</title>
     <style>
-        * { box-sizing: border-box; }
         body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f8f9fa; }
         h1 { text-align: center; color: #1a1a1a; }
         .section { background: white; margin: 20px auto; padding: 20px; border-radius: 8px; max-width: 1100px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
@@ -990,24 +989,25 @@
         th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
         th { background: #f0f0f0; }
         .calculator { margin-top: 20px; padding: 15px; background: #f9f9f9; border-radius: 8px; }
-        input, button, select, textarea { padding: 10px; margin: 5px 0; font-size: 16px; box-sizing: border-box; width: 100%; }
+        input, button, select, textarea { padding: 10px; margin: 5px 0; font-size: 16px; box-sizing: border-box; }
         .form-row { display: flex; gap: 4%; }
         .form-row input { width: 48%; }
-        button { background: #0066cc; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button { background: #0066cc; color: white; border: none; border-radius: 5px; cursor: pointer; width: 100%; }
         button:hover { background: #0055aa; }
         .positive { color: #28a745; font-weight: bold; }
         .negative { color: #dc3545; font-weight: bold; }
-        #result { padding: 10px; background: #eef2f5; border-radius: 5px; font-weight: bold; }
+        #result { padding: 10px; background: #eef2f5; border-radius: 5px; }
     </style>
 </head>
 <body>
-    <h1>📊 Piyasa Analizleri</h1>
+    <h1>Piyasa Analizleri</h1>
 
-    <!-- Emtia Metaller -->
     <div class="section">
-        <h2>🥇 Emtia Piyasaları (Metaller)</h2>
+        <h2>Emtia Piyasaları (Metaller)</h2>
         <table id="metalsTable">
-            <thead><tr><th>Emtia</th><th>Fiyat (USD)</th><th>Fiyat (TL)</th></tr></thead>
+            <thead>
+                <tr><th>Emtia</th><th>Fiyat (USD)</th><th>Fiyat (TL)</th></tr>
+            </thead>
             <tbody>
                 <tr><td>Altın (ONS)</td><td id="goldPrice">Yükleniyor...</td><td id="goldTl">Yükleniyor...</td></tr>
                 <tr><td>Gümüş</td><td id="silverPrice">Yükleniyor...</td><td id="silverTl">Yükleniyor...</td></tr>
@@ -1020,26 +1020,28 @@
         </table>
     </div>
 
-    <!-- Gıda Emtiaları -->
     <div class="section">
-        <h2>🌾 Gıda Emtiaları</h2>
+        <h2>Gıda Emtiaları</h2>
         <table id="foodTable">
-            <thead><tr><th>Emtia</th><th>Birim</th><th>Fiyat (USD)</th><th>Fiyat (TL)</th></tr></thead>
+            <thead>
+                <tr><th>Emtia</th><th>Birim</th><th>Fiyat (USD)</th><th>Fiyat (TL)</th></tr>
+            </thead>
             <tbody>
-                <tr><td>Buğday</td><td>Bushel</td><td id="wheatPrice">Yükleniyor...</td><td id="wheatTl">Yükleniyor...</td></tr>
-                <tr><td>Mısır</td><td>Bushel</td><td id="cornPrice">Yükleniyor...</td><td id="cornTl">Yükleniyor...</td></tr>
-                <tr><td>Kahve</td><td>Lb</td><td id="coffeePrice">Yükleniyor...</td><td id="coffeeTl">Yükleniyor...</td></tr>
-                <tr><td>Şeker</td><td>Lb</td><td id="sugarPrice">Yükleniyor...</td><td id="sugarTl">Yükleniyor...</td></tr>
-                <tr><td>Pamuk</td><td>Lb</td><td id="cottonPrice">Yükleniyor...</td><td id="cottonTl">Yükleniyor...</td></tr>
+                <tr><td>Buğday</td><td>Bushel</td><td>$562.50</td><td>Yükleniyor...</td></tr>
+                <tr><td>Mısır</td><td>Bushel</td><td>$442.25</td><td>Yükleniyor...</td></tr>
+                <tr><td>Kahve</td><td>Lb</td><td>$215.60</td><td>Yükleniyor...</td></tr>
+                <tr><td>Şeker</td><td>Lb</td><td>$22.40</td><td>Yükleniyor...</td></tr>
+                <tr><td>Pamuk</td><td>Lb</td><td>$80.15</td><td>Yükleniyor...</td></tr>
             </tbody>
         </table>
     </div>
 
-    <!-- Borsalar -->
     <div class="section">
-        <h2>📈 Borsalar</h2>
+        <h2>Borsalar</h2>
         <table id="stockTable">
-            <thead><tr><th>Borsa</th><th>Endeks</th></tr></thead>
+            <thead>
+                <tr><th>Borsa</th><th>Endeks</th></tr>
+            </thead>
             <tbody>
                 <tr><td>BIST 100</td><td id="bistPrice">Yükleniyor...</td></tr>
                 <tr><td>S&P 500</td><td id="spPrice">Yükleniyor...</td></tr>
@@ -1050,11 +1052,12 @@
         </table>
     </div>
 
-    <!-- Döviz Kurları -->
     <div class="section">
-        <h2>💱 Döviz Kurları</h2>
+        <h2>Döviz Kurları</h2>
         <table id="currencyTable">
-            <thead><tr><th>Para Birimi</th><th>Alış</th><th>Satış</th></tr></thead>
+            <thead>
+                <tr><th>Para Birimi</th><th>Alış</th><th>Satış</th></tr>
+            </thead>
             <tbody>
                 <tr><td>USD/TRY</td><td id="usdBuy">Yükleniyor...</td><td id="usdSell">Yükleniyor...</td></tr>
                 <tr><td>EUR/TRY</td><td id="eurBuy">Yükleniyor...</td><td id="eurSell">Yükleniyor...</td></tr>
@@ -1065,11 +1068,12 @@
         </table>
     </div>
 
-    <!-- Kripto Paralar -->
     <div class="section">
-        <h2>₿ Kripto Paralar</h2>
+        <h2>Kripto Paralar</h2>
         <table id="cryptoTable">
-            <thead><tr><th>Coin</th><th>Fiyat (USD)</th></tr></thead>
+            <thead>
+                <tr><th>Coin</th><th>Fiyat (USD)</th></tr>
+            </thead>
             <tbody>
                 <tr><td>Bitcoin (BTC)</td><td id="btcPrice">Yükleniyor...</td></tr>
                 <tr><td>Ethereum (ETH)</td><td id="ethPrice">Yükleniyor...</td></tr>
@@ -1085,9 +1089,8 @@
         </table>
     </div>
 
-    <!-- Hesaplayıcı -->
     <div class="section calculator">
-        <h2>🧮 Hesaplayıcı ve Çevirici</h2>
+        <h2>Hesaplayıcı ve Çevirici</h2>
         <select id="calcType">
             <option value="gold">Altın Hesaplayıcı</option>
             <option value="dollar">Dolar/TL Çevirici</option>
@@ -1095,257 +1098,336 @@
         </select><br>
 
         <div id="goldInput">
-            <input type="number" id="gramAmount" placeholder="Gram altın miktarını girin">
+            <input type="number" id="gramAmount" placeholder="Gram altın miktarını girin" style="width:100%;">
         </div>
         <div id="dollarInput" style="display:none;">
-            <input type="number" id="usdAmount" placeholder="USD miktarını girin">
+            <input type="number" id="usdAmount" placeholder="USD miktarını girin" style="width:100%;">
         </div>
         <div id="interestInput" style="display:none;">
-            <input type="number" id="principal" placeholder="Ana para (TL)">
-            <input type="number" id="rate" placeholder="Yıllık faiz oranı (%)">
-            <input type="number" id="days" placeholder="Vade (gün)">
+            <input type="number" id="principal" placeholder="Ana para miktarını girin (TL)" style="width:100%;">
+            <input type="number" id="rate" placeholder="Yıllık faiz oranı (%)" style="width:100%;">
+            <input type="number" id="days" placeholder="Vade (Gün sayısı)" style="width:100%;">
         </div>
 
         <button onclick="calculate()">Hesapla</button>
-        <div id="result" style="margin-top:10px;">Sonuç: -</div>
+        <div id="result" style="margin-top:10px; font-weight:bold;">Sonuç: -</div>
     </div>
 
-    <!-- Yorum -->
     <div class="section">
-        <h2>✍️ Yorum Yap</h2>
+        <h2>Yorum Yap</h2>
         <form id="commentForm">
             <div class="form-row">
                 <input type="text" name="ad" placeholder="Adınız" required>
                 <input type="text" name="soyad" placeholder="Soyadınız" required>
             </div>
-            <input type="text" name="sehir" placeholder="Şehir (isteğe bağlı)">
-            <textarea name="yorum" placeholder="Yorumunuzu yazın..." required style="height:100px;"></textarea>
+            <input type="text" name="sehir" placeholder="Şehir (İsteğe bağlı)" style="width:100%">
+            <textarea name="yorum" placeholder="Yorumunuzu yazın..." required style="width:100%; height:100px;"></textarea>
             <button type="submit">Yorum Gönder</button>
         </form>
     </div>
 
     <script>
-        // --------------------------------------------------------------
-        // 1. API ve değişkenler
-        // --------------------------------------------------------------
-        let usdRate = 0;          // USD/TRY kuru
-        let goldOunceUsd = 0;     // Altının ons fiyatı (USD)
+        const ADMIN_EMAIL = "altinborsapiyasa@gmail.com";
+        let usdRate = 0;
 
-        // --------------------------------------------------------------
-        // 2. Ana veri çekme fonksiyonu
-        // --------------------------------------------------------------
-        async function fetchAllData() {
-            try {
-                // ---- 2a. Döviz kurları (Frankfurter) ----
-                const currencyCodes = ['USD', 'EUR', 'GBP', 'JPY', 'RUB'];
-                const currencyPromises = currencyCodes.map(code =>
-                    fetch(`https://api.frankfurter.app/latest?from=${code}&to=TRY`)
-                        .then(res => res.json())
-                        .then(data => ({ code, rate: data.rates.TRY }))
-                        .catch(() => ({ code, rate: null }))
-                );
-                const currencyResults = await Promise.all(currencyPromises);
-                const rates = {};
-                currencyResults.forEach(r => rates[r.code] = r.rate);
-
-                // USD/TRY kurunu kaydet
-                usdRate = rates.USD || 0;
-                // Tabloyu güncelle
-                document.getElementById('usdBuy').innerText = usdRate ? usdRate.toFixed(4) : 'Veri yok';
-                document.getElementById('usdSell').innerText = usdRate ? (usdRate * 1.002).toFixed(4) : 'Veri yok';
-
-                document.getElementById('eurBuy').innerText = rates.EUR ? rates.EUR.toFixed(4) : 'Veri yok';
-                document.getElementById('eurSell').innerText = rates.EUR ? (rates.EUR * 1.002).toFixed(4) : 'Veri yok';
-
-                document.getElementById('gbpBuy').innerText = rates.GBP ? rates.GBP.toFixed(4) : 'Veri yok';
-                document.getElementById('gbpSell').innerText = rates.GBP ? (rates.GBP * 1.002).toFixed(4) : 'Veri yok';
-
-                document.getElementById('jpyBuy').innerText = rates.JPY ? rates.JPY.toFixed(4) : 'Veri yok';
-                document.getElementById('jpySell').innerText = rates.JPY ? (rates.JPY * 1.002).toFixed(4) : 'Veri yok';
-
-                document.getElementById('rubBuy').innerText = rates.RUB ? rates.RUB.toFixed(4) : 'Veri yok';
-                document.getElementById('rubSell').innerText = rates.RUB ? (rates.RUB * 1.002).toFixed(4) : 'Veri yok';
-
-                // ---- 2b. Metaller (Metals.Live) ----
-                const metalResponse = await fetch('https://api.metals.live/v1/spot/');
-                const metalData = await metalResponse.json();
-                // metalData örnek: [ { metal: "XAU", price: 1950.5, ... }, ... ]
-                const metalMap = {};
-                metalData.forEach(item => {
-                    metalMap[item.metal] = item.price;
-                });
-
-                const metals = [
-                    { id: 'gold', symbol: 'XAU', name: 'Altın' },
-                    { id: 'silver', symbol: 'XAG', name: 'Gümüş' },
-                    { id: 'platinum', symbol: 'XPT', name: 'Platin' },
-                    { id: 'palladium', symbol: 'XPD', name: 'Paladyum' },
-                    { id: 'copper', symbol: 'XCU', name: 'Bakır' },
-                    { id: 'aluminum', symbol: 'XAL', name: 'Alüminyum' },
-                    { id: 'iron', symbol: 'XIR', name: 'Demir' }
-                ];
-
-                metals.forEach(metal => {
-                    const priceUsd = metalMap[metal.symbol] || 0;
-                    const priceTl = usdRate ? priceUsd * usdRate : 0;
-                    document.getElementById(metal.id + 'Price').innerText = priceUsd ? `$${priceUsd.toFixed(2)}` : 'Veri yok';
-                    document.getElementById(metal.id + 'Tl').innerText = priceTl ? `${priceTl.toFixed(2)} TL` : 'Veri yok';
-                    if (metal.symbol === 'XAU') goldOunceUsd = priceUsd;
-                });
-
-                // ---- 2c. Gıda emtiaları (Yahoo Finance) ----
-                const foodSymbols = {
-                    wheat: 'ZW=F',
-                    corn: 'ZC=F',
-                    coffee: 'KC=F',
-                    sugar: 'SB=F',
-                    cotton: 'CT=F'
-                };
-                const foodPromises = Object.entries(foodSymbols).map(([key, symbol]) =>
-                    fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${symbol}`)
-                        .then(res => res.json())
-                        .then(data => {
-                            const price = data?.chart?.result?.[0]?.meta?.regularMarketPrice;
-                            return { key, price: price || 0 };
-                        })
-                        .catch(() => ({ key, price: 0 }))
-                );
-                const foodResults = await Promise.all(foodPromises);
-                const foodPrices = {};
-                foodResults.forEach(r => foodPrices[r.key] = r.price);
-
-                const foodItems = [
-                    { key: 'wheat', id: 'wheat', birim: 'Bushel' },
-                    { key: 'corn', id: 'corn', birim: 'Bushel' },
-                    { key: 'coffee', id: 'coffee', birim: 'Lb' },
-                    { key: 'sugar', id: 'sugar', birim: 'Lb' },
-                    { key: 'cotton', id: 'cotton', birim: 'Lb' }
-                ];
-                foodItems.forEach(item => {
-                    const priceUsd = foodPrices[item.key] || 0;
-                    const priceTl = usdRate ? priceUsd * usdRate : 0;
-                    document.getElementById(item.id + 'Price').innerText = priceUsd ? `$${priceUsd.toFixed(2)}` : 'Veri yok';
-                    document.getElementById(item.id + 'Tl').innerText = priceTl ? `${priceTl.toFixed(2)} TL` : 'Veri yok';
-                });
-
-                // ---- 2d. Borsa endeksleri (Yahoo Finance) ----
-                const indexSymbols = {
-                    bist: 'XU100.IS',
-                    sp: '^GSPC',
-                    nasdaq: '^IXIC',
-                    dax: '^GDAXI',
-                    nikkei: '^N225'
-                };
-                const indexPromises = Object.entries(indexSymbols).map(([key, symbol]) =>
-                    fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${symbol}`)
-                        .then(res => res.json())
-                        .then(data => {
-                            const price = data?.chart?.result?.[0]?.meta?.regularMarketPrice;
-                            return { key, price: price || 0 };
-                        })
-                        .catch(() => ({ key, price: 0 }))
-                );
-                const indexResults = await Promise.all(indexPromises);
-                const indexPrices = {};
-                indexResults.forEach(r => indexPrices[r.key] = r.price);
-
-                document.getElementById('bistPrice').innerText = indexPrices.bist ? indexPrices.bist.toFixed(2) : 'Veri yok';
-                document.getElementById('spPrice').innerText = indexPrices.sp ? indexPrices.sp.toFixed(2) : 'Veri yok';
-                document.getElementById('nasdaqPrice').innerText = indexPrices.nasdaq ? indexPrices.nasdaq.toFixed(2) : 'Veri yok';
-                document.getElementById('daxPrice').innerText = indexPrices.dax ? indexPrices.dax.toFixed(2) : 'Veri yok';
-                document.getElementById('nikkeiPrice').innerText = indexPrices.nikkei ? indexPrices.nikkei.toFixed(2) : 'Veri yok';
-
-                // ---- 2e. Kripto (CoinGecko) - zaten mevcut ----
-                const cryptoResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,solana,ripple,dogecoin,cardano,avalanche-2,polkadot,shiba-inu&vs_currencies=usd');
-                const cryptoData = await cryptoResponse.json();
-
-                const cryptoMap = {
-                    btc: 'bitcoin',
-                    eth: 'ethereum',
-                    bnb: 'binancecoin',
-                    sol: 'solana',
-                    xrp: 'ripple',
-                    doge: 'dogecoin',
-                    ada: 'cardano',
-                    avax: 'avalanche-2',
-                    dot: 'polkadot',
-                    shib: 'shiba-inu'
-                };
-                Object.entries(cryptoMap).forEach(([id, coinId]) => {
-                    const price = cryptoData[coinId]?.usd || 0;
-                    document.getElementById(id + 'Price').innerText = price ? `$${price.toFixed(2)}` : 'Veri yok';
-                });
-
-            } catch (error) {
-                console.error('Veri çekme hatası:', error);
-                // Kullanıcıya genel bir mesaj göstermek isterseniz:
-                // alert('Veriler yüklenirken bir sorun oluştu. Lütfen sayfayı yenileyin.');
-            }
-        }
-
-        // --------------------------------------------------------------
-        // 3. Hesaplayıcı işlevleri
-        // --------------------------------------------------------------
         document.getElementById('calcType').addEventListener('change', function() {
             document.getElementById('goldInput').style.display = 'none';
             document.getElementById('dollarInput').style.display = 'none';
             document.getElementById('interestInput').style.display = 'none';
+            
             if (this.value === 'gold') document.getElementById('goldInput').style.display = 'block';
             if (this.value === 'dollar') document.getElementById('dollarInput').style.display = 'block';
             if (this.value === 'interest') document.getElementById('interestInput').style.display = 'block';
         });
 
-        function calculate() {
-            const type = document.getElementById('calcType').value;
-            const resultDiv = document.getElementById('result');
+        async function fetchMarketData() {
+            try {
+                // Döviz Kurları
+                const curResponse = await fetch('https://api.frankfurter.app/latest?from=USD&to=TRY');
+                const curData = await curResponse.json();
+                usdRate = curData.rates.TRY;
+                document.getElementById('usdBuy').innerText = usdRate.toFixed(4);
+                document.getElementById('usdSell').innerText = (usdRate * 1.002).toFixed(4);
 
-            if (type === 'gold') {
-                const gram = parseFloat(document.getElementById('gramAmount').value);
-                if (isNaN(gram) || gram <= 0) {
-                    resultDiv.innerText = 'Lütfen geçerli bir gram miktarı girin.';
-                    return;
-                }
-                if (!goldOunceUsd || !usdRate) {
-                    resultDiv.innerText = 'Altın fiyatı veya döviz kuru yüklenemedi. Lütfen sayfayı yenileyin.';
-                    return;
-                }
-                const gramUsd = (goldOunceUsd / 31.1035) * gram;
-                const gramTl = gramUsd * usdRate;
-                resultDiv.innerText = `${gram} gram Altın = ${gramTl.toFixed(2)} TL (Ons: $${goldOunceUsd.toFixed(2)})`;
-            } 
-            else if (type === 'dollar') {
-                const usd = parseFloat(document.getElementById('usdAmount').value);
-                if (isNaN(usd) || usd <= 0) {
-                    resultDiv.innerText = 'Lütfen geçerli bir USD miktarı girin.';
-                    return;
-                }
-                if (!usdRate) {
-                    resultDiv.innerText = 'Döviz kuru yüklenemedi. Lütfen sayfayı yenileyin.';
-                    return;
-                }
+                // Kripto Paralar
+                const cryptoResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,solana,ripple,dogecoin,cardano,avalanche-2,polkadot,shiba-inu&vs_currencies=usd');
+                const cryptoData = await cryptoResponse.json();
+                
+                document.getElementById('btcPrice').innerText = "$" + cryptoData.bitcoin.usd.toLocaleString();
+                document.getElementById('ethPrice').innerText = "$" + cryptoData.ethereum.usd.toLocaleString();
+                document.getElementById('bnbPrice').innerText = "$" + cryptoData.binancecoin.usd.toLocaleString();
+                document.getElementById('solPrice').innerText = "$" + cryptoData.solana.usd.toLocaleString();
+                document.getElementById('xrpPrice').innerText = "$" + cryptoData.ripple.usd.toLocaleString();
+                document.getElementById('dogePrice').innerText = "$" + cryptoData.dogecoin.usd.toLocaleString();
+                document.getElementById('adaPrice').innerText = "$" + cryptoData.cardano.usd.toLocaleString();
+                document.getElementById('avaxPrice').innerText = "$" + cryptoData['avalanche-2'].usd.toLocaleString();
+                document.getElementById('dotPrice').innerText = "$" + cryptoData.polkadot.usd.toLocaleString();
+                document.getElementById('shibPrice').innerText = "$" + cryptoData['shiba-inu'].usd.toLocaleString();
+
+            } catch (error) {
+                console.error("Veri alınırken hata oluştu:", error);
+            }
+        }
+
+        function calculate() {
+            const type = document.getElementById("calcType").value;
+            const resultDiv = document.getElementById("result");
+
+            if (type === "gold") {
+                const gram = parseFloat(document.getElementById("gramAmount").value);
+                const guncelGramAltin = 2500; // Örnek fiyat, piyasaya göre güncellenmeli
+                if (isNaN(gram) || gram <= 0) { resultDiv.innerText = "Lütfen geçerli bir miktar girin."; return; }
+                const total = gram * guncelGramAltin;
+                resultDiv.innerText = `Sonuç: ${gram} Gram Altın = ${total.toFixed(2)} TL`;
+            } else if (type === "dollar") {
+                const usd = parseFloat(document.getElementById("usdAmount").value);
+                if (isNaN(usd) || usd <= 0 || usdRate === 0) { resultDiv.innerText = "Lütfen geçerli bir miktar girin ve kurların yüklenmesini bekleyin."; return; }
                 const total = usd * usdRate;
-                resultDiv.innerText = `${usd} USD = ${total.toFixed(2)} TL`;
-            } 
-            else if (type === 'interest') {
-                const P = parseFloat(document.getElementById('principal').value);
-                const R = parseFloat(document.getElementById('rate').value);
-                const D = parseFloat(document.getElementById('days').value);
+                resultDiv.innerText = `Sonuç: ${usd} USD = ${total.toFixed(2)} TL`;
+            } else if (type === "interest") {
+                const P = parseFloat(document.getElementById("principal").value);
+                const R = parseFloat(document.getElementById("rate").value);
+                const D = parseFloat(document.getElementById("days").value);
                 if (isNaN(P) || isNaN(R) || isNaN(D) || P <= 0 || R <= 0 || D <= 0) {
-                    resultDiv.innerText = 'Lütfen tüm alanları doğru ve eksiksiz doldurun.';
+                    resultDiv.innerText = "Lütfen tüm alanları doğru ve eksiksiz doldurun.";
                     return;
                 }
-                const interest = (P * R * D) / 36500;
+                const interest = (P * R * D) / (36500); 
                 const total = P + interest;
                 resultDiv.innerText = `Faiz Getirisi: ${interest.toFixed(2)} TL | Toplam Tutar: ${total.toFixed(2)} TL`;
             }
         }
 
-        // --------------------------------------------------------------
-        // 4. Sayfa yüklendiğinde verileri çek
-        // --------------------------------------------------------------
-        fetchAllData();
+        fetchMarketData();
+    </script>
+</body>
+    </html>
 
-        // (İsteğe bağlı) Her 60 saniyede bir yenile
-        // setInterval(fetchAllData, 60000);
 
-        // Yorum formu gönderimi 
+    <!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piyasa Analizleri</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f8f9fa; }
+        h1 { text-align: center; color: #1a1a1a; }
+        .section { background: white; margin: 20px auto; padding: 20px; border-radius: 8px; max-width: 1100px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background: #f0f0f0; }
+        .calculator { margin-top: 20px; padding: 15px; background: #f9f9f9; border-radius: 8px; }
+        input, button, select, textarea { padding: 10px; margin: 5px 0; font-size: 16px; box-sizing: border-box; }
+        .form-row { display: flex; gap: 4%; }
+        .form-row input { width: 48%; }
+        button { background: #0066cc; color: white; border: none; border-radius: 5px; cursor: pointer; width: 100%; }
+        button:hover { background: #0055aa; }
+        .positive { color: #28a745; font-weight: bold; }
+        .negative { color: #dc3545; font-weight: bold; }
+        #result { padding: 10px; background: #eef2f5; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Piyasa Analizleri</h1>
+
+    <div class="section">
+        <h2>Emtia Piyasaları (Metaller)</h2>
+        <table id="metalsTable">
+            <thead>
+                <tr><th>Emtia</th><th>Fiyat (USD)</th><th>Fiyat (TL)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Altın (ONS)</td><td id="goldPrice">Yükleniyor...</td><td id="goldTl">Yükleniyor...</td></tr>
+                <tr><td>Gümüş</td><td id="silverPrice">Yükleniyor...</td><td id="silverTl">Yükleniyor...</td></tr>
+                <tr><td>Platin</td><td id="platinumPrice">Yükleniyor...</td><td id="platinumTl">Yükleniyor...</td></tr>
+                <tr><td>Paladyum</td><td id="palladiumPrice">Yükleniyor...</td><td id="palladiumTl">Yükleniyor...</td></tr>
+                <tr><td>Bakır</td><td id="copperPrice">Yükleniyor...</td><td id="copperTl">Yükleniyor...</td></tr>
+                <tr><td>Alüminyum</td><td id="aluminumPrice">Yükleniyor...</td><td id="aluminumTl">Yükleniyor...</td></tr>
+                <tr><td>Demir</td><td id="ironPrice">Yükleniyor...</td><td id="ironTl">Yükleniyor...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Gıda Emtiaları</h2>
+        <table id="foodTable">
+            <thead>
+                <tr><th>Emtia</th><th>Birim</th><th>Fiyat (USD)</th><th>Fiyat (TL)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Buğday</td><td>Bushel</td><td>$562.50</td><td>Yükleniyor...</td></tr>
+                <tr><td>Mısır</td><td>Bushel</td><td>$442.25</td><td>Yükleniyor...</td></tr>
+                <tr><td>Kahve</td><td>Lb</td><td>$215.60</td><td>Yükleniyor...</td></tr>
+                <tr><td>Şeker</td><td>Lb</td><td>$22.40</td><td>Yükleniyor...</td></tr>
+                <tr><td>Pamuk</td><td>Lb</td><td>$80.15</td><td>Yükleniyor...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Borsalar</h2>
+        <table id="stockTable">
+            <thead>
+                <tr><th>Borsa</th><th>Endeks</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>BIST 100</td><td id="bistPrice">Yükleniyor...</td></tr>
+                <tr><td>S&P 500</td><td id="spPrice">Yükleniyor...</td></tr>
+                <tr><td>Nasdaq</td><td id="nasdaqPrice">Yükleniyor...</td></tr>
+                <tr><td>DAX</td><td id="daxPrice">Yükleniyor...</td></tr>
+                <tr><td>Nikkei 225</td><td id="nikkeiPrice">Yükleniyor...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Döviz Kurları</h2>
+        <table id="currencyTable">
+            <thead>
+                <tr><th>Para Birimi</th><th>Alış</th><th>Satış</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>USD/TRY</td><td id="usdBuy">Yükleniyor...</td><td id="usdSell">Yükleniyor...</td></tr>
+                <tr><td>EUR/TRY</td><td id="eurBuy">Yükleniyor...</td><td id="eurSell">Yükleniyor...</td></tr>
+                <tr><td>GBP/TRY</td><td id="gbpBuy">Yükleniyor...</td><td id="gbpSell">Yükleniyor...</td></tr>
+                <tr><td>JPY/TRY</td><td id="jpyBuy">Yükleniyor...</td><td id="jpySell">Yükleniyor...</td></tr>
+                <tr><td>RUB/TRY</td><td id="rubBuy">Yükleniyor...</td><td id="rubSell">Yükleniyor...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Kripto Paralar</h2>
+        <table id="cryptoTable">
+            <thead>
+                <tr><th>Coin</th><th>Fiyat (USD)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Bitcoin (BTC)</td><td id="btcPrice">Yükleniyor...</td></tr>
+                <tr><td>Ethereum (ETH)</td><td id="ethPrice">Yükleniyor...</td></tr>
+                <tr><td>Binance Coin (BNB)</td><td id="bnbPrice">Yükleniyor...</td></tr>
+                <tr><td>Solana (SOL)</td><td id="solPrice">Yükleniyor...</td></tr>
+                <tr><td>Ripple (XRP)</td><td id="xrpPrice">Yükleniyor...</td></tr>
+                <tr><td>Dogecoin (DOGE)</td><td id="dogePrice">Yükleniyor...</td></tr>
+                <tr><td>Cardano (ADA)</td><td id="adaPrice">Yükleniyor...</td></tr>
+                <tr><td>Avalanche (AVAX)</td><td id="avaxPrice">Yükleniyor...</td></tr>
+                <tr><td>Polkadot (DOT)</td><td id="dotPrice">Yükleniyor...</td></tr>
+                <tr><td>Shiba Inu (SHIB)</td><td id="shibPrice">Yükleniyor...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section calculator">
+        <h2>Hesaplayıcı ve Çevirici</h2>
+        <select id="calcType">
+            <option value="gold">Altın Hesaplayıcı</option>
+            <option value="dollar">Dolar/TL Çevirici</option>
+            <option value="interest">Faiz Hesaplayıcı</option>
+        </select><br>
+
+        <div id="goldInput">
+            <input type="number" id="gramAmount" placeholder="Gram altın miktarını girin" style="width:100%;">
+        </div>
+        <div id="dollarInput" style="display:none;">
+            <input type="number" id="usdAmount" placeholder="USD miktarını girin" style="width:100%;">
+        </div>
+        <div id="interestInput" style="display:none;">
+            <input type="number" id="principal" placeholder="Ana para miktarını girin (TL)" style="width:100%;">
+            <input type="number" id="rate" placeholder="Yıllık faiz oranı (%)" style="width:100%;">
+            <input type="number" id="days" placeholder="Vade (Gün sayısı)" style="width:100%;">
+        </div>
+
+        <button onclick="calculate()">Hesapla</button>
+        <div id="result" style="margin-top:10px; font-weight:bold;">Sonuç: -</div>
+    </div>
+
+    <div class="section">
+        <h2>Yorum Yap</h2>
+        <form id="commentForm">
+            <div class="form-row">
+                <input type="text" name="ad" placeholder="Adınız" required>
+                <input type="text" name="soyad" placeholder="Soyadınız" required>
+            </div>
+            <input type="text" name="sehir" placeholder="Şehir (İsteğe bağlı)" style="width:100%">
+            <textarea name="yorum" placeholder="Yorumunuzu yazın..." required style="width:100%; height:100px;"></textarea>
+            <button type="submit">Yorum Gönder</button>
+        </form>
+    </div>
+
+    <script>
+        const ADMIN_EMAIL = "altinborsapiyasa@gmail.com";
+        let usdRate = 0;
+
+        document.getElementById('calcType').addEventListener('change', function() {
+            document.getElementById('goldInput').style.display = 'none';
+            document.getElementById('dollarInput').style.display = 'none';
+            document.getElementById('interestInput').style.display = 'none';
+            
+            if (this.value === 'gold') document.getElementById('goldInput').style.display = 'block';
+            if (this.value === 'dollar') document.getElementById('dollarInput').style.display = 'block';
+            if (this.value === 'interest') document.getElementById('interestInput').style.display = 'block';
+        });
+
+        async function fetchMarketData() {
+            try {
+                // Döviz Kurları
+                const curResponse = await fetch('https://api.frankfurter.app/latest?from=USD&to=TRY');
+                const curData = await curResponse.json();
+                usdRate = curData.rates.TRY;
+                document.getElementById('usdBuy').innerText = usdRate.toFixed(4);
+                document.getElementById('usdSell').innerText = (usdRate * 1.002).toFixed(4);
+
+                // Kripto Paralar
+                const cryptoResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,solana,ripple,dogecoin,cardano,avalanche-2,polkadot,shiba-inu&vs_currencies=usd');
+                const cryptoData = await cryptoResponse.json();
+                
+                document.getElementById('btcPrice').innerText = "$" + cryptoData.bitcoin.usd.toLocaleString();
+                document.getElementById('ethPrice').innerText = "$" + cryptoData.ethereum.usd.toLocaleString();
+                document.getElementById('bnbPrice').innerText = "$" + cryptoData.binancecoin.usd.toLocaleString();
+                document.getElementById('solPrice').innerText = "$" + cryptoData.solana.usd.toLocaleString();
+                document.getElementById('xrpPrice').innerText = "$" + cryptoData.ripple.usd.toLocaleString();
+                document.getElementById('dogePrice').innerText = "$" + cryptoData.dogecoin.usd.toLocaleString();
+                document.getElementById('adaPrice').innerText = "$" + cryptoData.cardano.usd.toLocaleString();
+                document.getElementById('avaxPrice').innerText = "$" + cryptoData['avalanche-2'].usd.toLocaleString();
+                document.getElementById('dotPrice').innerText = "$" + cryptoData.polkadot.usd.toLocaleString();
+                document.getElementById('shibPrice').innerText = "$" + cryptoData['shiba-inu'].usd.toLocaleString();
+
+            } catch (error) {
+                console.error("Veri alınırken hata oluştu:", error);
+            }
+        }
+
+        function calculate() {
+            const type = document.getElementById("calcType").value;
+            const resultDiv = document.getElementById("result");
+
+            if (type === "gold") {
+                const gram = parseFloat(document.getElementById("gramAmount").value);
+                const guncelGramAltin = 2500; // Örnek fiyat, piyasaya göre güncellenmeli
+                if (isNaN(gram) || gram <= 0) { resultDiv.innerText = "Lütfen geçerli bir miktar girin."; return; }
+                const total = gram * guncelGramAltin;
+                resultDiv.innerText = `Sonuç: ${gram} Gram Altın = ${total.toFixed(2)} TL`;
+            } else if (type === "dollar") {
+                const usd = parseFloat(document.getElementById("usdAmount").value);
+                if (isNaN(usd) || usd <= 0 || usdRate === 0) { resultDiv.innerText = "Lütfen geçerli bir miktar girin ve kurların yüklenmesini bekleyin."; return; }
+                const total = usd * usdRate;
+                resultDiv.innerText = `Sonuç: ${usd} USD = ${total.toFixed(2)} TL`;
+            } else if (type === "interest") {
+                const P = parseFloat(document.getElementById("principal").value);
+                const R = parseFloat(document.getElementById("rate").value);
+                const D = parseFloat(document.getElementById("days").value);
+                if (isNaN(P) || isNaN(R) || isNaN(D) || P <= 0 || R <= 0 || D <= 0) {
+                    resultDiv.innerText = "Lütfen tüm alanları doğru ve eksiksiz doldurun.";
+                    return;
+                }
+                const interest = (P * R * D) / (36500); 
+                const total = P + interest;
+                resultDiv.innerText = `Faiz Getirisi: ${interest.toFixed(2)} TL | Toplam Tutar: ${total.toFixed(2)} TL`;
+            }
+        }
+
+        fetchMarketData();
+    </script>
+</body>
+</html>
