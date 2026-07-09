@@ -973,7 +973,6 @@
 
 
 
-```html
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -994,12 +993,28 @@
         .form-row input { width: 48%; }
         button { background: #0066cc; color: white; border: none; border-radius: 5px; cursor: pointer; }
         button:hover { background: #0055aa; }
-        .positive { color: #28a745; font-weight: bold; }
-        .negative { color: #dc3545; font-weight: bold; }
         #result { padding: 10px; background: #eef2f5; border-radius: 5px; font-weight: bold; }
+        #updateStatus {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            background: #333;
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 999;
+        }
+        #updateStatus.show { opacity: 1; }
     </style>
 </head>
 <body>
+    <!-- Güncelleme durumu göstergesi -->
+    <div id="updateStatus">🔄 Güncelleniyor...</div>
+
     <h1>📊 Piyasa Analizleri</h1>
 
     <!-- Emtia Metaller -->
@@ -1125,15 +1140,23 @@
 
     <script>
         // --------------------------------------------------------------
-        // 1. API ve değişkenler
+        // 1. Değişkenler
         // --------------------------------------------------------------
-        let usdRate = 0;          // USD/TRY kuru
-        let goldOunceUsd = 0;     // Altının ons fiyatı (USD)
+        let usdRate = 0;
+        let goldOunceUsd = 0;
+        let updateTimer = null;
+
+        // DOM elemanlarını hızlı erişim için cache'leyelim
+        const $ = id => document.getElementById(id);
+        const statusDiv = $('updateStatus');
 
         // --------------------------------------------------------------
-        // 2. Ana veri çekme fonksiyonu
+        // 2. Ana veri çekme fonksiyonu (eski veriler korunur)
         // --------------------------------------------------------------
         async function fetchAllData() {
+            // Güncelleme göstergesini göster
+            statusDiv.classList.add('show');
+
             try {
                 // ---- 2a. Döviz kurları (Frankfurter) ----
                 const currencyCodes = ['USD', 'EUR', 'GBP', 'JPY', 'RUB'];
@@ -1147,49 +1170,48 @@
                 const rates = {};
                 currencyResults.forEach(r => rates[r.code] = r.rate);
 
-                // USD/TRY kurunu kaydet
-                usdRate = rates.USD || 0;
-                // Tabloyu güncelle
-                document.getElementById('usdBuy').innerText = usdRate ? usdRate.toFixed(4) : 'Veri yok';
-                document.getElementById('usdSell').innerText = usdRate ? (usdRate * 1.002).toFixed(4) : 'Veri yok';
+                usdRate = rates.USD || usdRate; // eğer yeni kur gelmezse eski kalsın
 
-                document.getElementById('eurBuy').innerText = rates.EUR ? rates.EUR.toFixed(4) : 'Veri yok';
-                document.getElementById('eurSell').innerText = rates.EUR ? (rates.EUR * 1.002).toFixed(4) : 'Veri yok';
-
-                document.getElementById('gbpBuy').innerText = rates.GBP ? rates.GBP.toFixed(4) : 'Veri yok';
-                document.getElementById('gbpSell').innerText = rates.GBP ? (rates.GBP * 1.002).toFixed(4) : 'Veri yok';
-
-                document.getElementById('jpyBuy').innerText = rates.JPY ? rates.JPY.toFixed(4) : 'Veri yok';
-                document.getElementById('jpySell').innerText = rates.JPY ? (rates.JPY * 1.002).toFixed(4) : 'Veri yok';
-
-                document.getElementById('rubBuy').innerText = rates.RUB ? rates.RUB.toFixed(4) : 'Veri yok';
-                document.getElementById('rubSell').innerText = rates.RUB ? (rates.RUB * 1.002).toFixed(4) : 'Veri yok';
+                // Döviz tablosunu güncelle (sadece başarılı olanları)
+                const currencyMap = {
+                    usd: 'USD', eur: 'EUR', gbp: 'GBP', jpy: 'JPY', rub: 'RUB'
+                };
+                for (const [id, code] of Object.entries(currencyMap)) {
+                    const rate = rates[code];
+                    if (rate) {
+                        $(id + 'Buy').innerText = rate.toFixed(4);
+                        $(id + 'Sell').innerText = (rate * 1.002).toFixed(4);
+                    }
+                    // yoksa eski değer kalır
+                }
 
                 // ---- 2b. Metaller (Metals.Live) ----
                 const metalResponse = await fetch('https://api.metals.live/v1/spot/');
                 const metalData = await metalResponse.json();
-                // metalData örnek: [ { metal: "XAU", price: 1950.5, ... }, ... ]
                 const metalMap = {};
                 metalData.forEach(item => {
                     metalMap[item.metal] = item.price;
                 });
 
                 const metals = [
-                    { id: 'gold', symbol: 'XAU', name: 'Altın' },
-                    { id: 'silver', symbol: 'XAG', name: 'Gümüş' },
-                    { id: 'platinum', symbol: 'XPT', name: 'Platin' },
-                    { id: 'palladium', symbol: 'XPD', name: 'Paladyum' },
-                    { id: 'copper', symbol: 'XCU', name: 'Bakır' },
-                    { id: 'aluminum', symbol: 'XAL', name: 'Alüminyum' },
-                    { id: 'iron', symbol: 'XIR', name: 'Demir' }
+                    { id: 'gold', symbol: 'XAU' },
+                    { id: 'silver', symbol: 'XAG' },
+                    { id: 'platinum', symbol: 'XPT' },
+                    { id: 'palladium', symbol: 'XPD' },
+                    { id: 'copper', symbol: 'XCU' },
+                    { id: 'aluminum', symbol: 'XAL' },
+                    { id: 'iron', symbol: 'XIR' }
                 ];
 
                 metals.forEach(metal => {
-                    const priceUsd = metalMap[metal.symbol] || 0;
-                    const priceTl = usdRate ? priceUsd * usdRate : 0;
-                    document.getElementById(metal.id + 'Price').innerText = priceUsd ? `$${priceUsd.toFixed(2)}` : 'Veri yok';
-                    document.getElementById(metal.id + 'Tl').innerText = priceTl ? `${priceTl.toFixed(2)} TL` : 'Veri yok';
-                    if (metal.symbol === 'XAU') goldOunceUsd = priceUsd;
+                    const priceUsd = metalMap[metal.symbol];
+                    if (priceUsd) {
+                        const priceTl = usdRate ? priceUsd * usdRate : 0;
+                        $(metal.id + 'Price').innerText = `$${priceUsd.toFixed(2)}`;
+                        $(metal.id + 'Tl').innerText = priceTl ? `${priceTl.toFixed(2)} TL` : 'Veri yok';
+                        if (metal.symbol === 'XAU') goldOunceUsd = priceUsd;
+                    }
+                    // yoksa eski değer kalır
                 });
 
                 // ---- 2c. Gıda emtiaları (Yahoo Finance) ----
@@ -1213,18 +1235,14 @@
                 const foodPrices = {};
                 foodResults.forEach(r => foodPrices[r.key] = r.price);
 
-                const foodItems = [
-                    { key: 'wheat', id: 'wheat', birim: 'Bushel' },
-                    { key: 'corn', id: 'corn', birim: 'Bushel' },
-                    { key: 'coffee', id: 'coffee', birim: 'Lb' },
-                    { key: 'sugar', id: 'sugar', birim: 'Lb' },
-                    { key: 'cotton', id: 'cotton', birim: 'Lb' }
-                ];
-                foodItems.forEach(item => {
-                    const priceUsd = foodPrices[item.key] || 0;
-                    const priceTl = usdRate ? priceUsd * usdRate : 0;
-                    document.getElementById(item.id + 'Price').innerText = priceUsd ? `$${priceUsd.toFixed(2)}` : 'Veri yok';
-                    document.getElementById(item.id + 'Tl').innerText = priceTl ? `${priceTl.toFixed(2)} TL` : 'Veri yok';
+                const foodItems = ['wheat', 'corn', 'coffee', 'sugar', 'cotton'];
+                foodItems.forEach(key => {
+                    const priceUsd = foodPrices[key];
+                    if (priceUsd) {
+                        const priceTl = usdRate ? priceUsd * usdRate : 0;
+                        $(key + 'Price').innerText = `$${priceUsd.toFixed(2)}`;
+                        $(key + 'Tl').innerText = priceTl ? `${priceTl.toFixed(2)} TL` : 'Veri yok';
+                    }
                 });
 
                 // ---- 2d. Borsa endeksleri (Yahoo Finance) ----
@@ -1248,13 +1266,15 @@
                 const indexPrices = {};
                 indexResults.forEach(r => indexPrices[r.key] = r.price);
 
-                document.getElementById('bistPrice').innerText = indexPrices.bist ? indexPrices.bist.toFixed(2) : 'Veri yok';
-                document.getElementById('spPrice').innerText = indexPrices.sp ? indexPrices.sp.toFixed(2) : 'Veri yok';
-                document.getElementById('nasdaqPrice').innerText = indexPrices.nasdaq ? indexPrices.nasdaq.toFixed(2) : 'Veri yok';
-                document.getElementById('daxPrice').innerText = indexPrices.dax ? indexPrices.dax.toFixed(2) : 'Veri yok';
-                document.getElementById('nikkeiPrice').innerText = indexPrices.nikkei ? indexPrices.nikkei.toFixed(2) : 'Veri yok';
+                const indexIds = ['bist', 'sp', 'nasdaq', 'dax', 'nikkei'];
+                indexIds.forEach(key => {
+                    const price = indexPrices[key];
+                    if (price) {
+                        $(key + 'Price').innerText = price.toFixed(2);
+                    }
+                });
 
-                // ---- 2e. Kripto (CoinGecko) - zaten mevcut ----
+                // ---- 2e. Kripto (CoinGecko) ----
                 const cryptoResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,solana,ripple,dogecoin,cardano,avalanche-2,polkadot,shiba-inu&vs_currencies=usd');
                 const cryptoData = await cryptoResponse.json();
 
@@ -1271,14 +1291,18 @@
                     shib: 'shiba-inu'
                 };
                 Object.entries(cryptoMap).forEach(([id, coinId]) => {
-                    const price = cryptoData[coinId]?.usd || 0;
-                    document.getElementById(id + 'Price').innerText = price ? `$${price.toFixed(2)}` : 'Veri yok';
+                    const price = cryptoData[coinId]?.usd;
+                    if (price) {
+                        $(id + 'Price').innerText = `$${price.toFixed(2)}`;
+                    }
                 });
 
             } catch (error) {
                 console.error('Veri çekme hatası:', error);
-                // Kullanıcıya genel bir mesaj göstermek isterseniz:
-                // alert('Veriler yüklenirken bir sorun oluştu. Lütfen sayfayı yenileyin.');
+                // Hata durumunda eski veriler kalır, sadece konsola yazarız
+            } finally {
+                // Güncelleme göstergesini gizle
+                statusDiv.classList.remove('show');
             }
         }
 
@@ -1327,4 +1351,32 @@
             } 
             else if (type === 'interest') {
                 const P = parseFloat(document.getElementById('principal').value);
-        
+                const R = parseFloat(document.getElementById('rate').value);
+                const D = parseFloat(document.getElementById('days').value);
+                if (isNaN(P) || isNaN(R) || isNaN(D) || P <= 0 || R <= 0 || D <= 0) {
+                    resultDiv.innerText = 'Lütfen tüm alanları doğru ve eksiksiz doldurun.';
+                    return;
+                }
+                const interest = (P * R * D) / 36500;
+                const total = P + interest;
+                resultDiv.innerText = `Faiz Getirisi: ${interest.toFixed(2)} TL | Toplam Tutar: ${total.toFixed(2)} TL`;
+            }
+        }
+
+        // --------------------------------------------------------------
+        // 4. Sayfa yüklendiğinde verileri çek ve otomatik güncellemeyi başlat
+        // --------------------------------------------------------------
+        fetchAllData(); // ilk yükleme
+
+        // Her 60 saniyede bir güncelle
+        setInterval(fetchAllData, 60000);
+
+        // Yorum formu gönderimi (demo)
+        document.getElementById('commentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Yorumunuz için teşekkürler! (Bu demo amaçlıdır.)');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
