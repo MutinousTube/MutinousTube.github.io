@@ -975,7 +975,7 @@
 
 
 
-<!DOCTYPE html>
+        <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
@@ -1017,13 +1017,38 @@
     <div id="updateStatus">🔄 Güncelleniyor...</div>
     <h1>📊 Piyasa Analizleri (Canlı)</h1>
 
-    <!-- Emtia Metaller -->
+    <!-- Döviz Kurları -->
     <div class="section">
-        <h2>🥇 Emtia Piyasaları (Metaller)</h2>
+        <h2>💱 Döviz Kurları</h2>
+        <table>
+            <thead><tr><th>Para Birimi</th><th>Alış</th><th>Satış</th></tr></thead>
+            <tbody>
+                <tr><td>USD/TRY</td><td id="usdBuy">Yükleniyor...</td><td id="usdSell">Yükleniyor...</td></tr>
+                <tr><td>EUR/TRY</td><td id="eurBuy">Yükleniyor...</td><td id="eurSell">Yükleniyor...</td></tr>
+                <tr><td>GBP/TRY</td><td id="gbpBuy">Yükleniyor...</td><td id="gbpSell">Yükleniyor...</td></tr>
+                <tr><td>JPY/TRY</td><td id="jpyBuy">Yükleniyor...</td><td id="jpySell">Yükleniyor...</td></tr>
+                <tr><td>RUB/TRY</td><td id="rubBuy">Yükleniyor...</td><td id="rubSell">Yükleniyor...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Altın -->
+    <div class="section">
+        <h2>🥇 Altın</h2>
         <table>
             <thead><tr><th>Emtia</th><th>Fiyat (USD)</th><th>Fiyat (TL)</th></tr></thead>
             <tbody>
                 <tr><td>Altın (ONS)</td><td id="goldPrice">Yükleniyor...</td><td id="goldTl">Yükleniyor...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Diğer Metaller -->
+    <div class="section">
+        <h2>🥈 Diğer Metaller</h2>
+        <table>
+            <thead><tr><th>Emtia</th><th>Fiyat (USD)</th><th>Fiyat (TL)</th></tr></thead>
+            <tbody>
                 <tr><td>Gümüş</td><td id="silverPrice">Yükleniyor...</td><td id="silverTl">Yükleniyor...</td></tr>
                 <tr><td>Platin</td><td id="platinumPrice">Yükleniyor...</td><td id="platinumTl">Yükleniyor...</td></tr>
                 <tr><td>Paladyum</td><td id="palladiumPrice">Yükleniyor...</td><td id="palladiumTl">Yükleniyor...</td></tr>
@@ -1064,22 +1089,7 @@
         </table>
     </div>
 
-    <!-- Döviz Kurları -->
-    <div class="section">
-        <h2>💱 Döviz Kurları</h2>
-        <table>
-            <thead><tr><th>Para Birimi</th><th>Alış</th><th>Satış</th></tr></thead>
-            <tbody>
-                <tr><td>USD/TRY</td><td id="usdBuy">Yükleniyor...</td><td id="usdSell">Yükleniyor...</td></tr>
-                <tr><td>EUR/TRY</td><td id="eurBuy">Yükleniyor...</td><td id="eurSell">Yükleniyor...</td></tr>
-                <tr><td>GBP/TRY</td><td id="gbpBuy">Yükleniyor...</td><td id="gbpSell">Yükleniyor...</td></tr>
-                <tr><td>JPY/TRY</td><td id="jpyBuy">Yükleniyor...</td><td id="jpySell">Yükleniyor...</td></tr>
-                <tr><td>RUB/TRY</td><td id="rubBuy">Yükleniyor...</td><td id="rubSell">Yükleniyor...</td></tr>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Kripto Paralar -->
+    <!-- Kripto -->
     <div class="section">
         <h2>₿ Kripto Paralar</h2>
         <table>
@@ -1101,22 +1111,18 @@
 
     <!-- Hesaplayıcı -->
     <div class="section calculator">
-        <h2>🧮 Hesaplayıcı ve Çevirici</h2>
+        <h2>🧮 Hesaplayıcı</h2>
         <select id="calcType">
             <option value="gold">Altın Hesaplayıcı</option>
             <option value="dollar">Dolar/TL Çevirici</option>
             <option value="interest">Faiz Hesaplayıcı</option>
         </select><br>
-        <div id="goldInput">
-            <input type="number" id="gramAmount" placeholder="Gram altın miktarını girin">
-        </div>
-        <div id="dollarInput" style="display:none;">
-            <input type="number" id="usdAmount" placeholder="USD miktarını girin">
-        </div>
+        <div id="goldInput"><input type="number" id="gramAmount" placeholder="Gram altın"></div>
+        <div id="dollarInput" style="display:none;"><input type="number" id="usdAmount" placeholder="USD"></div>
         <div id="interestInput" style="display:none;">
-            <input type="number" id="principal" placeholder="Ana para (TL)">
-            <input type="number" id="rate" placeholder="Yıllık faiz oranı (%)">
-            <input type="number" id="days" placeholder="Vade (gün)">
+            <input type="number" id="principal" placeholder="Ana para">
+            <input type="number" id="rate" placeholder="Faiz %">
+            <input type="number" id="days" placeholder="Gün">
         </div>
         <button onclick="calculate()">Hesapla</button>
         <div id="result" style="margin-top:10px;">Sonuç: -</div>
@@ -1130,58 +1136,60 @@
                 <input type="text" name="ad" placeholder="Adınız" required>
                 <input type="text" name="soyad" placeholder="Soyadınız" required>
             </div>
-            <input type="text" name="sehir" placeholder="Şehir (isteğe bağlı)">
-            <textarea name="yorum" placeholder="Yorumunuzu yazın..." required style="height:100px;"></textarea>
-            <button type="submit">Yorum Gönder</button>
+            <input type="text" name="sehir" placeholder="Şehir">
+            <textarea name="yorum" placeholder="Yorumunuz..." required style="height:100px;"></textarea>
+            <button type="submit">Gönder</button>
         </form>
-                </div>
-                    <script>
-        // --------------------------------------------------------------
-        // Değişkenler
-        // --------------------------------------------------------------
+    </div>
+        <script>
+        // ---- Değişkenler ----
         let usdRate = 0;
         let goldOunceUsd = 0;
 
-        // --------------------------------------------------------------
-        // Veri çekme fonksiyonu
-        // --------------------------------------------------------------
+        // ---- Veri Çekme ----
         async function fetchAllData() {
-            const statusDiv = document.getElementById('updateStatus');
-            statusDiv.classList.add('show');
+            const status = document.getElementById('updateStatus');
+            status.classList.add('show');
 
             try {
-                // ---- Döviz (Frankfurter) ----
-                const currencyCodes = ['USD', 'EUR', 'GBP', 'JPY', 'RUB'];
-                const currencyPromises = currencyCodes.map(code =>
-                    fetch(`https://api.frankfurter.app/latest?from=${code}&to=TRY`)
-                        .then(res => res.json())
-                        .then(data => ({ code, rate: data.rates.TRY }))
-                        .catch(() => ({ code, rate: null }))
-                );
-                const currencyResults = await Promise.all(currencyPromises);
-                const rates = {};
-                currencyResults.forEach(r => rates[r.code] = r.rate);
+                // 1. Döviz (Frankfurter)
+                const curRes = await fetch('https://api.frankfurter.app/latest?from=USD&to=TRY,EUR,GBP,JPY,RUB');
+                const curData = await curRes.json();
+                const rates = curData.rates;
+                usdRate = rates.TRY || 0;
 
-                usdRate = rates.USD || 0;
+                document.getElementById('usdBuy').innerText = rates.TRY ? rates.TRY.toFixed(4) : 'Veri yok';
+                document.getElementById('usdSell').innerText = rates.TRY ? (rates.TRY * 1.002).toFixed(4) : 'Veri yok';
+                document.getElementById('eurBuy').innerText = rates.EUR ? rates.EUR.toFixed(4) : 'Veri yok';
+                document.getElementById('eurSell').innerText = rates.EUR ? (rates.EUR * 1.002).toFixed(4) : 'Veri yok';
+                document.getElementById('gbpBuy').innerText = rates.GBP ? rates.GBP.toFixed(4) : 'Veri yok';
+                document.getElementById('gbpSell').innerText = rates.GBP ? (rates.GBP * 1.002).toFixed(4) : 'Veri yok';
+                document.getElementById('jpyBuy').innerText = rates.JPY ? rates.JPY.toFixed(4) : 'Veri yok';
+                document.getElementById('jpySell').innerText = rates.JPY ? (rates.JPY * 1.002).toFixed(4) : 'Veri yok';
+                document.getElementById('rubBuy').innerText = rates.RUB ? rates.RUB.toFixed(4) : 'Veri yok';
+                document.getElementById('rubSell').innerText = rates.RUB ? (rates.RUB * 1.002).toFixed(4) : 'Veri yok';
 
-                const currencyMap = {
-                    usd: 'USD', eur: 'EUR', gbp: 'GBP', jpy: 'JPY', rub: 'RUB'
-                };
-                for (const [id, code] of Object.entries(currencyMap)) {
-                    const rate = rates[code];
-                    document.getElementById(id + 'Buy').innerText = rate ? rate.toFixed(4) : 'Veri yok';
-                    document.getElementById(id + 'Sell').innerText = rate ? (rate * 1.002).toFixed(4) : 'Veri yok';
+                // 2. Altın (Gold-API)
+                const goldRes = await fetch('https://www.gold-api.com/price/XAU');
+                const goldData = await goldRes.json();
+                if (goldData.price) {
+                    goldOunceUsd = goldData.price;
+                    document.getElementById('goldPrice').innerText = `$${goldOunceUsd.toFixed(2)}`;
+                    const goldTl = usdRate ? goldOunceUsd * usdRate : 0;
+                    document.getElementById('goldTl').innerText = goldTl ? `${goldTl.toFixed(2)} TL` : 'Veri yok';
+                } else {
+                    document.getElementById('goldPrice').innerText = 'Veri yok';
+                    document.getElementById('goldTl').innerText = 'Veri yok';
                 }
 
-                // ---- Metaller (Metals.Live) ----
+                // 3. Diğer Metaller (Metals.Live)
                 try {
-                    const metalResponse = await fetch('https://api.metals.live/v1/spot/');
-                    const metalData = await metalResponse.json();
+                    const metalRes = await fetch('https://api.metals.live/v1/spot/');
+                    const metalData = await metalRes.json();
                     const metalMap = {};
                     metalData.forEach(item => { metalMap[item.metal] = item.price; });
 
                     const metals = [
-                        { id: 'gold', symbol: 'XAU' },
                         { id: 'silver', symbol: 'XAG' },
                         { id: 'platinum', symbol: 'XPT' },
                         { id: 'palladium', symbol: 'XPD' },
@@ -1189,104 +1197,62 @@
                         { id: 'aluminum', symbol: 'XAL' },
                         { id: 'iron', symbol: 'XIR' }
                     ];
-
-                    metals.forEach(metal => {
-                        const priceUsd = metalMap[metal.symbol];
-                        if (priceUsd) {
-                            const priceTl = usdRate ? priceUsd * usdRate : 0;
-                            document.getElementById(metal.id + 'Price').innerText = `$${priceUsd.toFixed(2)}`;
-                            document.getElementById(metal.id + 'Tl').innerText = priceTl ? `${priceTl.toFixed(2)} TL` : 'Veri yok';
-                            if (metal.symbol === 'XAU') goldOunceUsd = priceUsd;
+                    metals.forEach(m => {
+                        const price = metalMap[m.symbol];
+                        if (price) {
+                            document.getElementById(m.id + 'Price').innerText = `$${price.toFixed(2)}`;
+                            const tl = usdRate ? price * usdRate : 0;
+                            document.getElementById(m.id + 'Tl').innerText = tl ? `${tl.toFixed(2)} TL` : 'Veri yok';
                         } else {
-                            document.getElementById(metal.id + 'Price').innerText = 'Veri yok';
-                            document.getElementById(metal.id + 'Tl').innerText = 'Veri yok';
+                            document.getElementById(m.id + 'Price').innerText = 'Veri yok';
+                            document.getElementById(m.id + 'Tl').innerText = 'Veri yok';
                         }
                     });
                 } catch (e) {
-                    // Metals.Live çalışmazsa altın için Gold-API dene
-                    try {
-                        const goldRes = await fetch('https://www.gold-api.com/price/XAU');
-                        const goldData = await goldRes.json();
-                        if (goldData.price) {
-                            goldOunceUsd = goldData.price;
-                            document.getElementById('goldPrice').innerText = `$${goldOunceUsd.toFixed(2)}`;
-                            const goldTl = usdRate ? goldOunceUsd * usdRate : 0;
-                            document.getElementById('goldTl').innerText = goldTl ? `${goldTl.toFixed(2)} TL` : 'Veri yok';
-                        }
-                    } catch (e2) {
-                        document.getElementById('goldPrice').innerText = 'Veri yok';
-                        document.getElementById('goldTl').innerText = 'Veri yok';
-                    }
-                    ['silver','platinum','palladium','copper','aluminum','iron'].forEach(id => {
-                        document.getElementById(id + 'Price').innerText = 'Veri yok';
-                        document.getElementById(id + 'Tl').innerText = 'Veri yok';
-                    });
+                    // Metals.Live çalışmazsa boş bırak
                 }
 
-                // ---- Gıda emtiaları (Yahoo Finance) ----
+                // 4. Gıda Emtiaları (Yahoo Finance)
                 const foodSymbols = {
-                    wheat: 'ZW=F',
-                    corn: 'ZC=F',
-                    coffee: 'KC=F',
-                    sugar: 'SB=F',
-                    cotton: 'CT=F'
+                    wheat: 'ZW=F', corn: 'ZC=F', coffee: 'KC=F', sugar: 'SB=F', cotton: 'CT=F'
                 };
-                const foodPromises = Object.entries(foodSymbols).map(([key, symbol]) =>
-                    fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${symbol}`)
-                        .then(res => res.json())
-                        .then(data => {
-                            const price = data?.chart?.result?.[0]?.meta?.regularMarketPrice;
-                            return { key, price: price || 0 };
-                        })
-                        .catch(() => ({ key, price: 0 }))
-                );
-                const foodResults = await Promise.all(foodPromises);
-                const foodPrices = {};
-                foodResults.forEach(r => foodPrices[r.key] = r.price);
-
-                const foodItems = ['wheat', 'corn', 'coffee', 'sugar', 'cotton'];
-                foodItems.forEach(key => {
-                    const priceUsd = foodPrices[key];
-                    if (priceUsd) {
-                        const priceTl = usdRate ? priceUsd * usdRate : 0;
-                        document.getElementById(key + 'Price').innerText = `$${priceUsd.toFixed(2)}`;
-                        document.getElementById(key + 'Tl').innerText = priceTl ? `${priceTl.toFixed(2)} TL` : 'Veri yok';
-                    } else {
+                for (const [key, symbol] of Object.entries(foodSymbols)) {
+                    try {
+                        const res = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${symbol}`);
+                        const data = await res.json();
+                        const price = data?.chart?.result?.[0]?.meta?.regularMarketPrice;
+                        if (price) {
+                            document.getElementById(key + 'Price').innerText = `$${price.toFixed(2)}`;
+                            const tl = usdRate ? price * usdRate : 0;
+                            document.getElementById(key + 'Tl').innerText = tl ? `${tl.toFixed(2)} TL` : 'Veri yok';
+                        } else {
+                            document.getElementById(key + 'Price').innerText = 'Veri yok';
+                            document.getElementById(key + 'Tl').innerText = 'Veri yok';
+                        }
+                    } catch (e) {
                         document.getElementById(key + 'Price').innerText = 'Veri yok';
                         document.getElementById(key + 'Tl').innerText = 'Veri yok';
                     }
-                });
+                }
 
-                // ---- Borsa (Yahoo Finance) ----
+                // 5. Borsalar (Yahoo Finance)
                 const indexSymbols = {
-                    bist: 'XU100.IS',
-                    sp: '^GSPC',
-                    nasdaq: '^IXIC',
-                    dax: '^GDAXI',
-                    nikkei: '^N225'
+                    bist: 'XU100.IS', sp: '^GSPC', nasdaq: '^IXIC', dax: '^GDAXI', nikkei: '^N225'
                 };
-                const indexPromises = Object.entries(indexSymbols).map(([key, symbol]) =>
-                    fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${symbol}`)
-                        .then(res => res.json())
-                        .then(data => {
-                            const price = data?.chart?.result?.[0]?.meta?.regularMarketPrice;
-                            return { key, price: price || 0 };
-                        })
-                        .catch(() => ({ key, price: 0 }))
-                );
-                const indexResults = await Promise.all(indexPromises);
-                const indexPrices = {};
-                indexResults.forEach(r => indexPrices[r.key] = r.price);
+                for (const [key, symbol] of Object.entries(indexSymbols)) {
+                    try {
+                        const res = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${symbol}`);
+                        const data = await res.json();
+                        const price = data?.chart?.result?.[0]?.meta?.regularMarketPrice;
+                        document.getElementById(key + 'Price').innerText = price ? price.toFixed(2) : 'Veri yok';
+                    } catch (e) {
+                        document.getElementById(key + 'Price').innerText = 'Veri yok';
+                    }
+                }
 
-                const indexIds = ['bist', 'sp', 'nasdaq', 'dax', 'nikkei'];
-                indexIds.forEach(key => {
-                    const price = indexPrices[key];
-                    document.getElementById(key + 'Price').innerText = price ? price.toFixed(2) : 'Veri yok';
-                });
-
-                // ---- Kripto (CoinGecko) ----
-                const cryptoResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,solana,ripple,dogecoin,cardano,avalanche-2,polkadot,shiba-inu&vs_currencies=usd');
-                const cryptoData = await cryptoResponse.json();
+                // 6. Kripto (CoinGecko)
+                const cryptoRes = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,solana,ripple,dogecoin,cardano,avalanche-2,polkadot,shiba-inu&vs_currencies=usd');
+                const cryptoData = await cryptoRes.json();
                 const cryptoMap = {
                     btc: 'bitcoin', eth: 'ethereum', bnb: 'binancecoin', sol: 'solana',
                     xrp: 'ripple', doge: 'dogecoin', ada: 'cardano', avax: 'avalanche-2',
@@ -1298,18 +1264,16 @@
                 });
 
             } catch (error) {
-                console.error('Genel hata:', error);
+                console.error('Hata:', error);
                 document.querySelectorAll('td').forEach(td => {
                     if (td.innerText === 'Yükleniyor...') td.innerText = 'Veri alınamadı';
                 });
             } finally {
-                statusDiv.classList.remove('show');
+                status.classList.remove('show');
             }
         }
 
-        // --------------------------------------------------------------
-        // Hesaplayıcı
-        // --------------------------------------------------------------
+        // ---- Hesaplayıcı ----
         document.getElementById('calcType').addEventListener('change', function() {
             document.getElementById('goldInput').style.display = 'none';
             document.getElementById('dollarInput').style.display = 'none';
@@ -1321,59 +1285,39 @@
 
         function calculate() {
             const type = document.getElementById('calcType').value;
-            const resultDiv = document.getElementById('result');
+            const result = document.getElementById('result');
 
             if (type === 'gold') {
                 const gram = parseFloat(document.getElementById('gramAmount').value);
-                if (isNaN(gram) || gram <= 0) {
-                    resultDiv.innerText = 'Lütfen geçerli bir gram miktarı girin.';
-                    return;
-                }
-                if (!goldOunceUsd || !usdRate) {
-                    resultDiv.innerText = 'Altın fiyatı veya döviz kuru yüklenemedi.';
-                    return;
-                }
-                const gramUsd = (goldOunceUsd / 31.1035) * gram;
-                const gramTl = gramUsd * usdRate;
-                resultDiv.innerText = `${gram} gram Altın = ${gramTl.toFixed(2)} TL`;
-            } 
-            else if (type === 'dollar') {
+                if (!gram || gram <= 0) { result.innerText = 'Geçerli gram girin'; return; }
+                if (!goldOunceUsd || !usdRate) { result.innerText = 'Veriler yüklenmedi'; return; }
+                const tl = (goldOunceUsd / 31.1035) * gram * usdRate;
+                result.innerText = `${gram} gram Altın = ${tl.toFixed(2)} TL`;
+            } else if (type === 'dollar') {
                 const usd = parseFloat(document.getElementById('usdAmount').value);
-                if (isNaN(usd) || usd <= 0) {
-                    resultDiv.innerText = 'Lütfen geçerli bir USD miktarı girin.';
-                    return;
-                }
-                if (!usdRate) {
-                    resultDiv.innerText = 'Döviz kuru yüklenemedi.';
-                    return;
-                }
-                const total = usd * usdRate;
-                resultDiv.innerText = `${usd} USD = ${total.toFixed(2)} TL`;
-            } 
-            else if (type === 'interest') {
+                if (!usd || usd <= 0) { result.innerText = 'Geçerli USD girin'; return; }
+                if (!usdRate) { result.innerText = 'Döviz kuru yüklenmedi'; return; }
+                result.innerText = `${usd} USD = ${(usd * usdRate).toFixed(2)} TL`;
+            } else if (type === 'interest') {
                 const P = parseFloat(document.getElementById('principal').value);
                 const R = parseFloat(document.getElementById('rate').value);
                 const D = parseFloat(document.getElementById('days').value);
-                if (isNaN(P) || isNaN(R) || isNaN(D) || P <= 0 || R <= 0 || D <= 0) {
-                    resultDiv.innerText = 'Lütfen tüm alanları doğru doldurun.';
+                if (!P || !R || !D || P <= 0 || R <= 0 || D <= 0) {
+                    result.innerText = 'Tüm alanları doldurun';
                     return;
                 }
-                const interest = (P * R * D) / 36500;
-                const total = P + interest;
-                resultDiv.innerText = `Faiz Getirisi: ${interest.toFixed(2)} TL | Toplam: ${total.toFixed(2)} TL`;
+                const faiz = (P * R * D) / 36500;
+                result.innerText = `Faiz: ${faiz.toFixed(2)} TL | Toplam: ${(P + faiz).toFixed(2)} TL`;
             }
         }
 
-        // --------------------------------------------------------------
-        // Sayfa yüklendiğinde çalıştır ve otomatik güncelle
-        // --------------------------------------------------------------
+        // ---- Başlat ----
         fetchAllData();
         setInterval(fetchAllData, 60000);
 
-        // Yorum formu
         document.getElementById('commentForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Yorumunuz için teşekkürler!');
+            alert('Yorum gönderildi!');
             this.reset();
         });
     </script>
