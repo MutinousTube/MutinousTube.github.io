@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mutinous Piyasa Analizleri - Canlı</title>
+    <title>Mutinous Finans & Emtia Merkezi</title>
     <style>
-        /* ========== ANA STİLLER ========== */
+        /* ============================================================ */
+        /* ANA STİLLER */
+        /* ============================================================ */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
@@ -15,38 +17,9 @@
         }
         .container { max-width: 1400px; margin: 0 auto; }
         
-        /* ========== BAŞLIK ========== */
-        .main-header {
-            text-align: center;
-            padding: 20px 0;
-            border-bottom: 2px solid #ff4500;
-            margin-bottom: 25px;
-        }
-        .main-header h1 {
-            font-size: 32px;
-            background: linear-gradient(135deg, #ff4500, #ff6a00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-        }
-        .main-header .sub {
-            color: #64748b;
-            font-size: 14px;
-            margin-top: 5px;
-            -webkit-text-fill-color: #64748b;
-        }
-        .main-header .update-badge {
-            display: inline-block;
-            background: #1e293b;
-            color: #94a3b8;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            border: 1px solid #334155;
-            margin-top: 8px;
-        }
-        
-        /* ========== NAV ========== */
+        /* ============================================================ */
+        /* NAVİGASYON BUTONLARI */
+        /* ============================================================ */
         .nav-buttons { 
             display: flex; 
             justify-content: center; 
@@ -84,11 +57,12 @@
             transform: scale(1.05); 
         }
         
-        /* ========== MUTINOUS FİNANS KONTEYNER ========== */
+        /* ============================================================ */
+        /* MUTINOUS FİNANS KONTEYNER */
+        /* ============================================================ */
         .mutinous-finance-container {
             background: #121214;
             color: #e2e8f0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             border-radius: 12px;
             padding: 24px;
             max-width: 1200px;
@@ -96,6 +70,10 @@
             border: 1px solid #222227;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
+        
+        /* ============================================================ */
+        /* HEADER */
+        /* ============================================================ */
         .finance-header {
             display: flex;
             justify-content: space-between;
@@ -120,14 +98,16 @@
         .update-badge { 
             background: #1e293b; 
             color: #94a3b8; 
-            padding: 6px 12px; 
+            padding: 6px 16px; 
             border-radius: 20px; 
             font-size: 12px; 
             font-weight: 500; 
             border: 1px solid #334155; 
         }
         
-        /* ========== SEKME BUTONLARI ========== */
+        /* ============================================================ */
+        /* SEKME BUTONLARI */
+        /* ============================================================ */
         .finance-tabs { 
             display: flex; 
             gap: 6px; 
@@ -140,7 +120,7 @@
             background: #1e1e24; 
             border: 1px solid #2d2d39; 
             color: #94a3b8; 
-            padding: 10px 14px; 
+            padding: 10px 16px; 
             border-radius: 6px; 
             cursor: pointer; 
             font-weight: 600; 
@@ -166,9 +146,12 @@
             color: #fff;
         }
         
-        /* ========== TABLO VE İÇERİK ========== */
+        /* ============================================================ */
+        /* TABLO VE İÇERİK */
+        /* ============================================================ */
         .finance-tab-content { display: none; }
         .finance-tab-content.active { display: block; }
+        
         .finance-table-wrapper { 
             max-height: 480px; 
             overflow-y: auto; 
@@ -206,7 +189,9 @@
         .txt-down { color: #ef4444; font-weight: 600; }
         .txt-neutral { color: #64748b; font-weight: 600; }
         
-        /* ========== HESAPLAYICI ========== */
+        /* ============================================================ */
+        /* HESAPLAYICI */
+        /* ============================================================ */
         .calculator-box { 
             background: #18181c; 
             border: 1px solid #24242b; 
@@ -267,7 +252,9 @@
             color: #3b82f6; 
         }
         
-        /* ========== ALT BİLGİ ========== */
+        /* ============================================================ */
+        /* ALT BİLGİ */
+        /* ============================================================ */
         .finance-footer { 
             margin-top: 20px; 
             padding-top: 15px; 
@@ -289,7 +276,9 @@
             text-decoration: underline; 
         }
         
-        /* ========== SCROLLBAR ========== */
+        /* ============================================================ */
+        /* SCROLLBAR */
+        /* ============================================================ */
         .finance-table-wrapper::-webkit-scrollbar { width: 6px; }
         .finance-table-wrapper::-webkit-scrollbar-track { background: #121214; }
         .finance-table-wrapper::-webkit-scrollbar-thumb { background: #2d2d39; border-radius: 3px; }
@@ -302,7 +291,9 @@
         }
         .text-center { text-align: center; margin-top: 20px; }
         
-        /* ========== RESPONSIVE ========== */
+        /* ============================================================ */
+        /* RESPONSIVE */
+        /* ============================================================ */
         @media (max-width: 768px) {
             .finance-header { flex-direction: column; align-items: flex-start; }
             .calc-row { flex-direction: column; }
@@ -336,7 +327,7 @@
                 <button class="tab-btn" onclick="switchFinanceTab('tab-metals')">🥇 Değerli Metaller</button>
                 <button class="tab-btn" onclick="switchFinanceTab('tab-agri')">🌾 Tarım & Gıda</button>
                 <button class="tab-btn" onclick="switchFinanceTab('tab-global')">📈 Dünya Borsaları</button>
-                <button class="tab-btn" onclick="switchFinanceTab('tab-crypto')">₿ Kripto (Coin)</button>
+                <button class="tab-btn" onclick="switchFinanceTab('tab-crypto')">₿ Kripto</button>
                 <button class="tab-btn calc-btn" onclick="switchFinanceTab('tab-calculator')">🧮 Hesaplayıcı</button>
             </div>
 
@@ -584,6 +575,8 @@
             { key: 'CAD', name: 'CAD - Kanada Doları' },
             { key: 'AUD', name: 'AUD - Avustralya Doları' },
             { key: 'CNY', name: 'CNY - Çin Yuanı' },
+            { key: 'JPY', name: 'JPY - Japon Yeni (100)' },
+            { key: 'RUB', name: 'RUB - Rus Rublesi' },
             { key: 'GRA', name: 'GRAM ALTIN' },
             { key: 'CEYREKALTIN', name: 'ÇEYREK ALTIN' },
             { key: 'CUMHURIYETALTINI', name: 'CUMHURİYET ALTINI' }
@@ -611,4 +604,16 @@
         const items = [
             { key: 'GUMUS', name: 'GÜMÜŞ' },
             { key: 'GPL', name: 'GRAM PLATİN' },
-           
+            { key: 'PAL', name: 'GRAM PALADYUM' },
+            { key: 'BRENT', name: 'BRENT PETROL ($/Varil)' }
+        ];
+        
+        let html = '';
+        items.forEach(item => {
+            const data = marketData[item.key];
+            if (data) {
+                const buy = data.Buying !== undefined ? data.Buying : '-';
+                const sell = data.Selling !== undefined ? data.Selling : '-';
+                html += `<tr>
+                    <td><strong>${item.name}</strong></td>
+                    <td>${typeof buy === 'number' ? buy.toFixed(2)
