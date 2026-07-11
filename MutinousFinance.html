@@ -1,1 +1,1261 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mutinous Technology - Kampanyalar Dünyası</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        :root {
+            --on-green: #3cd62d; 
+            --on-dark: #1e2229;  
+            --bg-light: #f0f2f5;
+            --white: #ffffff;
+            
+            /* Vodafone Değişkenleri - Çakışmayı önlemek için izole edildi */
+            --voda-red: #e60000;
+            --voda-dark: #231f20;
+            --voda-bg-light: #f4f4f9;
+        }
+
+        /* Genel Temizlik ve Sayfa Ayarları */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            background-color: var(--bg-light);
+            margin: 0;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .header {
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+        .profile-img {
+            width: 113px;
+            height: 113px;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            object-fit: cover;
+            display: block;
+            margin: 0 auto;
+        }
+        h3 {
+            margin: 10px 0 0 0;
+            color: #333;
+        }
+        .description {
+            font-size: 16px;
+            color: #333;
+            max-width: 500px;
+            margin: 5px auto 15px auto;
+            font-weight: 500;
+            padding: 0 10px;
+        }
+
+        /* AKILLI ESNEK GRID */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .links-container {
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .media-container {
+            width: 100%;
+            max-width: 550px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Bilgisayar (Masaüstü) Düzeni */
+        @media (min-width: 768px) {
+            .main-layout {
+                grid-template-columns: 4fr 6fr; 
+                align-items: start;
+            }
+            .links-container, .media-container {
+                max-width: 100%;
+            }
+        }
+
+        /* Link Butonları Stilleri */
+        .btn {
+            display: block;
+            width: 100%;
+            margin: 0;
+            padding: 14px 0;
+            text-decoration: none;
+            color: white;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: transform 0.2s, opacity 0.2s;
+            box-sizing: border-box;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .btn:hover { transform: scale(1.02); opacity: 0.9; }
+        
+        /* Renk Kodları */
+        .yt { background-color: #FF0000; }
+        .dm { background-color: #0066DC; }
+        .ms { background-color: #6364FF; }
+        .tt { background-color: #000000; }
+        .rumble { background-color: #87C232; }
+        .tg { background-color: #0088cc; }
+        .ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+        .tw { background-color: #1DA1F2; }
+        .wa { background-color: #25D366; }
+        .pt { background-color: #FF424D; }
+        .gh { background-color: #24292e; }
+        .odysee { background: linear-gradient(45deg, #E21B57 0%, #FF5B24 100%); }
+        .fb { background-color: #4267B2; }
+        .ln { background-color: #0077b5; }
+        .com { background-color: #555; }
+        .mail { background-color: #D44638; }
+
+        /* Video Kapsayıcı Alanları (16:9 Oran) */
+        .video-container {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            position: relative;
+            padding-bottom: 56.25%; 
+            height: 0;
+            background: #000;
+        }
+        .video-container iframe, .video-container div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* SAĞ ALTAKİ DARALTILMIŞ YOUTUBE VİDEO LİSTESİ */
+        .youtube-compact {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            position: relative;
+            padding-bottom: 49.5%; 
+            height: 0;
+            background: #000;
+        }
+        .youtube-compact iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Telegram Bölümü */
+        .telegram-container {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            background: #fff;
+            text-align: left;
+            max-height: 280px; 
+        }
+
+        /* BANKA KAMPANYALARI BÖLÜMÜ STİLLERİ */
+        .campaign-wrapper {
+            display: flex;
+            flex-direction: row;
+            gap: 25px;
+            width: 100%;
+            max-width: 1100px;
+            margin: 40px auto 20px auto;
+            align-items: stretch; 
+            justify-content: center;
+        }
+
+        .container {
+            flex: 1; 
+            background: var(--white);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.07);
+            display: flex;
+            flex-direction: column; 
+        }
+
+        .campaign-container {
+            flex: 1; 
+            background: var(--white);
+            border-radius: 24px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.07);
+            padding: 35px 30px; 
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column; 
+        }
+
+        .banner {
+            background-color: var(--on-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 35px 30px;
+            position: relative;
+            border-bottom: 5px solid var(--on-green);
+        }
+
+        .banner .logo-text {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--on-green);
+            line-height: 1;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .banner h1 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .content {
+            padding: 35px 30px;
+            text-align: center;
+            flex-grow: 1; 
+        }
+
+        .welcome-text {
+            font-size: 1.1rem;
+            color: #4a5568;
+            margin-bottom: 30px;
+        }
+
+        .code-container {
+            background: #f1f5f9;
+            border: 2px dashed var(--on-green);
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 35px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .code-container:hover {
+            background: #f0fdf4;
+            transform: scale(1.02);
+        }
+
+        .code-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: #64748b;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .code-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--on-dark);
+            letter-spacing: 2px;
+        }
+
+        .copy-hint {
+            font-size: 0.8rem;
+            color: var(--on-green);
+            margin-top: 5px;
+            font-weight: 500;
+        }
+
+        .steps {
+            text-align: left;
+            margin-bottom: 35px;
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 16px;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .step-item:last-child { margin-bottom: 0; }
+
+        .step-number {
+            background: var(--on-dark);
+            color: var(--on-green);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-right: 12px;
+            flex-shrink: 0;
+            font-size: 0.9rem;
+        }
+
+        .step-text {
+            font-size: 0.95rem;
+            color: #334155;
+            padding-top: 2px;
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        .brand-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .main-title {
+            color: #7209b7;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin: 0 0 15px 0;
+            line-height: 1.3;
+        }
+
+        .campaign-container .description {
+            font-size: 1.1rem;
+            color: #4a5568;
+            font-weight: 500;
+            line-height: 1.6;
+            margin: 0;
+            text-align: center;
+        }
+
+        .benefit-list {
+            margin-bottom: 35px;
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 16px;
+            text-align: left;
+            flex-grow: 1; 
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .benefit-item:last-child { margin-bottom: 0; }
+
+        .icon {
+            font-size: 18px;
+            margin-right: 12px;
+            margin-top: 2px;
+        }
+
+        .benefit-text strong {
+            color: #111111;
+            display: inline;
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .benefit-text span {
+            color: #334155;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 35px;
+        }
+
+        .cta-button {
+            display: block;
+            text-align: center;
+            background-color: #7209b7;
+            color: #ffffff;
+            padding: 14px 15px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            transition: background-color 0.2s;
+        }
+
+        .cta-button:hover { background-color: #5b0794; }
+        .cta-button.secondary { background-color: #ffb703; color: #111111; }
+        .cta-button.secondary:hover { background-color: #fca311; }
+
+        .download-title {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--on-dark);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .app-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .app-btn {
+            background: var(--on-dark);
+            color: var(--white);
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s;
+            flex: 1;
+            min-width: 140px;
+            text-align: left;
+        }
+
+        .app-btn:hover {
+            background: #2d333f;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn-text span { display: block; font-size: 0.75rem; color: #94a3b8; }
+        .btn-text strong { display: block; font-size: 0.95rem; font-weight: 500; }
+
+        .video-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #555555;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .video-box {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-box iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* VODAFONE ÖZEL İZOLE EDİLMİŞ STİLLER (Çakışma Engellendi) */
+        .voda-wrapper {
+            width: 100%;
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+        }
+
+        .voda-header {
+            background: linear-gradient(135deg, var(--voda-red), #b30000);
+            color: var(--white);
+            padding: 40px 20px;
+            border-radius: 24px;
+            box-shadow: 0 10px 20px rgba(230, 0, 0, 0.15);
+            margin-bottom: 30px;
+        }
+
+        .voda-header h1 {
+            font-size: 2.2rem;
+            margin: 0 0 10px 0;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .voda-header p {
+            font-size: 1.05rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--white);
+            line-height: 1.6;
+        }
+
+        .voda-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .voda-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #eef0f2;
+            text-align: center;
+        }
+
+        .voda-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(230, 0, 0, 0.12);
+        }
+
+        .voda-card-header {
+            background-color: var(--voda-dark);
+            color: var(--white);
+            padding: 16px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .voda-card.voda-fiber .voda-card-header {
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+        }
+
+        .voda-card-body {
+            padding: 25px 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .voda-card-body p {
+            font-size: 1rem;
+            color: #4a5568;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .voda-code-box {
+            background: #f8f9fa;
+            border: 2px dashed #ccc;
+            padding: 12px 15px;
+            border-radius: 10px;
+            font-weight: 700;
+            color: var(--voda-red);
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            margin: 15px 0;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .voda-code-box:hover {
+            background: #fff5f5;
+            border-color: var(--voda-red);
+        }
+
+        .voda-code-box::after {
+            content: 'Kodu Kopyala';
+            position: absolute;
+            bottom: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            color: #6c757d;
+            font-weight: 400;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .voda-code-box:hover::after { opacity: 1; }
+
+        .voda-btn {
+            display: block;
+            width: 100%;
+            padding: 13px;
+            background-color: var(--voda-red);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: background 0.2s;
+            box-shadow: 0 4px 6px rgba(230, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+
+        .voda-btn:hover { background-color: #b30000; }
+
+        .voda-card.voda-fiber .voda-btn {
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            box-shadow: 0 4px 6px rgba(0, 114, 255, 0.2);
+        }
+        .voda-card.voda-fiber .voda-btn:hover { filter: brightness(0.9); }
+
+        /* Bildirim Global Alanı */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--on-dark);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 1000;
+            font-size: 0.95rem;
+            border: 1px solid var(--on-green);
+        }
+
+        /* MOBİL RESPONSIVE AYARLARI */
+        @media (max-width: 868px) {
+            .campaign-wrapper {
+                flex-direction: column; 
+                align-items: center;
+                padding: 0 10px;
+            }
+            .container, .campaign-container {
+                width: 100%;
+                max-width: 550px; 
+            }
+            .voda-wrapper {
+                padding: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ÜST LOGO VE TANITIM ALANI -->
+    <div class="header">
+        <a href="https://www.youtube.com/@mutinoustube" target="_blank" rel="noopener noreferrer">
+            <img src="https://yt3.googleusercontent.com/x0mGWLt60-GJv2ZvwAcvOmkTftz_zogGGIB01a3mqXIZGpvSxL_k_n1eb4kmZWBLIWa6I0atcA=s160-c-k-c0x00ffffff-no-rj" alt="Mutinous Technology Logo" class="profile-img">
+        </a>
+        
+        <a href="https://youtube.com/MutinousTube" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+            <h3>Mutinous Technology</h3>
+        </a>
+        
+        <p class="description">Bağımsız Yayıncılığıma Hoşgeldiniz Tüm Güncel İçeriklerime Buradan Ulaşabilirsiniz.</p>
+    </div>
+
+    <!-- ANA DÜZEN (BUTONLAR VE SOSYAL MEDYA VİDEOLARI) -->
+    <div class="main-layout">
+        
+        <!-- BUTON GRUPLARI (SOL SÜTUN) -->
+        <div class="links-container">
+            <a href="https://youtube.com/MutinousTube" target="_blank" rel="noopener noreferrer" class="btn yt">YouTube</a>
+            <a href="https://www.youtube.com/channel/UCNQpjQqIsdUkKjsulWjngJA/join" target="_blank" rel="noopener noreferrer" class="btn dm">Özel Katıl Üyeliği</a>
+            <a href="https://www.youtube.com/playlist?list=UUMONQpjQqIsdUkKjsulWjngJA" target="_blank" rel="noopener noreferrer" class="btn ms">Katıl Üyeliği Videoları</a>
+            <a href="https://www.tiktok.com/@mutinoustube" target="_blank" rel="noopener noreferrer" class="btn tt">TikTok</a>
+            <a href="https://www.rumble.com/user/MutinousTube" target="_blank" rel="noopener noreferrer" class="btn rumble">Rumble</a>
+            <a href="https://www.dailymotion.com/MutinousTube" target="_blank" rel="noopener noreferrer" class="btn dm">Dailymotion</a>
+            <a href="https://t.me/MutinousTube" target="_blank" rel="noopener noreferrer" class="btn tg">Telegram</a>
+            <a href="https://www.instagram.com/MutinousTube" target="_blank" rel="noopener noreferrer" class="btn ig">Instagram</a>
+            <a href="https://www.x.com/MutinousTube" target="_blank" rel="noopener noreferrer" class="btn tw">Twitter (X)</a>
+            <a href="https://mastodon.social/@MutinousTube" target="_blank" rel="noopener noreferrer" class="btn ms">Mastodon</a>
+            <a href="https://whatsapp.com/channel/0029Vb4JKWmIyPtbv15mol0F" target="_blank" rel="noopener noreferrer" class="btn wa">WhatsApp</a>
+            <a href="https://www.patreon.com/MutinousTube" target="_blank" rel="noopener noreferrer" class="btn pt">Patreon</a>
+            <a href="https://github.com/mutinoustube" target="_blank" rel="noopener noreferrer" class="btn gh">Github</a>
+            <a href="https://odysee.com/@MutinousTube" target="_blank" rel="noopener noreferrer" class="btn odysee">Odysee</a>
+            <a href="https://www.facebook.com/MutinousTube" target="_blank" rel="noopener noreferrer" class="btn fb">Facebook</a>
+            <a href="https://www.linkedin.com/in/mutinoustube" target="_blank" rel="noopener noreferrer" class="btn ln">Linkedin</a>
+            <a href="https://youtube.com/@MutinousTube/community" target="_blank" rel="noopener noreferrer" class="btn com">Topluluk</a>
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mutinoustube@gmail.com" target="_blank" rel="noopener noreferrer" class="btn mail">İletişim</a>
+            
+            <!-- RUMBLE OYNATICI ALANI -->
+            <div class="video-container" style="margin-top: 12px;">
+                <div id="rumble_v76n2f8"></div>
+            </div>
+        </div>
+
+        <!-- MEDYALAR VE VİDEOLAR (SAĞ SÜTUN) -->
+        <div class="media-container">
+            <div class="video-container">
+                <iframe 
+                    id="yt-player"
+                    src="https://www.youtube-nocookie.com/embed/videoseries?list=PLs8e_3KWChB_qb5k_r-lYlg31Xyl5AKhu&autoplay=1&mute=1&playsinline=1&rel=0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <div id="dm-wrapper" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.15);">
+                <iframe src="https://geo.dailymotion.com/player.html?video=xaa2a66" style="width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden; border:none;" allowfullscreen title="Dailymotion Video Player" allow="web-share"></iframe>
+            </div>
+
+            <div class="telegram-container">
+                <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="MutinousTube/111" data-width="100%"></script>
+            </div>
+            
+            <div class="youtube-compact">
+                <iframe src="https://www.youtube.com/embed/videoseries?si=OrSUw39lUv6rKT8J&list=PLs8e_3KWChB90M7uwcDHVa7eEmVQV04wS" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- BANKA KAMPANYALARI BÖLÜMÜ (ORTA ALAN) -->
+    <div class="campaign-wrapper">
+
+        <!-- ON KART -->
+        <div class="container">
+            <div class="banner">
+                <div class="logo-text">ON</div>
+                <h1>Avantajlar Dünyasına Davetlisiniz!</h1>
+                <p>Sıra beklemeden, tamamen dijital ve masrafsız bankacılıkla tanışın.</p>
+            </div>
+            <div class="content">
+                <p class="welcome-text">Merhaba, seni ON’un masrafsız ve yüksek kazançlı dünyasından faydalanmaya davet ediyorum! Hemen aşağıdaki sana özel kodla başvurunu yap, kazanmaya başla.</p>
+                
+                <div class="code-container" onclick="copyCode('09DD3D0E')">
+                    <div class="code-label">Sana Özel Davet Kodu</div>
+                    <div class="code-value">09DD3D0E</div>
+                    <div class="copy-hint">Kopyalamak İçin Tıkla</div>
+                </div>
+
+                <div class="steps">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-text">Aşağıdaki güncel linklerden <strong>ON Dijital</strong> uygulamasını indirin.</div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-text"><strong>"Müşteri Olmak İstiyorum"</strong> adımındaki formu doldurun.</div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-text">Formdaki davet kodu alanına kopyaladığınız <strong>09DD3D0E</strong> kodunu girin.</div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">4</div>
+                        <div class="step-text">Görüntülü görüşme ile kolayca ON'lu olun ve anında davet edip kazanmaya başlayın!</div>
+                    </div>
+                </div>
+
+                <div class="download-title">Hemen ON Dijital'i İndirin:</div>
+                <div class="app-buttons">
+                    <a href="https://apps.apple.com/tr/app/on-dijital/id1584313693" target="_blank" class="app-btn">
+                        <div class="btn-text"><span>App Store'dan</span><strong>İndirin</strong></div>
+                    </a>
+                    <a href="https://play.google.com/store/search?q=on+mobil&c=apps" target="_blank" class="app-btn">
+                        <div class="btn-text"><span>Google Play</span><strong>'den Alın</strong></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ENPARA KART -->
+        <div class="campaign-container">
+            <div class="brand-header">
+                <h1 class="main-title">Size Özel Enpara Kampanya Linkleri İle Avantajlar Dünyasına Katılabilirsiniz</h1>
+                <p class="description">Enpara'nın ayrıcalıklı dünyasına katılın; ömür boyu hiçbir gizli ücret, aidat veya transfer masrafı ödemeden işlemlerinizi kolayca halledin.</p>
+            </div>
+            
+            <div class="benefit-list">
+                <div class="benefit-item">
+                    <div class="icon">🏪</div>
+                    <div class="benefit-text"><strong>Ömür Boyu Ücretsiz Yazar Kasa:</strong> <span>Şirketiniz için POS ve yazar kasa aidat ücretlerini tamamen sıfırlayın.</span></div>
+                </div>
+                <div class="benefit-item">
+                    <div class="icon">💳</div>
+                    <div class="benefit-text"><strong>Aidatsız Kredi Kartı:</strong> <span>Yıllık kart kullanım ücreti ödemeden güvenle harcayın.</span></div>
+                </div>
+                <div class="benefit-item">
+                    <div class="icon">💸</div>
+                    <div class="benefit-text"><strong>Ücretsiz EFT, FAST ve Havale:</strong> <span>7/24 yapacağınız tüm para transferleri her zaman tamamen ücretsiz.</span></div>
+                </div>
+                <div class="benefit-item">
+                    <div class="icon">📊</div>
+                    <div class="benefit-text"><strong>Borsa ve Fatura Ödemeleri:</strong> <span>Yatırımlarınızı masrafsız yönetin, faturalarınızı komisyonsuz ödeyin.</span></div>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <a href="https://www.enpara.com/sirketim/basvuru/firma-bilgileriniz?ref=S_TVS_S_253971101&utm_source=tvs&utm_medium=sirketim" target="_blank" class="cta-button">Şirketim Yazar Kasa Başvurusu</a>
+                <a href="https://www.enpara.com/bireysel-basvuru/kimlik-bilgileriniz?ref=B_TVS_253971101&utm_source=tvs&utm_medium=bireysel" target="_blank" class="cta-button secondary">Bireysel Kredi Kartı Başvurusu</a>
+            </div>
+
+            <div class="video-title">Kampanya Videosu</div>
+            <div class="video-box">
+                <iframe src="https://www.youtube.com/embed/74LMH5Q9cb8" title="Enpara Tanıtım" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- VODAFONE ÖZEL KAMPANYALAR BÖLÜMÜ (EN ALT ALAN) -->
+    <div class="voda-wrapper">
+        <div class="voda-header">
+            <h1><i class="fa-solid fa-gift"></i> Vodafone Avantaj Günleri!</h1>
+            <p>Merhaba arkadaşlar! Vodafone'un uygun fiyatlı faturalı hat ve fiber internet kampanyalarından, size özel hazırladığım indirim kodları ve linklerle hemen faydalanabilirsiniz. Kaçırmayın, değerlendirin!</p>
+        </div>
+
+        <div class="voda-grid">
+            <!-- Kart 1 -->
+            <div class="voda-card">
+                <div class="voda-card-header"><i class="fa-solid fa-star"></i> Tercih Kampanyası</div>
+                <div class="voda-card-body">
+                    <p>Size Özel Avantajlı Tarife</p>
+                    <div class="voda-code-box" onclick="copyCode('TERCIH47CVR3I6T')">TERCIH47CVR3I6T</div>
+                    <a href="https://www.vodafone.com.tr/numara-tasima-yeni-hat/tarifeler/MNP/postpaid/ALL?referer=amb-f0f7349c-f40e-4649-8053-aad230d2419b&couponCode=TERCIH47CVR3I6T&cid=perf-ambaff" target="_blank" class="voda-btn">Başvuru Yap</a>
+                </div>
+            </div>
+
+            <!-- Kart 2 -->
+            <div class="voda-card">
+                <div class="voda-card-header"><i class="fa-solid fa-crown"></i> Vodafone RED</div>
+                <div class="voda-card-body">
+                    <p>Dolu Dolu RED Dünyası Fırsatı</p>
+                    <div class="voda-code-box" onclick="copyCode('RED3LKRZZE7')">RED3LKRZZE7</div>
+                    <a href="https://www.vodafone.com.tr/numara-tasima-yeni-hat/tarifeler/MNP/postpaid/RED?referer=amb-f0f7349c-f40e-4649-8053-aad230d2419b&couponCode=RED3LKRZZE7&cid=perf-ambaff" target="_blank" class="voda-btn">Başvuru Yap</a>
+                </div>
+            </div>
+
+            <!-- Kart 3 -->
+            <div class="voda-card">
+                <div class="voda-card-header"><i class="fa-solid fa-fire"></i> Yalın Fırsat</div>
+                <div class="voda-card-body">
+                    <p>En Uygun Fiyatlı Yalın Paketler</p>
+                    <div class="voda-code-box" onclick="copyCode('FIRSAT6IZQGZC5')">FIRSAT6IZQGZC5</div>
+                    <a href="https://www.vodafone.com.tr/numara-tasima-yeni-hat/tarifeler/MNP/postpaid/YALIN?referer=amb-f0f7349c-f40e-4649-8053-aad230d2419b&couponCode=FIRSAT6IZQGZC5&cid=perf-ambaff" target="_blank" class="voda-btn">Başvuru Yap</a>
+                </div>
+            </div>
+
+            <!-- Kart 4 -->
+            <div class="voda-card">
+                <div class="voda-card-header"><i class="fa-solid fa-bolt"></i> FreeZone Kampanyası</div>
+                <div class="voda-card-body">
+                    <p>Gençlere Özel Ekstra Hediyeli</p>
+                    <div class="voda-code-box" onclick="copyCode('GENC2A5E7V2V')">GENC2A5E7V2V</div>
+                    <a href="https://www.vodafone.com.tr/numara-tasima-yeni-hat/tarifeler/MNP/postpaid/FREEZONE?referer=amb-f0f7349c-f40e-4649-8053-aad230d2419b&couponCode=GENC2A5E7V2V&cid=perf-ambaff" target="_blank" class="voda-btn">Başvuru Yap</a>
+                </div>
+            </div>
+
+            <!-- Kart 5 -->
+            <div class="voda-card">
+                <div class="voda-card-header"><i class="fa-solid fa-heart"></i> İlk Fırsat Paketleri</div>
+                <div class="voda-card-body">
+                    <p>Vodafone'a İlk Gelenlere Özel</p>
+                    <div class="voda-code-box" onclick="copyCode('ILK5XHX0IPB')">ILK5XHX0IPB</div>
+                    <a href="https://www.vodafone.com.tr/numara-tasima-yeni-hat/tarifeler/MNP/postpaid/POME?referer=amb-f0f7349c-f40e-4649-8053-aad230d2419b&couponCode=ILK5XHX0IPB&cid=perf-ambaff" target="_blank" class="voda-btn">Başvuru Yap</a>
+                </div>
+            </div>
+
+            <!-- Kart 6 (Fiber İnternet) -->
+            <div class="voda-card vada-fiber">
+                <div class="voda-card-header"><i class="fa-solid fa-house-signal"></i> Fiber İnternet</div>
+                <div class="voda-card-body">
+                    <p>Evde Işık Hızında Fiber İnternet</p>
+                    <div class="voda-code-box" style="color: #0072ff;" onclick="copyCode('FIBER41LT4MA2')">FIBER41LT4MA2</div>
+                    <a href="https://www.vodafone.com.tr/evde-internet/home?referer=amb-f0f7349c-f40e-4649-8053-aad230d2419b&couponCode=FIBER41LT4MA2&cid=perf-ambaff" target="_blank" class="voda-btn">Başvuru Yap</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST BİLDİRİM ALANI -->
+    <div id="toast" class="toast">Kod panoya kopyalandı!</div>
+
+    <script>
+        function copyCode(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById('toast');
+                toast.style.display = 'block';
+                setTimeout(() => {
+                    toast.style.display = 'none';
+                }, 2000);
+            });
+        }
+    </script>
+
+    <!-- Rumble Script -->
+    <script>
+        !function(r,u,m,b,l,e){r._Rumble=b,r[b]||(r[b]=function(){(r[b]._=r[b]._||[]).push(arguments);if(r[b]._.length==1){l=u.createElement(m),e=u.getElementsByTagName(m)[0],l.async=1,l.src="https://rumble.com/embedJS/u4p7gvi"+(arguments[1].video?'.'+arguments[1].video:'')+"/?url="+encodeURIComponent(location.href)+"&args="+encodeURIComponent(JSON.stringify([].slice.apply(arguments))),e.parentNode.insertBefore(l,e)}})}(window, document, "script", "Rumble");
+        Rumble("play", {"video":"v76n2f8","div":"rumble_v76n2f8"});
+    </script>
+
+    <!-- Dailymotion Scripti -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var dmWrapper = document.getElementById("dm-wrapper");
+            if (dmWrapper) {
+                dmWrapper.innerHTML = ""; 
+                var dmIframe = document.createElement("iframe");
+                dmIframe.id = "dm-player";
+                dmIframe.src = "https://www.dailymotion.com/embed/playlist/xbx1yy?autoplay=0&mute=1&ui-start-screen-info=0&queue-autoplay-next=0";
+                dmIframe.style.width = "100%";
+                dmIframe.style.height = "100%";
+                dmIframe.style.position = "absolute";
+                dmIframe.style.left = "0px";
+                dmIframe.style.top = "0px";
+                dmIframe.style.border = "none";
+                dmIframe.setAttribute("allowfullscreen", "true");
+                dmIframe.setAttribute("allow", "clipboard-write; encrypted-media; gyroscope; picture-in-picture");
+                dmWrapper.appendChild(dmIframe);
+            }
+        });
+    </script>
+</body>
+</html>
+### 🟥 Akbank Davet & Chip-Para Kampanyaları
+
+<div style="background: linear-gradient(135deg, #e60000, #990000); color: white; padding: 25px 20px; border-radius: 20px; text-align: center; margin-bottom: 25px;">
+  <h2 style="margin: 0 0 10px 0; color: white; font-size: 24px;">🚀 Akbanklı Ol, Avantajları Yakala!</h2>
+  <p style="margin: 0; opacity: 0.95; font-size: 14px;">Akbank Mobil uygulaması üzerinden sana özel davet kodlarını kullanarak dakikalar içinde başvurunu tamamla; ücretsiz bankacılık işlemlerinin, özel kampanyaların ve chip-para kazanma fırsatlarının tadını çıkar!</p>
+</div>
+
+<table width="100%" style="border-collapse: separate; border-spacing: 15px;">
+  <tr>
+    <!-- Akbanklı Ol Kampanyası -->
+    <td width="50%" valign="top" style="border: 2px solid #e60000; border-radius: 16px; padding: 25px; background: #ffffff; box-shadow: 0 4px 6px rgba(0,0,0,0.05);" align="center">
+      <span style="background: #e60000; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: bold;">YENİ ÜYELİK</span>
+      <h3 style="color: #e60000; margin-top: 15px; font-size: 18px;">🔴 Akbanklı Ol Fırsatı</h3>
+      <p style="color: #2c3e50; font-size: 14px; margin-top: 10px;">Akbank Mobil'den ilk kez Akbanklı olanlara özel masrafsız işlemler ve hoş geldin ödülleri.</p>
+      <div style="background: #fff5f5; border: 2px dashed #e60000; padding: 12px; border-radius: 8px; margin: 20px 0;">
+        <span style="font-size: 13px; color: #7f8c8d; display:block; margin-bottom:5px;">Sana Özel Davet Kodu:</span>
+        <code style="font-size: 18px; color: #e60000; letter-spacing: 1px;"><b>1001013780539</b></code>
+      </div>
+      <a href="https://www.akbank.com/akbankli-ol" target="_blank" rel="noopener noreferrer" style="display: block; padding: 12px; background: #e60000; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; box-shadow: 0 4px 6px rgba(230,0,0,0.15);">Hemen Akbanklı Ol</a>
+    </td>
+    <!-- Ürün Başvurusu Kampanyası -->
+    <td width="50%" valign="top" style="border: 2px solid #2c3e50; border-radius: 16px; padding: 25px; background: #ffffff; box-shadow: 0 4px 6px rgba(0,0,0,0.05);" align="center">
+      <span style="background: #2c3e50; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: bold;">ÜRÜN BAŞVURUSU</span>
+      <h3 style="color: #2c3e50; margin-top: 15px; font-size: 18px;">💳 Avantajlı Ürün Dünyası</h3>
+      <p style="color: #2c3e50; font-size: 14px; margin-top: 10px;">Akbank Mobil'den yeni ürün başvuruları yaparak sana özel ek chip-para kazanma fırsatları.</p>
+      <div style="background: #f8f9fa; border: 2px dashed #2c3e50; padding: 12px; border-radius: 8px; margin: 20px 0;">
+        <span style="font-size: 13px; color: #7f8c8d; display:block; margin-bottom:5px;">Sana Özel Davet Kodu:</span>
+        <code style="font-size: 18px; color: #2c3e50; letter-spacing: 2px;"><b>GUUUT</b></code>
+      </div>
+      <a href="https://akbank.com/davetet" target="_blank" rel="noopener noreferrer" style="display: block; padding: 12px; background: #2c3e50; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; box-shadow: 0 4px 6px rgba(44,62,80,0.15);">Hemen Başvuru Yap</a>
+    </td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piyasa Analizleri - Canlı</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f8f9fa; }
+        h1 { text-align: center; color: #1a1a1a; }
+        .section { background: white; margin: 20px auto; padding: 20px; border-radius: 8px; max-width: 1100px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background: #f0f0f0; }
+        .calculator { margin-top: 20px; padding: 15px; background: #f9f9f9; border-radius: 8px; }
+        input, button, select, textarea { padding: 10px; margin: 5px 0; font-size: 16px; box-sizing: border-box; width: 100%; }
+        .form-row { display: flex; gap: 4%; }
+        .form-row input { width: 48%; }
+        button { background: #0066cc; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #0055aa; }
+        #result { padding: 10px; background: #eef2f5; border-radius: 5px; font-weight: bold; }
+        #updateStatus {
+            position: fixed;
+            top: 15px; right: 20px;
+            background: #333; color: #fff;
+            padding: 8px 15px; border-radius: 20px;
+            font-size: 14px; opacity: 0;
+            transition: opacity 0.3s; pointer-events: none;
+            z-index: 999;
+        }
+        #updateStatus.show { opacity: 1; }
+        .error { color: #dc3545; font-style: italic; }
+    </style>
+</head>
+<body>
+    <div id="updateStatus">🔄 Güncelleniyor...</div>
+    <h1>📊 Piyasa Analizleri (Canlı)</h1>
+
+    <!-- Döviz -->
+    <div class="section">
+        <h2>💱 Döviz Kurları</h2>
+        <table>
+            <thead><tr><th>Para Birimi</th><th>Alış</th><th>Satış</th></tr></thead>
+            <tbody>
+                <tr><td>USD/TRY</td><td id="usdBuy">Yükleniyor...</td><td id="usdSell">Yükleniyor...</td></tr>
+                <tr><td>EUR/TRY</td><td id="eurBuy">Yükleniyor...</td><td id="eurSell">Yükleniyor...</td></tr>
+                <tr><td>GBP/TRY</td><td id="gbpBuy">Yükleniyor...</td><td id="gbpSell">Yükleniyor...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Altın -->
+    <div class="section">
+        <h2>🥇 Altın</h2>
+        <table>
+            <thead><tr><th>Emtia</th><th>Fiyat (USD)</th><th>Fiyat (TL)</th></tr></thead>
+            <tbody>
+                <tr><td>Altın (ONS)</td><td id="goldPrice">Yükleniyor...</td><td id="goldTl">Yükleniyor...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Metaller -->
+    <div class="section">
+        <h2>🥈 Diğer Metaller</h2>
+        <table>
+            <thead><tr><th>Emtia</th><th>Fiyat (USD)</th><th>Fiyat (TL)</th></tr></thead>
+            <tbody>
+                <tr><td>Gümüş</td><td id="silverPrice">Yükleniyor...</td><td id="silverTl">Yükleniyor...</td></tr>
+                <tr><td>Platin</td><td id="platinumPrice">Yükleniyor...</td><td id="platinumTl">Yükleniyor...</td></tr>
+                <tr><td>Paladyum</td><td id="palladiumPrice">Yükleniyor...</td><td id="palladiumTl">Yükleniyor...</td></tr>
+                <tr><td>Bakır</td><td id="copperPrice">Yükleniyor...</td><td id="copperTl">Yükleniyor...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Gıda Emtiaları -->
+    <div class="section">
+        <h2>🌾 Gıda Emtiaları</h2>
+        <table>
+            <thead><tr><th>Emtia</th><th>Birim</th><th>Fiyat (USD)</th><th>Fiyat (TL)</th></tr></thead>
+            <tbody>
+                <tr><td>Buğday</td><td>Bushel</td><td id="wheatPrice">Yükleniyor...</td><td id="wheatTl">Yükleniyor...</td></tr>
+                <tr><td>Mısır</td><td>Bushel</td><td id="cornPrice">Yükleniyor...</td><td id="cornTl">Yükleniyor...</td></tr>
+                <tr><td>Kahve</td><td>Lb</td><td id="coffeePrice">Yükleniyor...</td><td id="coffeeTl">Yükleniyor...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Borsalar -->
+    <div class="section">
+        <h2>📈 Borsalar</h2>
+        <table>
+            <thead><tr><th>Borsa</th><th>Endeks</th></tr></thead>
+            <tbody>
+                <tr><td>BIST 100</td><td id="bistPrice">Yükleniyor...</td></tr>
+                <tr><td>S&P 500</td><td id="spPrice">Yükleniyor...</td></tr>
+                <tr><td>Nasdaq</td><td id="nasdaqPrice">Yükleniyor...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Kripto -->
+    <div class="section">
+        <h2>₿ Kripto Paralar</h2>
+        <table>
+            <thead><tr><th>Coin</th><th>Fiyat (USD)</th></tr></thead>
+            <tbody>
+                <tr><td>Bitcoin (BTC)</td><td id="btcPrice">Yükleniyor...</td></tr>
+                <tr><td>Ethereum (ETH)</td><td id="ethPrice">Yükleniyor...</td></tr>
+                <tr><td>Binance Coin (BNB)</td><td id="bnbPrice">Yükleniyor...</td></tr>
+                <tr><td>Solana (SOL)</td><td id="solPrice">Yükleniyor...</td></tr>
+                <tr><td>Ripple (XRP)</td><td id="xrpPrice">Yükleniyor...</td></tr>
+                <tr><td>Dogecoin (DOGE)</td><td id="dogePrice">Yükleniyor...</td></tr>
+                <tr><td>Cardano (ADA)</td><td id="adaPrice">Yükleniyor...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Hesaplayıcı -->
+    <div class="section calculator">
+        <h2>🧮 Hesaplayıcı</h2>
+        <select id="calcType">
+            <option value="gold">Altın Hesaplayıcı</option>
+            <option value="dollar">Dolar/TL Çevirici</option>
+            <option value="interest">Faiz Hesaplayıcı</option>
+        </select><br>
+        <div id="goldInput"><input type="number" id="gramAmount" placeholder="Gram altın"></div>
+        <div id="dollarInput" style="display:none;"><input type="number" id="usdAmount" placeholder="USD"></div>
+        <div id="interestInput" style="display:none;">
+            <input type="number" id="principal" placeholder="Ana para">
+            <input type="number" id="rate" placeholder="Faiz %">
+            <input type="number" id="days" placeholder="Gün">
+        </div>
+        <button onclick="calculate()">Hesapla</button>
+        <div id="result" style="margin-top:10px;">Sonuç: -</div>
+    </div>
+
+    <!-- Yorum -->
+    <div class="section">
+        <h2>✍️ Yorum Yap</h2>
+        <form id="commentForm">
+            <div class="form-row">
+                <input type="text" name="ad" placeholder="Adınız" required>
+                <input type="text" name="soyad" placeholder="Soyadınız" required>
+            </div>
+            <input type="text" name="sehir" placeholder="Şehir">
+            <textarea name="yorum" placeholder="Yorumunuz..." required style="height:100px;"></textarea>
+            <button type="submit">Gönder</button>
+        </form>
+    </div>
+                   <script>
+    // ---- Değişkenler ----
+    let usdRate = 0;
+    let goldOunceUsd = 0;
+
+    // ---- Yardımcı: Veriyi güncelle ----
+    function updateCell(id, value, prefix = '', suffix = '') {
+        const el = document.getElementById(id);
+        if (el) el.innerText = value ? prefix + value + suffix : 'Veri yok';
+    }
+
+    // ---- 1. Döviz (Frankfurter) ----
+    async function fetchForex() {
+        try {
+            const res = await fetch('https://api.frankfurter.app/latest?from=USD&to=TRY,EUR,GBP');
+            const data = await res.json();
+            const rates = data.rates;
+            usdRate = rates.TRY || 0;
+
+            updateCell('usdBuy', rates.TRY?.toFixed(4));
+            updateCell('usdSell', (rates.TRY * 1.002)?.toFixed(4));
+            updateCell('eurBuy', rates.EUR?.toFixed(4));
+            updateCell('eurSell', (rates.EUR * 1.002)?.toFixed(4));
+            updateCell('gbpBuy', rates.GBP?.toFixed(4));
+            updateCell('gbpSell', (rates.GBP * 1.002)?.toFixed(4));
+            return true;
+        } catch (e) { return false; }
+    }
+
+    // ---- 2. Altın (Gold-API) ----
+    async function fetchGold() {
+        try {
+            const res = await fetch('https://www.gold-api.com/price/XAU');
+            const data = await res.json();
+            if (data.price) {
+                goldOunceUsd = data.price;
+                updateCell('goldPrice', '$', goldOunceUsd.toFixed(2));
+                const tl = usdRate ? goldOunceUsd * usdRate : 0;
+                updateCell('goldTl', tl ? tl.toFixed(2) + ' TL' : 'Veri yok');
+                return true;
+            }
+            return false;
+        } catch (e) { return false; }
+    }
+
+    // ---- 3. Metaller (Metals-API) ----
+    async function fetchMetals() {
+        try {
+            const res = await fetch('https://api.metals-api.com/v1/latest?access_key=demo&base=USD&symbols=XAG,XPT,XPD,XCU');
+            const data = await res.json();
+            if (data.rates) {
+                const metals = { silver: 'XAG', platinum: 'XPT', palladium: 'XPD', copper: 'XCU' };
+                Object.entries(metals).forEach(([id, symbol]) => {
+                    const price = data.rates[symbol];
+                    if (price) {
+                        updateCell(id + 'Price', '$', price.toFixed(2));
+                        const tl = usdRate ? price * usdRate : 0;
+                        updateCell(id + 'Tl', tl ? tl.toFixed(2) + ' TL' : 'Veri yok');
+                    }
+                });
+                return true;
+            }
+            return false;
+        } catch (e) { return false; }
+    }
+
+    // ---- 4. Gıda Emtiaları (Yahoo Finance) ----
+    async function fetchFood() {
+        const symbols = { wheat: 'ZW=F', corn: 'ZC=F', coffee: 'KC=F' };
+        for (const [id, symbol] of Object.entries(symbols)) {
+            try {
+                const res = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${symbol}`);
+                const data = await res.json();
+                const price = data?.chart?.result?.[0]?.meta?.regularMarketPrice;
+                if (price) {
+                    updateCell(id + 'Price', '$', price.toFixed(2));
+                    const tl = usdRate ? price * usdRate : 0;
+                    updateCell(id + 'Tl', tl ? tl.toFixed(2) + ' TL' : 'Veri yok');
+                }
+            } catch (e) { /* sessizce geç */ }
+        }
+    }
+
+    // ---- 5. Borsalar (Yahoo Finance) ----
+    async function fetchStocks() {
+        const symbols = { bist: 'XU100.IS', sp: '^GSPC', nasdaq: '^IXIC' };
+        for (const [id, symbol] of Object.entries(symbols)) {
+            try {
+                const res = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${symbol}`);
+                const data = await res.json();
+                const price = data?.chart?.result?.[0]?.meta?.regularMarketPrice;
+                if (price) updateCell(id + 'Price', '', price.toFixed(2));
+            } catch (e) { /* sessizce geç */ }
+        }
+    }
+
+    // ---- 6. Kripto (CoinGecko) ----
+    async function fetchCrypto() {
+        try {
+            const ids = 'bitcoin,ethereum,binancecoin,solana,ripple,dogecoin,cardano';
+            const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd`);
+            const data = await res.json();
+            const map = { btc: 'bitcoin', eth: 'ethereum', bnb: 'binancecoin', sol: 'solana', xrp: 'ripple', doge: 'dogecoin', ada: 'cardano' };
+            Object.entries(map).forEach(([id, coin]) => {
+                const price = data[coin]?.usd;
+                if (price) updateCell(id + 'Price', '$', price.toFixed(2));
+            });
+            return true;
+        } catch (e) { return false; }
+    }
+
+    // ---- Ana Veri Çekme ----
+    async function fetchAllData() {
+        const status = document.getElementById('updateStatus');
+        status.classList.add('show');
+
+        try {
+            await fetchForex();
+            await fetchGold();
+            await fetchMetals();
+            await fetchFood();
+            await fetchStocks();
+            await fetchCrypto();
+        } catch (e) {
+            console.error('Hata:', e);
+        } finally {
+            status.classList.remove('show');
+        }
+    } </div><a href="piyasa.html">Piyasa Analizleri</a>
+                    <a href="piyasa.html">Piyasa Analizleri</a>
+                       <a href="piyasa.html">Piyasa Analizleri</a>
 
