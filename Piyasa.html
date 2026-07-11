@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MutinousTube Finans & Emtia Merkezi</title>
     <style>
-        /* ============================================================ */
-        /* ANA STİLLER */
-        /* ============================================================ */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
@@ -17,9 +14,6 @@
         }
         .container { max-width: 1400px; margin: 0 auto; }
         
-        /* ============================================================ */
-        /* NAVİGASYON BUTONLARI */
-        /* ============================================================ */
         .nav-buttons { 
             display: flex; 
             justify-content: center; 
@@ -75,9 +69,6 @@
             transform: scale(1.05); 
         }
         
-        /* ============================================================ */
-        /* MUTINOUS FİNANS KONTEYNER */
-        /* ============================================================ */
         .mutinous-finance-container {
             background: #121214;
             color: #e2e8f0;
@@ -89,9 +80,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         
-        /* ============================================================ */
-        /* HEADER */
-        /* ============================================================ */
         .finance-header {
             display: flex;
             justify-content: space-between;
@@ -131,9 +119,6 @@
             50% { box-shadow: 0 0 40px rgba(16, 185, 129, 0.5); }
         }
         
-        /* ============================================================ */
-        /* SEKME BUTONLARI */
-        /* ============================================================ */
         .finance-tabs { 
             display: flex; 
             gap: 6px; 
@@ -181,9 +166,6 @@
             color: #fff;
         }
         
-        /* ============================================================ */
-        /* TABLO VE İÇERİK */
-        /* ============================================================ */
         .finance-tab-content { display: none; }
         .finance-tab-content.active { display: block; }
         
@@ -224,9 +206,6 @@
         .txt-down { color: #ef4444; font-weight: 600; }
         .txt-neutral { color: #64748b; font-weight: 600; }
         
-        /* ============================================================ */
-        /* HESAPLAYICI */
-        /* ============================================================ */
         .calculator-box { 
             background: #18181c; 
             border: 1px solid #24242b; 
@@ -312,9 +291,6 @@
             color: #fff; 
         }
         
-        /* ============================================================ */
-        /* ALT BİLGİ & YÖNLENDİRİCİ */
-        /* ============================================================ */
         .finance-footer { 
             margin-top: 20px; 
             padding-top: 15px; 
@@ -336,16 +312,12 @@
             text-decoration: underline; 
         }
         
-        /* ===== YATIRIM TAVSİYESİ DEĞİLDİR - KIRMIZI ===== */
         .warning-text {
             color: #ef4444;
             font-weight: 700;
             font-size: 12px;
         }
         
-        /* ============================================================ */
-        /* BANKNOT */
-        /* ============================================================ */
         .banknote {
             background: #1e293b;
             border-left: 4px solid #fbbf24;
@@ -359,9 +331,6 @@
         .banknote a { color: #60a5fa; text-decoration: none; }
         .banknote a:hover { text-decoration: underline; }
         
-        /* ============================================================ */
-        /* SCROLLBAR */
-        /* ============================================================ */
         .finance-table-wrapper::-webkit-scrollbar { width: 6px; }
         .finance-table-wrapper::-webkit-scrollbar-track { background: #121214; }
         .finance-table-wrapper::-webkit-scrollbar-thumb { background: #2d2d39; border-radius: 3px; }
@@ -375,11 +344,6 @@
         .footer a { color: #ff4500; text-decoration: none; }
         .footer a:hover { text-decoration: underline; }
         
-        .text-center { text-align: center; margin-top: 20px; }
-        
-        /* ============================================================ */
-        /* RESPONSIVE */
-        /* ============================================================ */
         @media (max-width: 768px) {
             .finance-header { flex-direction: column; align-items: flex-start; }
             .calc-row { flex-direction: column; }
@@ -390,7 +354,7 @@
 </head>
 <body>
     <div class="container">
-        <!-- ===== NAV ===== -->
+        <!-- NAV -->
         <div class="nav-buttons">
             <a href="https://mutinoustube.github.io" class="nav-btn nav-btn-secondary">🏠 Ana Sayfa</a>
             <a href="BankaKampanyalari.html" class="nav-btn nav-btn-primary">🏦 Banka Kampanyaları</a>
@@ -398,7 +362,7 @@
             <a href="BankaKampanyalari.html" class="nav-btn nav-btn-green">⚡ Kampanya Kısayol</a>
         </div>
         
-        <!-- ===== MUTINOUS FİNANS MERKEZİ ===== -->
+        <!-- MUTINOUS FİNANS MERKEZİ -->
         <div class="mutinous-finance-container">
             <div class="finance-header">
                 <div class="header-title-zone">
@@ -410,7 +374,7 @@
                 </div>
             </div>
 
-            <!-- ===== SEKME MENÜSÜ ===== -->
+            <!-- SEKME MENÜSÜ -->
             <div class="finance-tabs">
                 <button class="tab-btn active" onclick="switchFinanceTab('tab-forex', this)">💱 Döviz & Altın</button>
                 <button class="tab-btn" onclick="switchFinanceTab('tab-metals', this)">🥇 Değerli Metaller</button>
@@ -421,7 +385,7 @@
                 <button class="tab-btn interest-btn" onclick="switchFinanceTab('tab-interest', this)">📈 Faiz Hesapla</button>
             </div>
 
-            <!-- ===== 1. DÖVİZ & ALTIN ===== -->
+            <!-- 1. DÖVİZ & ALTIN -->
             <div id="tab-forex" class="finance-tab-content active">
                 <div class="finance-table-wrapper">
                     <table class="finance-table">
@@ -443,7 +407,7 @@
                 </div>
             </div>
 
-            <!-- ===== 2. DEĞERLİ METALLER ===== -->
+            <!-- 2. DEĞERLİ METALLER -->
             <div id="tab-metals" class="finance-tab-content">
                 <div class="finance-table-wrapper">
                     <table class="finance-table">
@@ -462,7 +426,7 @@
                 </div>
             </div>
 
-            <!-- ===== 3. TARIM & GIDA ===== -->
+            <!-- 3. TARIM & GIDA -->
             <div id="tab-agri" class="finance-tab-content">
                 <div class="finance-table-wrapper">
                     <table class="finance-table">
@@ -478,7 +442,7 @@
                 </div>
             </div>
 
-            <!-- ===== 4. DÜNYA BORSALARI ===== -->
+            <!-- 4. DÜNYA BORSALARI -->
             <div id="tab-global" class="finance-tab-content">
                 <div class="finance-table-wrapper">
                     <table class="finance-table">
@@ -495,7 +459,7 @@
                 </div>
             </div>
 
-            <!-- ===== 5. KRİPTO ===== -->
+            <!-- 5. KRİPTO -->
             <div id="tab-crypto" class="finance-tab-content">
                 <div class="finance-table-wrapper">
                     <table class="finance-table">
@@ -515,7 +479,7 @@
                 </div>
             </div>
 
-            <!-- ===== 6. ÇEVİRİCİ ===== -->
+            <!-- 6. ÇEVİRİCİ -->
             <div id="tab-calculator" class="finance-tab-content">
                 <div class="calculator-box">
                     <h4>Canlı Döviz & Altın Çevirici</h4>
@@ -554,7 +518,7 @@
                 </div>
             </div>
 
-            <!-- ===== 7. FAİZ HESAPLAYICI ===== -->
+            <!-- 7. FAİZ HESAPLAYICI -->
             <div id="tab-interest" class="finance-tab-content">
                 <div class="calculator-box">
                     <h4>Mevduat Faizi Hesaplayıcı</h4>
@@ -586,7 +550,7 @@
                 </div>
             </div>
 
-            <!-- ===== BANKNOT ===== -->
+            <!-- BANKNOT -->
             <div class="banknote">
                 💡 <strong>Hızlı Yönlendirmeler:</strong> 
                 <a href="BankaKampanyalari.html" target="_blank" style="background:#ff4500;padding:2px 10px;border-radius:4px;color:#fff;">🏦 Kampanya</a>
@@ -594,7 +558,7 @@
                 <a href="https://mutinoustube.github.io" target="_blank" style="background:#60a5fa;padding:2px 10px;border-radius:4px;color:#fff;">🏠 Ana Sayfa</a>
             </div>
 
-            <!-- ===== ALT BİLGİ VE YÖNLENDİRİCİ ===== -->
+            <!-- ALT BİLGİ -->
             <div class="finance-footer">
                 <p class="warning-text">⚠️ Piyasa verileri anlık olarak güncellenmektedir. Yatırım tavsiyesi içermez.</p>
                 <div style="display: flex; gap: 15px; flex-wrap: wrap;">
@@ -637,4 +601,38 @@
             const toSelect = document.getElementById('calc-to');
             
             const fromText = fromSelect.options[fromSelect.selectedIndex].text.split(' ')[0];
-            const toText = toSelect.options[toSelect.selected
+            const toText = toSelect.options[toSelect.selectedIndex].text.split(' ')[0];
+
+            const amountInTL = amount * fromRate;
+            const finalResult = amountInTL / toRate;
+
+            document.getElementById('calc-result-value').innerText = 
+                amount.toLocaleString('tr-TR', {maximumFractionDigits: 4}) + " " + fromText + " = " + 
+                finalResult.toLocaleString('tr-TR', {maximumFractionDigits: 4}) + " " + toText;
+        }
+
+        function calculateInterest() {
+            const principal = parseFloat(document.getElementById('interest-principal').value) || 0;
+            const rate = parseFloat(document.getElementById('interest-rate').value) || 0;
+            const days = parseInt(document.getElementById('interest-days').value) || 0;
+
+            const grossGain = (principal * rate * days) / 36500;
+            const netGain = grossGain * 0.95;
+            const totalAmount = principal + netGain;
+
+            document.getElementById('interest-net-gain').innerText = 
+                netGain.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + " TL";
+            document.getElementById('interest-total-amount').innerText = 
+                totalAmount.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + " TL";
+        }
+
+        // ================================================================
+        // CANLI SAAT - HER SANİYE GÜNCELLENİR
+        // ================================================================
+        function startLiveClock() {
+            const updateBadge = document.getElementById('updateBadge');
+            
+            function updateClock() {
+                const now = new Date();
+                const dateStr = now.toLocaleDateString('tr-TR');
+                const
