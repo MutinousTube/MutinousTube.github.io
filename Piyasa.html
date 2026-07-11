@@ -630,9 +630,9 @@
         // ================================================================
         // CANLI SAAT - HER SANİYE GÜNCELLENİR
         // ================================================================
-        function startLiveClock() {
+        (function startLiveClock() {
             const updateBadge = document.getElementById('updateBadge');
             
             function updateClock() {
                 const now = new Date();
-                const dateStr
+                const dateStr = now.to
