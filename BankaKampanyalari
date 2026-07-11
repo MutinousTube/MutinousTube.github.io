@@ -68,7 +68,7 @@
     <div class="container">
         <h1>🏦 Hoş Geldiniz</h1>
         <p>Size özel banka kampanyalarını keşfedin.</p>
-        <!-- Banka Kampanyaları butonu - yeni sayfaya yönlendirir -->
+        <!-- Banka Kampanyaları butonu - MutinousTube.github.io/BankaKampanyalari -->
         <a href="kampanyalar.html" class="btn">Banka Kampanyaları</a>
         <div class="footer">© 2026 Banka Kampanyaları</div>
     </div>
