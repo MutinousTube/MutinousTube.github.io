@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MutinousTube Finans & Emtia Merkezi</title>
     <style>
-        /* ============================================================ */
-        /* ANA STİLLER */
-        /* ============================================================ */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
@@ -17,9 +14,6 @@
         }
         .container { max-width: 1400px; margin: 0 auto; }
         
-        /* ============================================================ */
-        /* NAVİGASYON BUTONLARI */
-        /* ============================================================ */
         .nav-buttons { 
             display: flex; 
             justify-content: center; 
@@ -56,10 +50,25 @@
             background: #334155; 
             transform: scale(1.05); 
         }
+        .nav-btn-green { 
+            background: #064e3b; 
+            color: #34d399; 
+            border: 1px solid #10b981;
+        }
+        .nav-btn-green:hover { 
+            background: #065f46; 
+            transform: scale(1.05); 
+        }
+        .nav-btn-gold { 
+            background: #78350f; 
+            color: #fbbf24; 
+            border: 1px solid #f59e0b;
+        }
+        .nav-btn-gold:hover { 
+            background: #92400e; 
+            transform: scale(1.05); 
+        }
         
-        /* ============================================================ */
-        /* MUTINOUS FİNANS KONTEYNER */
-        /* ============================================================ */
         .mutinous-finance-container {
             background: #121214;
             color: #e2e8f0;
@@ -71,9 +80,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         
-        /* ============================================================ */
-        /* HEADER */
-        /* ============================================================ */
         .finance-header {
             display: flex;
             justify-content: space-between;
@@ -98,18 +104,21 @@
             letter-spacing: 0.3px;
         }
         .update-badge { 
-            background: #1e293b; 
+            background: #064e3b; 
             color: #34d399;
-            padding: 6px 16px; 
+            padding: 8px 18px; 
             border-radius: 20px; 
-            font-size: 12px; 
-            font-weight: 600; 
-            border: 1px solid #10b981; 
+            font-size: 13px; 
+            font-weight: 700; 
+            border: 2px solid #10b981;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+            animation: pulse-green 2s ease-in-out infinite;
+        }
+        @keyframes pulse-green {
+            0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.2); }
+            50% { box-shadow: 0 0 40px rgba(16, 185, 129, 0.5); }
         }
         
-        /* ============================================================ */
-        /* SEKME BUTONLARI */
-        /* ============================================================ */
         .finance-tabs { 
             display: flex; 
             gap: 6px; 
@@ -157,9 +166,6 @@
             color: #fff;
         }
         
-        /* ============================================================ */
-        /* TABLO VE İÇERİK */
-        /* ============================================================ */
         .finance-tab-content { display: none; }
         .finance-tab-content.active { display: block; }
         
@@ -200,9 +206,6 @@
         .txt-down { color: #ef4444; font-weight: 600; }
         .txt-neutral { color: #64748b; font-weight: 600; }
         
-        /* ============================================================ */
-        /* HESAPLAYICI */
-        /* ============================================================ */
         .calculator-box { 
             background: #18181c; 
             border: 1px solid #24242b; 
@@ -288,9 +291,6 @@
             color: #fff; 
         }
         
-        /* ============================================================ */
-        /* ALT BİLGİ & YÖNLENDİRİCİ */
-        /* ============================================================ */
         .finance-footer { 
             margin-top: 20px; 
             padding-top: 15px; 
@@ -312,16 +312,12 @@
             text-decoration: underline; 
         }
         
-        /* ===== YATIRIM TAVSİYESİ DEĞİLDİR - KIRMIZI ===== */
         .warning-text {
             color: #ef4444;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 12px;
         }
         
-        /* ============================================================ */
-        /* BANKNOT */
-        /* ============================================================ */
         .banknote {
             background: #1e293b;
             border-left: 4px solid #fbbf24;
@@ -335,9 +331,6 @@
         .banknote a { color: #60a5fa; text-decoration: none; }
         .banknote a:hover { text-decoration: underline; }
         
-        /* ============================================================ */
-        /* SCROLLBAR */
-        /* ============================================================ */
         .finance-table-wrapper::-webkit-scrollbar { width: 6px; }
         .finance-table-wrapper::-webkit-scrollbar-track { background: #121214; }
         .finance-table-wrapper::-webkit-scrollbar-thumb { background: #2d2d39; border-radius: 3px; }
@@ -351,11 +344,6 @@
         .footer a { color: #ff4500; text-decoration: none; }
         .footer a:hover { text-decoration: underline; }
         
-        .text-center { text-align: center; margin-top: 20px; }
-        
-        /* ============================================================ */
-        /* RESPONSIVE */
-        /* ============================================================ */
         @media (max-width: 768px) {
             .finance-header { flex-direction: column; align-items: flex-start; }
             .calc-row { flex-direction: column; }
@@ -366,13 +354,15 @@
 </head>
 <body>
     <div class="container">
-        <!-- ===== NAV ===== -->
+        <!-- NAV -->
         <div class="nav-buttons">
             <a href="https://mutinoustube.github.io" class="nav-btn nav-btn-secondary">🏠 Ana Sayfa</a>
-            <a href="kampanyalar.html" class="nav-btn nav-btn-primary">🏦 Banka Kampanyaları</a>
+            <a href="BankaKampanyalari.html" class="nav-btn nav-btn-primary">🏦 Banka Kampanyaları</a>
+            <a href="ParaKazan.html" class="nav-btn nav-btn-gold">💰 Para Kazan</a>
+            <a href="BankaKampanyalari.html" class="nav-btn nav-btn-green">⚡ Kampanya Kısayol</a>
         </div>
         
-        <!-- ===== MUTINOUS FİNANS MERKEZİ ===== -->
+        <!-- MUTINOUS FİNANS MERKEZİ -->
         <div class="mutinous-finance-container">
             <div class="finance-header">
                 <div class="header-title-zone">
@@ -380,11 +370,11 @@
                     <p class="brand-sub">Küresel Piyasalar, Canlı Çeviri ve Hesaplama Servisi</p>
                 </div>
                 <div class="update-badge" id="updateBadge">
-                    Canlı Saat Yükleniyor...
+                    🟢 Canlı Zaman: Yükleniyor...
                 </div>
             </div>
 
-            <!-- ===== SEKME MENÜSÜ ===== -->
+            <!-- SEKME MENÜSÜ -->
             <div class="finance-tabs">
                 <button class="tab-btn active" onclick="switchFinanceTab('tab-forex', this)">💱 Döviz & Altın</button>
                 <button class="tab-btn" onclick="switchFinanceTab('tab-metals', this)">🥇 Değerli Metaller</button>
@@ -395,7 +385,7 @@
                 <button class="tab-btn interest-btn" onclick="switchFinanceTab('tab-interest', this)">📈 Faiz Hesapla</button>
             </div>
 
-            <!-- ===== 1. DÖVİZ & ALTIN ===== -->
+            <!-- 1. DÖVİZ & ALTIN -->
             <div id="tab-forex" class="finance-tab-content active">
                 <div class="finance-table-wrapper">
                     <table class="finance-table">
@@ -417,7 +407,7 @@
                 </div>
             </div>
 
-            <!-- ===== 2. DEĞERLİ METALLER ===== -->
+            <!-- 2. DEĞERLİ METALLER -->
             <div id="tab-metals" class="finance-tab-content">
                 <div class="finance-table-wrapper">
                     <table class="finance-table">
@@ -436,7 +426,7 @@
                 </div>
             </div>
 
-            <!-- ===== 3. TARIM & GIDA ===== -->
+            <!-- 3. TARIM & GIDA -->
             <div id="tab-agri" class="finance-tab-content">
                 <div class="finance-table-wrapper">
                     <table class="finance-table">
@@ -452,7 +442,7 @@
                 </div>
             </div>
 
-            <!-- ===== 4. DÜNYA BORSALARI ===== -->
+            <!-- 4. DÜNYA BORSALARI -->
             <div id="tab-global" class="finance-tab-content">
                 <div class="finance-table-wrapper">
                     <table class="finance-table">
@@ -469,7 +459,7 @@
                 </div>
             </div>
 
-            <!-- ===== 5. KRİPTO ===== -->
+            <!-- 5. KRİPTO -->
             <div id="tab-crypto" class="finance-tab-content">
                 <div class="finance-table-wrapper">
                     <table class="finance-table">
@@ -489,7 +479,7 @@
                 </div>
             </div>
 
-            <!-- ===== 6. ÇEVİRİCİ ===== -->
+            <!-- 6. ÇEVİRİCİ -->
             <div id="tab-calculator" class="finance-tab-content">
                 <div class="calculator-box">
                     <h4>Canlı Döviz & Altın Çevirici</h4>
@@ -528,7 +518,7 @@
                 </div>
             </div>
 
-            <!-- ===== 7. FAİZ HESAPLAYICI ===== -->
+            <!-- 7. FAİZ HESAPLAYICI -->
             <div id="tab-interest" class="finance-tab-content">
                 <div class="calculator-box">
                     <h4>Mevduat Faizi Hesaplayıcı</h4>
@@ -560,18 +550,22 @@
                 </div>
             </div>
 
-            <!-- ===== BANKNOT ===== -->
+            <!-- BANKNOT -->
             <div class="banknote">
-                💡 <strong>Not:</strong> Banka Kampanyaları sayfasına <a href="kampanyalar.html" target="_blank">buradan</a> ulaşabilirsiniz. Sayfa linki eklendi.
+                💡 <strong>Hızlı Yönlendirmeler:</strong> 
+                <a href="BankaKampanyalari.html" target="_blank" style="background:#ff4500;padding:2px 10px;border-radius:4px;color:#fff;">🏦 Kampanya</a>
+                <a href="ParaKazan.html" target="_blank" style="background:#f59e0b;padding:2px 10px;border-radius:4px;color:#fff;">💰 Para Kazan</a>
+                <a href="https://mutinoustube.github.io" target="_blank" style="background:#60a5fa;padding:2px 10px;border-radius:4px;color:#fff;">🏠 Ana Sayfa</a>
             </div>
 
-            <!-- ===== ALT BİLGİ VE YÖNLENDİRİCİ ===== -->
+            <!-- ALT BİLGİ -->
             <div class="finance-footer">
                 <p class="warning-text">⚠️ Piyasa verileri anlık olarak güncellenmektedir. Yatırım tavsiyesi içermez.</p>
                 <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                    <a href="https://mutinoustube.github.io" target="_blank" rel="noopener" style="color: #60a5fa;">🏠 MutinousTube Ana Sayfa</a>
-                    <a href="kampanyalar.html" target="_blank" rel="noopener">🏦 Banka Kampanyaları</a>
-                    <a href="https://www.youtube.com/@MutinousTube" target="_blank" rel="noopener" style="color: #ff4500;">▶️ MutinousTube YouTube</a>
+                    <a href="https://mutinoustube.github.io" target="_blank" rel="noopener" style="color: #60a5fa;">🏠 Ana Sayfa</a>
+                    <a href="BankaKampanyalari.html" target="_blank" rel="noopener" style="color: #ff4500; font-weight: 700;">🏦 Banka Kampanyaları</a>
+                    <a href="ParaKazan.html" target="_blank" rel="noopener" style="color: #fbbf24; font-weight: 700;">💰 Para Kazan</a>
+                    <a href="https://www.youtube.com/@MutinousTube" target="_blank" rel="noopener" style="color: #ff4500;">▶️ YouTube</a>
                     <a href="https://github.com/MutinousTube/MutinousTube.github.io" target="_blank" rel="noopener">📂 GitHub</a>
                 </div>
             </div>
@@ -633,30 +627,10 @@
         }
 
         // ================================================================
-        // CANLI SAAT GÜNCELLEME SİSTEMİ
+        // CANLI SAAT - HER SANİYE GÜNCELLENİR
         // ================================================================
         function startLiveClock() {
             const updateBadge = document.getElementById('updateBadge');
             
             function updateClock() {
-                const now = new Date();
-                const dateStr = now.toLocaleDateString('tr-TR');
-                const timeStr = now.toLocaleTimeString('tr-TR');
-                updateBadge.textContent = 'Canlı Zaman: ' + dateStr + ' - ' + timeStr;
-            }
-            
-            updateClock(); // İlk açılışta hemen yazsın
-            setInterval(updateClock, 1000); // Her saniye tıkır tıkır güncellesin
-        }
-
-        // ================================================================
-        // SAYFA YÜKLENDİĞİNDE
-        // ================================================================
-        document.addEventListener('DOMContentLoaded', function() {
-            calculateFinance();
-            calculateInterest();
-            startLiveClock(); // Canlı saati başlat
-        });
-    </script>
-</body>
-</html>
+                const now = new Date
