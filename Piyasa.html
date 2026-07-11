@@ -1,3 +1,4 @@
+<meta charset="UTF-8">
 <!-- MUTINOUS TECHNOLOGY - GELİŞMİŞ FİNANS & EMTİA MERKEZİ -->
 <div class="mutinous-finance-container">
   <div class="finance-header">
@@ -47,7 +48,7 @@
           <tr><th>Metal Cinsi</th><th>Alış (TL)</th><th>Satış (TL)</th><th>Değişim</th></tr>
         </thead>
         <tbody>
-          <tr><td><strong>GÜMÜŞ</strong> (OOF)</td><td>90.38</td><td>90.48</td><td class="txt-up">+%0.03</td></tr>
+          <tr><td><strong>GÜMÜŞ</strong> (GUMUS)</td><td>90.38</td><td>90.48</td><td class="txt-up">+%0.03</td></tr>
           <tr><td><strong>GRAM PLATİN</strong> (GPL)</td><td>2463.46</td><td>2474.68</td><td class="txt-up">+%1.25</td></tr>
           <tr><td><strong>GRAM PALADYUM</strong> (PAL)</td><td>1922.21</td><td>1945.26</td><td class="txt-up">+%2.40</td></tr>
           <tr><td><strong>BRENT PETROL</strong> ($/Varil)</td><td>3660.10</td><td>3675.50</td><td class="txt-up">+%0.03</td></tr>
@@ -65,7 +66,7 @@
           <tr><th>Ürün Adı</th><th>Fiyat (TL/Birim)</th><th>Piyasa</th><th>Değişim</th></tr>
         </thead>
         <tbody>
-          <tr><td><strong>BUĞDAY</strong> (Wheat Cboti)</td><td>314.50</td><td>Chicago Borsası</td><td class="txt-down">-%0.18</td></tr>
+          <tr><td><strong>BUĞDAY</strong> (Wheat Cbot)</td><td>314.50</td><td>Chicago Borsası</td><td class="txt-down">-%0.18</td></tr>
           <tr><td><strong>KAHVE</strong> (Coffee Arabica)</td><td>1145.20</td><td>ICE Piyasası</td><td class="txt-up">+%1.12</td></tr>
           <tr><td><strong>PAMUK</strong> (Cotton US)</td><td>78.40</td><td>NY Borsası</td><td class="txt-neutral">%0.00</td></tr>
           <tr><td><strong>KAKAO</strong> (Cocoa)</td><td>4310.00</td><td>ICE Piyasası</td><td class="txt-up">+%2.34</td></tr>
@@ -85,7 +86,7 @@
         <tbody>
           <tr><td><strong>XU100</strong> - Borsa İstanbul</td><td>Türkiye</td><td>14321.19</td><td class="txt-up">+%1.53</td></tr>
           <tr><td><strong>S&P 500</strong></td><td>ABD</td><td>5422.50</td><td class="txt-up">+%0.42</td></tr>
-          <tr><td><strong>NASDAQ 100</strong></td><td>ABD Tech</td><td>19110.80</td><td class="txt-up">+%0.68</td></tr>
+          <tr><td><strong>NASDAQ 100</strong></td><td>ABD Teknoloji</td><td>19110.80</td><td class="txt-up">+%0.68</td></tr>
           <tr><td><strong>DAX 40</strong></td><td>Almanya</td><td>18230.15</td><td class="txt-down">-%0.15</td></tr>
           <tr><td><strong>FTSE 100</strong></td><td>İngiltere</td><td>8195.40</td><td class="txt-neutral">%0.00</td></tr>
           <tr><td><strong>NIKKEI 225</strong></td><td>Japonya</td><td>38720.00</td><td class="txt-up">+%0.85</td></tr>
@@ -251,7 +252,6 @@
     const fromText = fromSelect.options[fromSelect.selectedIndex].text.split(' ')[0];
     const toText = toSelect.options[toSelect.selectedIndex].text.split(' ')[0];
 
-    // Önce TL'ye çevir, sonra hedef birime böl
     const amountInTL = amount * fromRate;
     const finalResult = amountInTL / toRate;
 
