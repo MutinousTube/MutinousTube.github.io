@@ -115,9 +115,8 @@
             font-weight: 500;
             letter-spacing: 0.3px;
         }
-        /* ===== SAAT/TARİH - YEŞİL ===== */
         .update-badge { 
-            background: #064e3b;
+            background: #064e3b; 
             color: #34d399;
             padding: 8px 18px; 
             border-radius: 20px; 
@@ -126,25 +125,10 @@
             border: 2px solid #10b981;
             box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
             animation: pulse-green 2s ease-in-out infinite;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .update-badge .dot {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            background: #10b981;
-            border-radius: 50%;
-            animation: blink 1s ease-in-out infinite;
         }
         @keyframes pulse-green {
             0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.2); }
             50% { box-shadow: 0 0 40px rgba(16, 185, 129, 0.5); }
-        }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
         }
         
         /* ============================================================ */
@@ -409,9 +393,9 @@
         <!-- ===== NAV ===== -->
         <div class="nav-buttons">
             <a href="https://mutinoustube.github.io" class="nav-btn nav-btn-secondary">🏠 Ana Sayfa</a>
-            <a href="https://mutinoustube.github.io/BankaKampanyalari.html" class="nav-btn nav-btn-primary">🏦 Banka Kampanyaları</a>
-            <a href="https://mutinoustube.github.io/ParaKazan.html" class="nav-btn nav-btn-gold">💰 Para Kazan</a>
-            <a href="https://mutinoustube.github.io/BankaKampanyalari.html" class="nav-btn nav-btn-green">⚡ Kampanya Kısayol</a>
+            <a href="BankaKampanyalari.html" class="nav-btn nav-btn-primary">🏦 Banka Kampanyaları</a>
+            <a href="ParaKazan.html" class="nav-btn nav-btn-gold">💰 Para Kazan</a>
+            <a href="BankaKampanyalari.html" class="nav-btn nav-btn-green">⚡ Kampanya Kısayol</a>
         </div>
         
         <!-- ===== MUTINOUS FİNANS MERKEZİ ===== -->
@@ -421,21 +405,20 @@
                     <h2>MutinousTube Finans & Emtia Merkezi</h2>
                     <p class="brand-sub">Küresel Piyasalar, Canlı Çeviri ve Hesaplama Servisi</p>
                 </div>
-                <div class="update-badge">
-                    <span class="dot"></span>
-                    <span id="clockDisplay">🟢 Son Güncelleme: Yükleniyor...</span>
+                <div class="update-badge" id="updateBadge">
+                    🟢 Canlı Zaman: Yükleniyor...
                 </div>
             </div>
 
             <!-- ===== SEKME MENÜSÜ ===== -->
             <div class="finance-tabs">
-                <button class="tab-btn active" onclick="switchFinanceTab('tab-forex')">💱 Döviz & Altın</button>
-                <button class="tab-btn" onclick="switchFinanceTab('tab-metals')">🥇 Değerli Metaller</button>
-                <button class="tab-btn" onclick="switchFinanceTab('tab-agri')">🌾 Tarım & Gıda</button>
-                <button class="tab-btn" onclick="switchFinanceTab('tab-global')">📈 Dünya Borsaları</button>
-                <button class="tab-btn" onclick="switchFinanceTab('tab-crypto')">₿ Kripto</button>
-                <button class="tab-btn calc-btn" onclick="switchFinanceTab('tab-calculator')">🧮 Çevirici</button>
-                <button class="tab-btn interest-btn" onclick="switchFinanceTab('tab-interest')">📈 Faiz Hesapla</button>
+                <button class="tab-btn active" onclick="switchFinanceTab('tab-forex', this)">💱 Döviz & Altın</button>
+                <button class="tab-btn" onclick="switchFinanceTab('tab-metals', this)">🥇 Değerli Metaller</button>
+                <button class="tab-btn" onclick="switchFinanceTab('tab-agri', this)">🌾 Tarım & Gıda</button>
+                <button class="tab-btn" onclick="switchFinanceTab('tab-global', this)">📈 Dünya Borsaları</button>
+                <button class="tab-btn" onclick="switchFinanceTab('tab-crypto', this)">₿ Kripto</button>
+                <button class="tab-btn calc-btn" onclick="switchFinanceTab('tab-calculator', this)">🧮 Çevirici</button>
+                <button class="tab-btn interest-btn" onclick="switchFinanceTab('tab-interest', this)">📈 Faiz Hesapla</button>
             </div>
 
             <!-- ===== 1. DÖVİZ & ALTIN ===== -->
@@ -606,8 +589,8 @@
             <!-- ===== BANKNOT ===== -->
             <div class="banknote">
                 💡 <strong>Hızlı Yönlendirmeler:</strong> 
-                <a href="https://mutinoustube.github.io/BankaKampanyalari.html" target="_blank" style="background:#ff4500;padding:2px 10px;border-radius:4px;color:#fff;">🏦 Kampanya</a>
-                <a href="https://mutinoustube.github.io/ParaKazan.html" target="_blank" style="background:#f59e0b;padding:2px 10px;border-radius:4px;color:#fff;">💰 Para Kazan</a>
+                <a href="BankaKampanyalari.html" target="_blank" style="background:#ff4500;padding:2px 10px;border-radius:4px;color:#fff;">🏦 Kampanya</a>
+                <a href="ParaKazan.html" target="_blank" style="background:#f59e0b;padding:2px 10px;border-radius:4px;color:#fff;">💰 Para Kazan</a>
                 <a href="https://mutinoustube.github.io" target="_blank" style="background:#60a5fa;padding:2px 10px;border-radius:4px;color:#fff;">🏠 Ana Sayfa</a>
             </div>
 
@@ -616,8 +599,8 @@
                 <p class="warning-text">⚠️ Piyasa verileri anlık olarak güncellenmektedir. Yatırım tavsiyesi içermez.</p>
                 <div style="display: flex; gap: 15px; flex-wrap: wrap;">
                     <a href="https://mutinoustube.github.io" target="_blank" rel="noopener" style="color: #60a5fa;">🏠 Ana Sayfa</a>
-                    <a href="https://mutinoustube.github.io/BankaKampanyalari.html" target="_blank" rel="noopener" style="color: #ff4500; font-weight: 700;">🏦 Banka Kampanyaları</a>
-                    <a href="https://mutinoustube.github.io/ParaKazan.html" target="_blank" rel="noopener" style="color: #fbbf24; font-weight: 700;">💰 Para Kazan</a>
+                    <a href="BankaKampanyalari.html" target="_blank" rel="noopener" style="color: #ff4500; font-weight: 700;">🏦 Banka Kampanyaları</a>
+                    <a href="ParaKazan.html" target="_blank" rel="noopener" style="color: #fbbf24; font-weight: 700;">💰 Para Kazan</a>
                     <a href="https://www.youtube.com/@MutinousTube" target="_blank" rel="noopener" style="color: #ff4500;">▶️ YouTube</a>
                     <a href="https://github.com/MutinousTube/MutinousTube.github.io" target="_blank" rel="noopener">📂 GitHub</a>
                 </div>
@@ -629,10 +612,29 @@
 
     <script>
         // ================================================================
-        // CANLI SAAT - HER SANİYE GÜNCELLENİR
+        // FONKSİYONLAR
         // ================================================================
-        function updateClock() {
-            const now = new Date();
-            const dateStr = now.toLocaleDateString('tr-TR');
-            const timeStr = now.toLocaleTimeString('tr-TR');
-            document.getElementById('clockDisplay').textContent
+        
+        function switchFinanceTab(tabId, element) {
+            document.querySelectorAll('.finance-tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            element.classList.add('active');
+            
+            if(tabId === 'tab-calculator') {
+                calculateFinance();
+            } else if(tabId === 'tab-interest') {
+                calculateInterest();
+            }
+        }
+
+        function calculateFinance() {
+            const amount = parseFloat(document.getElementById('calc-amount').value) || 0;
+            const fromRate = parseFloat(document.getElementById('calc-from').value);
+            const toRate = parseFloat(document.getElementById('calc-to').value);
+            const fromSelect = document.getElementById('calc-from');
+            const toSelect = document.getElementById('calc-to');
+            
+            const fromText = fromSelect.options[fromSelect.selectedIndex].text.split(' ')[0];
+            const toText = toSelect.options
