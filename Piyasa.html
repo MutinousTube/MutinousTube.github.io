@@ -1,647 +1,330 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MutinousTube Finans & Emtia Merkezi</title>
-    <style>
-        /* ============================================================ */
-        /* ANA STİLLER */
-        /* ============================================================ */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background: #0a0a0c; 
-            color: #e2e8f0; 
-            padding: 15px; 
-        }
-        .container { max-width: 1400px; margin: 0 auto; }
-        
-        /* ============================================================ */
-        /* NAVİGASYON BUTONLARI */
-        /* ============================================================ */
-        .nav-buttons { 
-            display: flex; 
-            justify-content: center; 
-            gap: 12px; 
-            margin: 15px 0 25px; 
-            flex-wrap: wrap; 
-        }
-        .nav-btn { 
-            padding: 10px 30px; 
-            border-radius: 30px; 
-            text-decoration: none; 
-            font-weight: bold; 
-            font-size: 15px; 
-            transition: all 0.3s; 
-            border: none; 
-            cursor: pointer; 
-            display: inline-block; 
-        }
-        .nav-btn-primary { 
-            background: #ff4500; 
-            color: #fff; 
-            box-shadow: 0 4px 15px rgba(255,69,0,0.3); 
-        }
-        .nav-btn-primary:hover { 
-            background: #ff6a00; 
-            transform: scale(1.05); 
-        }
-        .nav-btn-secondary { 
-            background: #1e293b; 
-            color: #60a5fa; 
-            border: 1px solid #60a5fa;
-        }
-        .nav-btn-secondary:hover { 
-            background: #334155; 
-            transform: scale(1.05); 
-        }
-        
-        /* ============================================================ */
-        /* MUTINOUS FİNANS KONTEYNER */
-        /* ============================================================ */
-        .mutinous-finance-container {
-            background: #121214;
-            color: #e2e8f0;
-            border-radius: 12px;
-            padding: 24px;
-            max-width: 1200px;
-            margin: 30px auto;
-            border: 1px solid #222227;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        
-        /* ============================================================ */
-        /* HEADER */
-        /* ============================================================ */
-        .finance-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #1e1e24;
-            padding-bottom: 16px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-        .header-title-zone h2 { 
-            margin: 0; 
-            font-size: 24px; 
-            color: #fff; 
-            letter-spacing: 0.5px; 
-        }
-        .brand-sub { 
-            margin: 4px 0 0 0; 
-            font-size: 13px; 
-            color: #60a5fa; 
-            font-weight: 500;
-            letter-spacing: 0.3px;
-        }
-        .update-badge { 
-            background: #1e293b; 
-            color: #34d399;
-            padding: 6px 16px; 
-            border-radius: 20px; 
-            font-size: 12px; 
-            font-weight: 600; 
-            border: 1px solid #10b981; 
-        }
-        
-        /* ============================================================ */
-        /* SEKME BUTONLARI */
-        /* ============================================================ */
-        .finance-tabs { 
-            display: flex; 
-            gap: 6px; 
-            margin-bottom: 20px; 
-            border-bottom: 1px solid #1e1e24; 
-            padding-bottom: 10px; 
-            flex-wrap: wrap; 
-        }
-        .tab-btn { 
-            background: #1e1e24; 
-            border: 1px solid #2d2d39; 
-            color: #94a3b8; 
-            padding: 10px 16px; 
-            border-radius: 6px; 
-            cursor: pointer; 
-            font-weight: 600; 
-            font-size: 13px; 
-            transition: all 0.2s ease; 
-        }
-        .tab-btn:hover { 
-            background: #2a2a35; 
-            color: #fff; 
-        }
-        .tab-btn.active { 
-            background: #ff4500; 
-            color: #fff; 
-            border-color: #ff4500; 
-        }
-        .calc-btn { 
-            border-color: #3b82f6; 
-            color: #60a5fa; 
-        }
-        .calc-btn.active { 
-            background: #3b82f6; 
-            border-color: #3b82f6; 
-            color: #fff;
-        }
-        .interest-btn { 
-            border-color: #10b981; 
-            color: #34d399; 
-        }
-        .interest-btn.active { 
-            background: #10b981; 
-            border-color: #10b981; 
-            color: #fff;
-        }
-        
-        /* ============================================================ */
-        /* TABLO VE İÇERİK */
-        /* ============================================================ */
-        .finance-tab-content { display: none; }
-        .finance-tab-content.active { display: block; }
-        
-        .finance-table-wrapper { 
-            max-height: 480px; 
-            overflow-y: auto; 
-            border-radius: 8px; 
-            border: 1px solid #1e1e24; 
-        }
-        .finance-table { 
-            width: 100%; 
-            border-collapse: collapse; 
-            text-align: left; 
-            font-size: 14px; 
-        }
-        .finance-table th { 
-            background: #1e1e24; 
-            color: #94a3b8; 
-            padding: 12px 16px; 
-            font-weight: 600; 
-            position: sticky; 
-            top: 0; 
-            z-index: 2; 
-        }
-        .finance-table td { 
-            padding: 12px 16px; 
-            border-bottom: 1px solid #1a1a22; 
-            color: #cbd5e1; 
-        }
-        .finance-table tbody tr:hover { 
-            background: #181820; 
-        }
-        .finance-table tr td:first-child { 
-            color: #fff; 
-        }
-        
-        .txt-up { color: #10b981; font-weight: 600; }
-        .txt-down { color: #ef4444; font-weight: 600; }
-        .txt-neutral { color: #64748b; font-weight: 600; }
-        
-        /* ============================================================ */
-        /* HESAPLAYICI */
-        /* ============================================================ */
-        .calculator-box { 
-            background: #18181c; 
-            border: 1px solid #24242b; 
-            padding: 20px; 
-            border-radius: 8px; 
-        }
-        .calculator-box h4 { 
-            margin: 0 0 15px 0; 
-            font-size: 16px; 
-            color: #fff; 
-        }
-        .calc-row { 
-            display: flex; 
-            gap: 15px; 
-            flex-wrap: wrap; 
-            margin-bottom: 20px; 
-        }
-        .input-group { 
-            flex: 1; 
-            min-width: 150px; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 6px; 
-        }
-        .input-group label { 
-            font-size: 12px; 
-            color: #94a3b8; 
-            font-weight: 500; 
-        }
-        .input-group input, .input-group select { 
-            background: #121214; 
-            border: 1px solid #2d2d39; 
-            color: #fff; 
-            padding: 10px; 
-            border-radius: 6px; 
-            font-size: 14px; 
-            outline: none; 
-        }
-        .input-group input:focus, .input-group select:focus { 
-            border-color: #3b82f6; 
-        }
-        .calc-result-zone { 
-            background: #1e293b; 
-            border-left: 4px solid #3b82f6; 
-            padding: 15px; 
-            border-radius: 6px; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 4px; 
-        }
-        .result-label { 
-            font-size: 12px; 
-            color: #94a3b8; 
-            display: block; 
-            margin-bottom: 4px; 
-        }
-        #calc-result-value { 
-            font-size: 22px; 
-            font-weight: bold; 
-            color: #3b82f6; 
-        }
-        
-        .interest-results-wrapper { 
-            display: flex; 
-            gap: 15px; 
-            flex-wrap: wrap; 
-        }
-        .interest-result-card { 
-            flex: 1; 
-            min-width: 200px; 
-            background: #1e293b; 
-            padding: 15px; 
-            border-radius: 6px; 
-            border-left: 4px solid #10b981; 
-        }
-        #interest-net-gain { 
-            font-size: 22px; 
-            font-weight: bold; 
-        }
-        #interest-total-amount { 
-            font-size: 22px; 
-            font-weight: bold; 
-            color: #fff; 
-        }
-        
-        /* ============================================================ */
-        /* ALT BİLGİ & YÖNLENDİRİCİ */
-        /* ============================================================ */
-        .finance-footer { 
-            margin-top: 20px; 
-            padding-top: 15px; 
-            border-top: 1px solid #1e1e24; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            flex-wrap: wrap; 
-            gap: 10px; 
-            font-size: 12px; 
-            color: #64748b; 
-        }
-        .finance-footer a { 
-            color: #ff4500; 
-            text-decoration: none; 
-            font-weight: 500; 
-        }
-        .finance-footer a:hover { 
-            text-decoration: underline; 
-        }
-        
-        /* ===== YATIRIM TAVSİYESİ DEĞİLDİR - KIRMIZI ===== */
-        .warning-text {
-            color: #ef4444;
-            font-weight: 600;
-            font-size: 12px;
-        }
-        
-        /* ============================================================ */
-        /* BANKNOT */
-        /* ============================================================ */
-        .banknote {
-            background: #1e293b;
-            border-left: 4px solid #fbbf24;
-            padding: 10px 15px;
-            border-radius: 6px;
-            margin-top: 10px;
-            font-size: 13px;
-            color: #fbbf24;
-        }
-        .banknote strong { color: #fff; }
-        .banknote a { color: #60a5fa; text-decoration: none; }
-        .banknote a:hover { text-decoration: underline; }
-        
-        /* ============================================================ */
-        /* SCROLLBAR */
-        /* ============================================================ */
-        .finance-table-wrapper::-webkit-scrollbar { width: 6px; }
-        .finance-table-wrapper::-webkit-scrollbar-track { background: #121214; }
-        .finance-table-wrapper::-webkit-scrollbar-thumb { background: #2d2d39; border-radius: 3px; }
-        
-        .footer { 
-            text-align: center; 
-            margin-top: 20px; 
-            color: #64748b; 
-            font-size: 14px; 
-        }
-        .footer a { color: #ff4500; text-decoration: none; }
-        .footer a:hover { text-decoration: underline; }
-        
-        .text-center { text-align: center; margin-top: 20px; }
-        
-        /* ============================================================ */
-        /* RESPONSIVE */
-        /* ============================================================ */
-        @media (max-width: 768px) {
-            .finance-header { flex-direction: column; align-items: flex-start; }
-            .calc-row { flex-direction: column; }
-            .tab-btn { padding: 8px 12px; font-size: 12px; }
-            .finance-footer { flex-direction: column; text-align: center; }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <!-- ===== NAV ===== -->
-        <div class="nav-buttons">
-            <a href="https://mutinoustube.github.io" class="nav-btn nav-btn-secondary">🏠 Ana Sayfa</a>
-            <a href="kampanyalar.html" class="nav-btn nav-btn-primary">🏦 Banka Kampanyaları</a>
-        </div>
-        
-        <!-- ===== MUTINOUS FİNANS MERKEZİ ===== -->
-        <div class="mutinous-finance-container">
-            <div class="finance-header">
-                <div class="header-title-zone">
-                    <h2>MutinousTube Finans & Emtia Merkezi</h2>
-                    <p class="brand-sub">Küresel Piyasalar, Canlı Çeviri ve Hesaplama Servisi</p>
-                </div>
-                <div class="update-badge" id="updateBadge">
-                    Son Güncelleme: 11.07.2026 - 13:26:46
-                </div>
-            </div>
-
-            <!-- ===== SEKME MENÜSÜ ===== -->
-            <div class="finance-tabs">
-                <button class="tab-btn active" onclick="switchFinanceTab('tab-forex')">💱 Döviz & Altın</button>
-                <button class="tab-btn" onclick="switchFinanceTab('tab-metals')">🥇 Değerli Metaller</button>
-                <button class="tab-btn" onclick="switchFinanceTab('tab-agri')">🌾 Tarım & Gıda</button>
-                <button class="tab-btn" onclick="switchFinanceTab('tab-global')">📈 Dünya Borsaları</button>
-                <button class="tab-btn" onclick="switchFinanceTab('tab-crypto')">₿ Kripto</button>
-                <button class="tab-btn calc-btn" onclick="switchFinanceTab('tab-calculator')">🧮 Çevirici</button>
-                <button class="tab-btn interest-btn" onclick="switchFinanceTab('tab-interest')">📈 Faiz Hesapla</button>
-            </div>
-
-            <!-- ===== 1. DÖVİZ & ALTIN ===== -->
-            <div id="tab-forex" class="finance-tab-content active">
-                <div class="finance-table-wrapper">
-                    <table class="finance-table">
-                        <thead><tr><th>Enstrüman</th><th>Alış (TL)</th><th>Satış (TL)</th><th>Değişim</th></tr></thead>
-                        <tbody>
-                            <tr><td><strong>USD</strong> - Amerikan Doları</td><td>46.9424</td><td>47.0434</td><td class="txt-up">+%0.20</td></tr>
-                            <tr><td><strong>EUR</strong> - Euro</td><td>53.6174</td><td>53.7187</td><td class="txt-down">-%0.12</td></tr>
-                            <tr><td><strong>GBP</strong> - İngiliz Sterlini</td><td>62.8923</td><td>63.0486</td><td class="txt-down">-%0.04</td></tr>
-                            <tr><td><strong>JPY</strong> - Japon Yeni (100 JPY)</td><td>29.2840</td><td>29.4610</td><td class="txt-up">+%0.15</td></tr>
-                            <tr><td><strong>CNY</strong> - Çin Yuanı</td><td>6.4620</td><td>6.5010</td><td class="txt-neutral">%0.00</td></tr>
-                            <tr><td><strong>RUB</strong> - Rus Rublesi</td><td>0.5120</td><td>0.5180</td><td class="txt-down">-%0.34</td></tr>
-                            <tr><td><strong>SAR</strong> - Suudi Riyali</td><td>12.5110</td><td>12.5480</td><td class="txt-up">+%0.05</td></tr>
-                            <tr><td><strong>ONS ALTIN</strong> ($/Ons)</td><td>$2,642.50</td><td>$2,644.10</td><td class="txt-up">+%0.42</td></tr>
-                            <tr><td><strong>GRAM ALTIN</strong> (GRA)</td><td>6224.70</td><td>6225.55</td><td class="txt-up">+%0.12</td></tr>
-                            <tr><td><strong>ÇEYREK ALTIN</strong></td><td>9887.48</td><td>10113.63</td><td class="txt-down">-%0.72</td></tr>
-                            <tr><td><strong>CUMHURİYET ALTINI</strong></td><td>40985.00</td><td>41606.00</td><td class="txt-down">-%0.50</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- ===== 2. DEĞERLİ METALLER ===== -->
-            <div id="tab-metals" class="finance-tab-content">
-                <div class="finance-table-wrapper">
-                    <table class="finance-table">
-                        <thead><tr><th>Metal Cinsi</th><th>Alış (TL)</th><th>Satış (TL)</th><th>Değişim</th></tr></thead>
-                        <tbody>
-                            <tr><td><strong>GRAM ALTIN</strong> (GRA)</td><td>6224.70</td><td>6225.55</td><td class="txt-up">+%0.12</td></tr>
-                            <tr><td><strong>GÜMÜŞ</strong> (GUMUS)</td><td>90.38</td><td>90.48</td><td class="txt-up">+%0.03</td></tr>
-                            <tr><td><strong>GRAM PLATİN</strong> (GPL)</td><td>2463.46</td><td>2474.68</td><td class="txt-up">+%1.25</td></tr>
-                            <tr><td><strong>GRAM PALADYUM</strong> (PAL)</td><td>1922.21</td><td>1945.26</td><td class="txt-up">+%2.40</td></tr>
-                            <tr><td><strong>ALÜMİNYUM</strong> ($/Ton)</td><td>2450.00</td><td>2465.00</td><td class="txt-down">-%0.35</td></tr>
-                            <tr><td><strong>ÇELİK / METAL</strong> ($/Ton)</td><td>585.00</td><td>592.00</td><td class="txt-up">+%0.80</td></tr>
-                            <tr><td><strong>BRENT PETROL</strong> ($/Varil)</td><td>3660.10</td><td>3675.50</td><td class="txt-up">+%0.03</td></tr>
-                            <tr><td><strong>BAKIR</strong> ($/Ton)</td><td>445.20</td><td>448.90</td><td class="txt-up">+%0.45</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- ===== 3. TARIM & GIDA ===== -->
-            <div id="tab-agri" class="finance-tab-content">
-                <div class="finance-table-wrapper">
-                    <table class="finance-table">
-                        <thead><tr><th>Ürün Adı</th><th>Fiyat (TL/Birim)</th><th>Piyasa</th><th>Değişim</th></tr></thead>
-                        <tbody>
-                            <tr><td><strong>BUĞDAY</strong> (Wheat Cbot)</td><td>314.50</td><td>Chicago Borsası</td><td class="txt-down">-%0.18</td></tr>
-                            <tr><td><strong>KAHVE</strong> (Coffee Arabica)</td><td>1145.20</td><td>ICE Piyasası</td><td class="txt-up">+%1.12</td></tr>
-                            <tr><td><strong>PAMUK</strong> (Cotton US)</td><td>78.40</td><td>NY Borsası</td><td class="txt-neutral">%0.00</td></tr>
-                            <tr><td><strong>KAKAO</strong> (Cocoa)</td><td>4310.00</td><td>ICE Piyasası</td><td class="txt-up">+%2.34</td></tr>
-                            <tr><td><strong>ŞEKER</strong> (Sugar No:11)</td><td>22.15</td><td>Küresel Emtia</td><td class="txt-down">-%0.45</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- ===== 4. DÜNYA BORSALARI ===== -->
-            <div id="tab-global" class="finance-tab-content">
-                <div class="finance-table-wrapper">
-                    <table class="finance-table">
-                        <thead><tr><th>Endeks Adı</th><th>Ülke / Bölge</th><th>Son Değer</th><th>Değişim</th></tr></thead>
-                        <tbody>
-                            <tr><td><strong>XU100</strong> - Borsa İstanbul</td><td>Türkiye</td><td>14321.19</td><td class="txt-up">+%1.53</td></tr>
-                            <tr><td><strong>S&P 500</strong></td><td>ABD</td><td>5422.50</td><td class="txt-up">+%0.42</td></tr>
-                            <tr><td><strong>NASDAQ 100</strong></td><td>ABD Teknoloji</td><td>19110.80</td><td class="txt-up">+%0.68</td></tr>
-                            <tr><td><strong>DAX 40</strong></td><td>Almanya</td><td>18230.15</td><td class="txt-down">-%0.15</td></tr>
-                            <tr><td><strong>FTSE 100</strong></td><td>İngiltere</td><td>8195.40</td><td class="txt-neutral">%0.00</td></tr>
-                            <tr><td><strong>NIKKEI 225</strong></td><td>Japonya</td><td>38720.00</td><td class="txt-up">+%0.85</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- ===== 5. KRİPTO ===== -->
-            <div id="tab-crypto" class="finance-tab-content">
-                <div class="finance-table-wrapper">
-                    <table class="finance-table">
-                        <thead><tr><th>Kripto Para</th><th>Fiyat (USD)</th><th>Fiyat (TRY)</th><th>Değişim</th></tr></thead>
-                        <tbody>
-                            <tr><td><strong>BTC</strong> - Bitcoin</td><td>$96,450.00</td><td>4,537,243.00 TL</td><td class="txt-up">+%1.85</td></tr>
-                            <tr><td><strong>ETH</strong> - Ethereum</td><td>$3,420.50</td><td>160,911.00 TL</td><td class="txt-down">-%0.42</td></tr>
-                            <tr><td><strong>SOL</strong> - Solana</td><td>$184.20</td><td>8,665.30 TL</td><td class="txt-up">+%3.15</td></tr>
-                            <tr><td><strong>BNB</strong> - Binance Coin</td><td>$612.00</td><td>28,790.00 TL</td><td class="txt-up">+%0.22</td></tr>
-                            <tr><td><strong>XRP</strong> - Ripple</td><td>$0.92</td><td>43.28 TL</td><td class="txt-down">-%1.10</td></tr>
-                            <tr><td><strong>ADA</strong> - Cardano</td><td>$0.65</td><td>30.58 TL</td><td class="txt-up">+%0.45</td></tr>
-                            <tr><td><strong>DOT</strong> - Polkadot</td><td>$7.20</td><td>338.71 TL</td><td class="txt-down">-%0.15</td></tr>
-                            <tr><td><strong>AVAX</strong> - Avalanche</td><td>$34.80</td><td>1,637.11 TL</td><td class="txt-up">+%2.10</td></tr>
-                            <tr><td><strong>DOGE</strong> - Dogecoin</td><td>$0.18</td><td>8.47 TL</td><td class="txt-neutral">%0.00</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- ===== 6. ÇEVİRİCİ ===== -->
-            <div id="tab-calculator" class="finance-tab-content">
-                <div class="calculator-box">
-                    <h4>Canlı Döviz & Altın Çevirici</h4>
-                    <div class="calc-row">
-                        <div class="input-group">
-                            <label>Miktar:</label>
-                            <input type="number" id="calc-amount" value="1" oninput="calculateFinance()">
-                        </div>
-                        <div class="input-group">
-                            <label>Kaynak Birim:</label>
-                            <select id="calc-from" onchange="calculateFinance()">
-                                <option value="1">TRY (Türk Lirası)</option>
-                                <option value="47.0434">USD (Dolar)</option>
-                                <option value="53.7187">EUR (Euro)</option>
-                                <option value="63.0486">GBP (Sterlin)</option>
-                                <option value="6225.55">Gram Altın</option>
-                                <option value="10113.63">Çeyrek Altın</option>
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <label>Hedef Birim:</label>
-                            <select id="calc-to" onchange="calculateFinance()">
-                                <option value="47.0434">USD (Dolar)</option>
-                                <option value="1" selected>TRY (Türk Lirası)</option>
-                                <option value="53.7187">EUR (Euro)</option>
-                                <option value="63.0486">GBP (Sterlin)</option>
-                                <option value="6225.55">Gram Altın</option>
-                                <option value="10113.63">Çeyrek Altın</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="calc-result-zone">
-                        <span class="result-label">İşlem Sonucu:</span>
-                        <div id="calc-result-value">47.04 TRY</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ===== 7. FAİZ HESAPLAYICI ===== -->
-            <div id="tab-interest" class="finance-tab-content">
-                <div class="calculator-box">
-                    <h4>Mevduat Faizi Hesaplayıcı</h4>
-                    <div class="calc-row">
-                        <div class="input-group">
-                            <label>Anapara (TL):</label>
-                            <input type="number" id="interest-principal" value="100000" oninput="calculateInterest()">
-                        </div>
-                        <div class="input-group">
-                            <label>Yıllık Faiz Oranı (%):</label>
-                            <input type="number" id="interest-rate" value="45" oninput="calculateInterest()">
-                        </div>
-                        <div class="input-group">
-                            <label>Vade (Gün):</label>
-                            <input type="number" id="interest-days" value="32" oninput="calculateInterest()">
-                        </div>
-                    </div>
-                    <div class="interest-results-wrapper">
-                        <div class="interest-result-card">
-                            <span class="result-label">Net Faiz Getirisi:</span>
-                            <div id="interest-net-gain" class="txt-up">0.00 TL</div>
-                        </div>
-                        <div class="interest-result-card">
-                            <span class="result-label">Vade Sonu Toplam Tutar:</span>
-                            <div id="interest-total-amount">0.00 TL</div>
-                        </div>
-                    </div>
-                    <p style="font-size: 11px; color: #64748b; margin-top: 10px;">* Hesaplamada %5 gelir vergisi (stopaj) kesintisi otomatik olarak düşülmüştür.</p>
-                </div>
-            </div>
-
-            <!-- ===== BANKNOT ===== -->
-            <div class="banknote">
-                💡 <strong>Not:</strong> Banka Kampanyaları sayfasına <a href="kampanyalar.html" target="_blank">buradan</a> ulaşabilirsiniz. Sayfa linki eklendi.
-            </div>
-
-            <!-- ===== ALT BİLGİ VE YÖNLENDİRİCİ ===== -->
-            <div class="finance-footer">
-                <p class="warning-text">⚠️ Piyasa verileri anlık olarak güncellenmektedir. Yatırım tavsiyesi içermez.</p>
-                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                    <a href="https://mutinoustube.github.io" target="_blank" rel="noopener" style="color: #60a5fa;">🏠 MutinousTube Ana Sayfa</a>
-                    <a href="kampanyalar.html" target="_blank" rel="noopener">🏦 Banka Kampanyaları</a>
-                    <a href="https://www.youtube.com/@MutinousTube" target="_blank" rel="noopener" style="color: #ff4500;">▶️ MutinousTube YouTube</a>
-                    <a href="https://github.com/MutinousTube/MutinousTube.github.io" target="_blank" rel="noopener">📂 GitHub</a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="footer">© 2026 MutinousTube Finans | Veriler 60 saniyede bir güncellenir | <a href="https://mutinoustube.github.io" target="_blank">mutinoustube.github.io</a></div>
+<meta charset="UTF-8">
+<!-- MUTINOUS TECHNOLOGY - GELİŞMİŞ FİNANS, EMTİA & FAİZ MERKEZİ -->
+<div class="mutinous-finance-container">
+  <div class="finance-header">
+    <div class="header-title-zone">
+      <h2>MutinousTube Finans & Emtia Merkezi</h2>
+      <p class="brand-sub">Küresel Piyasalar, Canlı Çeviri ve Hesaplama Servisi</p>
     </div>
+    <div class="update-badge">
+      Son Güncelleme: 11.07.2026 - 13:26:46
+    </div>
+  </div>
 
-    <script>
-        // ================================================================
-        // FONKSİYONLAR
-        // ================================================================
-        
-        function switchFinanceTab(tabId) {
-            document.querySelectorAll('.finance-tab-content').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            event.currentTarget.classList.add('active');
-            
-            if(tabId === 'tab-calculator') {
-                calculateFinance();
-            } else if(tabId === 'tab-interest') {
-                calculateInterest();
-            }
-        }
+  <!-- Sekme Menüsü -->
+  <div class="finance-tabs">
+    <button class="tab-btn active" onclick="switchFinanceTab('tab-forex')">Döviz & Altın</button>
+    <button class="tab-btn" onclick="switchFinanceTab('tab-metals')">Değerli Metaller</button>
+    <button class="tab-btn" onclick="switchFinanceTab('tab-agri')">Tarım & Gıda</button>
+    <button class="tab-btn" onclick="switchFinanceTab('tab-global')">Dünya Borsaları</button>
+    <button class="tab-btn" onclick="switchFinanceTab('tab-crypto')">Kripto (Coin)</button>
+    <button class="tab-btn calc-btn" onclick="switchFinanceTab('tab-calculator')">🧮 Çevirici</button>
+    <button class="tab-btn interest-btn" onclick="switchFinanceTab('tab-interest')">📈 Faiz Hesapla</button>
+  </div>
 
-        function calculateFinance() {
-            const amount = parseFloat(document.getElementById('calc-amount').value) || 0;
-            const fromRate = parseFloat(document.getElementById('calc-from').value);
-            const toRate = parseFloat(document.getElementById('calc-to').value);
-            const fromSelect = document.getElementById('calc-from');
-            const toSelect = document.getElementById('calc-to');
-            
-            const fromText = fromSelect.options[fromSelect.selectedIndex].text.split(' ')[0];
-            const toText = toSelect.options[toSelect.selectedIndex].text.split(' ')[0];
+  <!-- 1. Döviz & Altın Sekmesi -->
+  <div id="tab-forex" class="finance-tab-content active">
+    <div class="finance-table-wrapper">
+      <table class="finance-table">
+        <thead>
+          <tr><th>Enstrüman</th><th>Alış (TL)</th><th>Satış (TL)</th><th>Değişim</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>USD</strong> - Amerikan Doları</td><td>46.9424</td><td>47.0434</td><td class="txt-up">+%0.20</td></tr>
+          <tr><td><strong>EUR</strong> - Euro</td><td>53.6174</td><td>53.7187</td><td class="txt-down">-%0.12</td></tr>
+          <tr><td><strong>GBP</strong> - İngiliz Sterlini</td><td>62.8923</td><td>63.0486</td><td class="txt-down">-%0.04</td></tr>
+          <tr><td><strong>JPY</strong> - Japon Yeni (100 JPY)</td><td>29.2840</td><td>29.4610</td><td class="txt-up">+%0.15</td></tr>
+          <tr><td><strong>CNY</strong> - Çin Yuanı</td><td>6.4620</td><td>6.5010</td><td class="txt-neutral">%0.00</td></tr>
+          <tr><td><strong>RUB</strong> - Rus Rublesi</td><td>0.5120</td><td>0.5180</td><td class="txt-down">-%0.34</td></tr>
+          <tr><td><strong>SAR</strong> - Suudi Riyali</td><td>12.5110</td><td>12.5480</td><td class="txt-up">+%0.05</td></tr>
+          <tr><td><strong>ONS ALTIN</strong> ($/Ons)</td><td>$2,642.50</td><td>$2,644.10</td><td class="txt-up">+%0.42</td></tr>
+          <tr><td><strong>GRAM ALTIN</strong> (GRA)</td><td>6224.70</td><td>6225.55</td><td class="txt-up">+%0.12</td></tr>
+          <tr><td><strong>ÇEYREK ALTIN</strong></td><td>9887.48</td><td>10113.63</td><td class="txt-down">-%0.72</td></tr>
+          <tr><td><strong>CUMHURİYET ALTINI</strong></td><td>40985.00</td><td>41606.00</td><td class="txt-down">-%0.50</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-            const amountInTL = amount * fromRate;
-            const finalResult = amountInTL / toRate;
+  <!-- 2. Değerli Metaller Sekmesi -->
+  <div id="tab-metals" class="finance-tab-content">
+    <div class="finance-table-wrapper">
+      <table class="finance-table">
+        <thead>
+          <tr><th>Metal Cinsi</th><th>Alış (TL)</th><th>Satış (TL)</th><th>Değişim</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>GRAM ALTIN</strong> (GRA)</td><td>6224.70</td><td>6225.55</td><td class="txt-up">+%0.12</td></tr>
+          <tr><td><strong>GÜMÜŞ</strong> (GUMUS)</td><td>90.38</td><td>90.48</td><td class="txt-up">+%0.03</td></tr>
+          <tr><td><strong>GRAM PLATİN</strong> (GPL)</td><td>2463.46</td><td>2474.68</td><td class="txt-up">+%1.25</td></tr>
+          <tr><td><strong>GRAM PALADYUM</strong> (PAL)</td><td>1922.21</td><td>1945.26</td><td class="txt-up">+%2.40</td></tr>
+          <tr><td><strong>ALÜMİNYUM</strong> ($/Ton)</td><td>2450.00</td><td>2465.00</td><td class="txt-down">-%0.35</td></tr>
+          <tr><td><strong>ÇELİK / METAL</strong> ($/Ton)</td><td>585.00</td><td>592.00</td><td class="txt-up">+%0.80</td></tr>
+          <tr><td><strong>BRENT PETROL</strong> ($/Varil)</td><td>3660.10</td><td>3675.50</td><td class="txt-up">+%0.03</td></tr>
+          <tr><td><strong>BAKIR</strong> ($/Ton)</td><td>445.20</td><td>448.90</td><td class="txt-up">+%0.45</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-            document.getElementById('calc-result-value').innerText = 
-                amount.toLocaleString('tr-TR', {maximumFractionDigits: 4}) + " " + fromText + " = " + 
-                finalResult.toLocaleString('tr-TR', {maximumFractionDigits: 4}) + " " + toText;
-        }
+  <!-- 3. Gıda ve Tarım Emtiaları Sekmesi -->
+  <div id="tab-agri" class="finance-tab-content">
+    <div class="finance-table-wrapper">
+      <table class="finance-table">
+        <thead>
+          <tr><th>Ürün Adı</th><th>Fiyat (TL/Birim)</th><th>Piyasa</th><th>Değişim</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>BUĞDAY</strong> (Wheat Cbot)</td><td>314.50</td><td>Chicago Borsası</td><td class="txt-down">-%0.18</td></tr>
+          <tr><td><strong>KAHVE</strong> (Coffee Arabica)</td><td>1145.20</td><td>ICE Piyasası</td><td class="txt-up">+%1.12</td></tr>
+          <tr><td><strong>PAMUK</strong> (Cotton US)</td><td>78.40</td><td>NY Borsası</td><td class="txt-neutral">%0.00</td></tr>
+          <tr><td><strong>KAKAO</strong> (Cocoa)</td><td>4310.00</td><td>ICE Piyasası</td><td class="txt-up">+%2.34</td></tr>
+          <tr><td><strong>ŞEKER</strong> (Sugar No:11)</td><td>22.15</td><td>Küresel Emtia</td><td class="txt-down">-%0.45</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-        function calculateInterest() {
-            const principal = parseFloat(document.getElementById('interest-principal').value) || 0;
-            const rate = parseFloat(document.getElementById('interest-rate').value) || 0;
-            const days = parseInt(document.getElementById('interest-days').value) || 0;
+  <!-- 4. Dünya Borsaları Sekmesi -->
+  <div id="tab-global" class="finance-tab-content">
+    <div class="finance-table-wrapper">
+      <table class="finance-table">
+        <thead>
+          <tr><th>Endeks Adı</th><th>Ülke / Bölge</th><th>Son Değer</th><th>Değişim</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>XU100</strong> - Borsa İstanbul</td><td>Türkiye</td><td>14321.19</td><td class="txt-up">+%1.53</td></tr>
+          <tr><td><strong>S&P 500</strong></td><td>ABD</td><td>5422.50</td><td class="txt-up">+%0.42</td></tr>
+          <tr><td><strong>NASDAQ 100</strong></td><td>ABD Teknoloji</td><td>19110.80</td><td class="txt-up">+%0.68</td></tr>
+          <tr><td><strong>DAX 40</strong></td><td>Almanya</td><td>18230.15</td><td class="txt-down">-%0.15</td></tr>
+          <tr><td><strong>FTSE 100</strong></td><td>İngiltere</td><td>8195.40</td><td class="txt-neutral">%0.00</td></tr>
+          <tr><td><strong>NIKKEI 225</strong></td><td>Japonya</td><td>38720.00</td><td class="txt-up">+%0.85</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-            const grossGain = (principal * rate * days) / 36500;
-            const netGain = grossGain * 0.95;
-            const totalAmount = principal + netGain;
+  <!-- 5. Kripto Paralar (Coinler) Sekmesi -->
+  <div id="tab-crypto" class="finance-tab-content">
+    <div class="finance-table-wrapper">
+      <table class="finance-table">
+        <thead>
+          <tr><th>Kripto Para</th><th>Fiyat (USD)</th><th>Fiyat (TRY)</th><th>Değişim</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>BTC</strong> - Bitcoin</td><td>$96,450.00</td><td>4,537,243.00 TL</td><td class="txt-up">+%1.85</td></tr>
+          <tr><td><strong>ETH</strong> - Ethereum</td><td>$3,420.50</td><td>160,911.00 TL</td><td class="txt-down">-%0.42</td></tr>
+          <tr><td><strong>SOL</strong> - Solana</td><td>$184.20</td><td>8,665.30 TL</td><td class="txt-up">+%3.15</td></tr>
+          <tr><td><strong>BNB</strong> - Binance Coin</td><td>$612.00</td><td>28,790.00 TL</td><td class="txt-up">+%0.22</td></tr>
+          <tr><td><strong>XRP</strong> - Ripple</td><td>$0.92</td><td>43.28 TL</td><td class="txt-down">-%1.10</td></tr>
+          <tr><td><strong>ADA</strong> - Cardano</td><td>$0.65</td><td>30.58 TL</td><td class="txt-up">+%0.45</td></tr>
+          <tr><td><strong>DOT</strong> - Polkadot</td><td>$7.20</td><td>338.71 TL</td><td class="txt-down">-%0.15</td></tr>
+          <tr><td><strong>AVAX</strong> - Avalanche</td><td>$34.80</td><td>1,637.11 TL</td><td class="txt-up">+%2.10</td></tr>
+          <tr><td><strong>DOGE</strong> - Dogecoin</td><td>$0.18</td><td>8.47 TL</td><td class="txt-neutral">%0.00</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-            document.getElementById('interest-net-gain').innerText = 
-                netGain.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + " TL";
-            document.getElementById('interest-total-amount').innerText = 
-                totalAmount.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + " TL";
-        }
+  <!-- 6. Gelişmiş Çevirici Sekmesi -->
+  <div id="tab-calculator" class="finance-tab-content">
+    <div class="calculator-box">
+      <h4>Canlı Döviz & Altın Çevirici</h4>
+      <div class="calc-row">
+        <div class="input-group">
+          <label>Miktar:</label>
+          <input type="number" id="calc-amount" value="1" oninput="calculateFinance()">
+        </div>
+        <div class="input-group">
+          <label>Kaynak Birim:</label>
+          <select id="calc-from" onchange="calculateFinance()">
+            <option value="1">TRY (Türk Lirası)</option>
+            <option value="47.0434">USD (Amerikan Doları)</option>
+            <option value="53.7187">EUR (Euro)</option>
+            <option value="63.0486">GBP (İngiliz Sterlini)</option>
+            <option value="6225.55">Gram Altın (GRA)</option>
+            <option value="10113.63">Çeyrek Altın</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label>Hedef Birim:</label>
+          <select id="calc-to" onchange="calculateFinance()">
+            <option value="47.0434">USD (Amerikan Doları)</option>
+            <option value="1" selected>TRY (Türk Lirası)</option>
+            <option value="53.7187">EUR (Euro)</option>
+            <option value="63.0486">GBP (İngiliz Sterlini)</option>
+            <option value="6225.55">Gram Altın (GRA)</option>
+            <option value="10113.63">Çeyrek Altın</option>
+          </select>
+        </div>
+      </div>
+      <div class="calc-result-zone">
+        <span class="result-label">İşlem Sonucu:</span>
+        <div id="calc-result-value">47.04 TRY</div>
+      </div>
+    </div>
+  </div>
 
-        // ================================================================
-        // SAYFA YÜKLENDİĞİNDE
-        // ================================================================
-        document.addEventListener('DOMContentLoaded', function() {
-            calculateFinance();
-            calculateInterest();
-            
-            const now = new Date();
-            document.getElementById('updateBadge').textContent = 
-                'Son Güncelleme: ' + now.toLocaleDateString('tr-TR') + ' - ' + now.toLocaleTimeString('tr-TR');
-        });
-    </script>
-</body>
-</html>
+  <!-- 7. Mevduat Faizi Hesaplayıcı Sekmesi -->
+  <div id="tab-interest" class="finance-tab-content">
+    <div class="calculator-box">
+      <h4>Mevduat Faizi Hesaplayıcı</h4>
+      <div class="calc-row">
+        <div class="input-group">
+          <label>Anapara (TL):</label>
+          <input type="number" id="interest-principal" value="100000" oninput="calculateInterest()">
+        </div>
+        <div class="input-group">
+          <label>Yıllık Faiz Oranı (%):</label>
+          <input type="number" id="interest-rate" value="45" oninput="calculateInterest()">
+        </div>
+        <div class="input-group">
+          <label>Vade (Gün):</label>
+          <input type="number" id="interest-days" value="32" oninput="calculateInterest()">
+        </div>
+      </div>
+      <div class="interest-results-wrapper">
+        <div class="interest-result-card">
+          <span class="result-label">Net Faiz Getirisi:</span>
+          <div id="interest-net-gain" class="txt-up">0.00 TL</div>
+        </div>
+        <div class="interest-result-card">
+          <span class="result-label">Vade Sonu Toplam Tutar:</span>
+          <div id="interest-total-amount">0.00 TL</div>
+        </div>
+      </div>
+      <p style="font-size: 11px; color: #64748b; margin-top: 10px;">* Hesaplamada %5 gelir vergisi (stopaj) kesintisi otomatik olarak düşülmüştür.</p>
+    </div>
+  </div>
+
+  <!-- Alt Bilgi Paneli -->
+  <div class="finance-footer">
+    <p>Piyasa verileri anlık olarak simüle edilmektedir. Yatırım tavsiyesi içermez.</p>
+    <a href="https://github.com/MutinousTube/MutinousTube.github.io" target="_blank" rel="noopener">Daha Fazla Analiz İçin Mutinous Platformları</a>
+  </div>
+</div>
+
+<!-- STİL DOSYALARI (CSS) -->
+<style>
+  .mutinous-finance-container {
+    background: #121214;
+    color: #e2e8f0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 950px;
+    margin: 30px auto;
+    border: 1px solid #222227;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+  .finance-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #1e1e24;
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .header-title-zone h2 { margin: 0; font-size: 24px; color: #fff; letter-spacing: 0.5px; }
+  .brand-sub { margin: 4px 0 0 0; font-size: 13px; color: #60a5fa; } /* Açık mavi renk tonu uygulandı */
+  .update-badge { background: #1e293b; color: #94a3b8; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; border: 1px solid #334155; }
+  
+  /* Sekme Butonları */
+  .finance-tabs { display: flex; gap: 6px; margin-bottom: 20px; border-bottom: 1px solid #1e1e24; padding-bottom: 10px; flex-wrap: wrap; }
+  .tab-btn { background: #1e1e24; border: 1px solid #2d2d39; color: #94a3b8; padding: 10px 14px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 13px; transition: all 0.2s ease; }
+  .tab-btn:hover { background: #2a2a35; color: #fff; }
+  .tab-btn.active { background: #ff4500; color: #fff; border-color: #ff4500; }
+  .calc-btn { border-color: #3b82f6; color: #60a5fa; }
+  .calc-btn.active { background: #3b82f6; border-color: #3b82f6; color: #fff; }
+  .interest-btn { border-color: #10b981; color: #34d399; }
+  .interest-btn.active { background: #10b981; border-color: #10b981; color: #fff; }
+
+  /* Tablo ve İçerik */
+  .finance-tab-content { display: none; }
+  .finance-tab-content.active { display: block; }
+  .finance-table-wrapper { max-height: 420px; overflow-y: auto; border-radius: 8px; border: 1px solid #1e1e24; }
+  .finance-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
+  .finance-table th { background: #1e1e24; color: #94a3b8; padding: 12px 16px; font-weight: 600; position: sticky; top: 0; z-index: 2; }
+  .finance-table td { padding: 12px 16px; border-bottom: 1px solid #1a1a22; color: #cbd5e1; }
+  .finance-table tbody tr:hover { background: #181820; }
+  .finance-table tr td:first-child { color: #fff; }
+  
+  .txt-up { color: #10b981; font-weight: 600; }
+  .txt-down { color: #ef4444; font-weight: 600; }
+  .txt-neutral { color: #64748b; font-weight: 600; }
+
+  /* Hesaplayıcı Tasarımı */
+  .calculator-box { background: #18181c; border: 1px solid #24242b; padding: 20px; border-radius: 8px; }
+  .calculator-box h4 { margin: 0 0 15px 0; font-size: 16px; color: #fff; }
+  .calc-row { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px; }
+  .input-group { flex: 1; min-width: 150px; display: flex; flex-direction: column; gap: 6px; }
+  .input-group label { font-size: 12px; color: #94a3b8; font-weight: 500; }
+  .input-group input, .input-group select { background: #121214; border: 1px solid #2d2d39; color: #fff; padding: 10px; border-radius: 6px; font-size: 14px; outline: none; }
+  .input-group input:focus, .input-group select:focus { border-color: #3b82f6; }
+  
+  .calc-result-zone { background: #1e293b; border-left: 4px solid #3b82f6; padding: 15px; border-radius: 6px; display: flex; flex-direction: column; gap: 4px; }
+  .interest-results-wrapper { display: flex; gap: 15px; flex-wrap: wrap; }
+  .interest-result-card { flex: 1; min-width: 200px; background: #1e293b; padding: 15px; border-radius: 6px; border-left: 4px solid #10b981; }
+  
+  .result-label { font-size: 12px; color: #94a3b8; display: block; margin-bottom: 4px; }
+  #calc-result-value { font-size: 22px; font-weight: bold; color: #3b82f6; }
+  #interest-net-gain { font-size: 22px; font-weight: bold; }
+  #interest-total-amount { font-size: 22px; font-weight: bold; color: #fff; }
+
+  .finance-footer { margin-top: 20px; padding-top: 15px; border-top: 1px solid #1e1e24; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 12px; color: #64748b; }
+  .finance-footer a { color: #ff4500; text-decoration: none; font-weight: 500; }
+  .finance-footer a:hover { text-decoration: underline; }
+
+  .finance-table-wrapper::-webkit-scrollbar { width: 6px; }
+  .finance-table-wrapper::-webkit-scrollbar-track { background: #121214; }
+  .finance-table-wrapper::-webkit-scrollbar-thumb { background: #2d2d39; border-radius: 3px; }
+</style>
+
+<!-- FONKSİYONLAR (JAVASCRIPT) -->
+<script>
+  function switchFinanceTab(tabId) {
+    document.querySelectorAll('.finance-tab-content').forEach(tab => tab.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    event.currentTarget.classList.add('active');
+    
+    if(tabId === 'tab-calculator') {
+      calculateFinance();
+    } else if(tabId === 'tab-interest') {
+      calculateInterest();
+    }
+  }
+
+  function calculateFinance() {
+    const amount = parseFloat(document.getElementById('calc-amount').value) || 0;
+    const fromRate = parseFloat(document.getElementById('calc-from').value);
+    const toRate = parseFloat(document.getElementById('calc-to').value);
+    const fromSelect = document.getElementById('calc-from');
+    const toSelect = document.getElementById('calc-to');
+    
+    const fromText = fromSelect.options[fromSelect.selectedIndex].text.split(' ')[0];
+    const toText = toSelect.options[toSelect.selectedIndex].text.split(' ')[0];
+
+    const amountInTL = amount * fromRate;
+    const finalResult = amountInTL / toRate;
+
+    document.getElementById('calc-result-value').innerText = 
+      amount.toLocaleString('tr-TR', {maximumFractionDigits: 4}) + " " + fromText + " = " + 
+      finalResult.toLocaleString('tr-TR', {maximumFractionDigits: 4}) + " " + toText;
+  }
+
+  function calculateInterest() {
+    const principal = parseFloat(document.getElementById('interest-principal').value) || 0;
+    const rate = parseFloat(document.getElementById('interest-rate').value) || 0;
+    const days = parseInt(document.getElementById('interest-days').value) || 0;
+
+    const grossGain = (principal * rate * days) / 36500;
+    const netGain = grossGain * 0.95; 
+    const totalAmount = principal + netGain;
+
+    document.getElementById('interest-net-gain').innerText = netGain.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + " TL";
+    document.getElementById('interest-total-amount').innerText = totalAmount.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + " TL";
+  }
+</script>
