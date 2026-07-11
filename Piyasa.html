@@ -29,10 +29,9 @@
             z-index: 999;
         }
         #updateStatus.show { opacity: 1; }
-        #updateStatus.error { background: #dc3545; }
         .error { color: #dc3545; font-style: italic; }
         
-        /* Navigasyon Butonları */
+        /* Yeni Buton Stilleri */
         .nav-buttons {
             display: flex;
             justify-content: center;
@@ -68,16 +67,6 @@
             background: #cbd5e1;
             transform: scale(1.05);
         }
-        .loading-text {
-            color: #999;
-            font-style: italic;
-        }
-        .update-time {
-            text-align: right;
-            font-size: 12px;
-            color: #999;
-            margin-top: 5px;
-        }
     </style>
 </head>
 <body>
@@ -102,7 +91,6 @@
                 <tr><td>GBP/TRY</td><td id="gbpBuy">Yükleniyor...</td><td id="gbpSell">Yükleniyor...</td></tr>
             </tbody>
         </table>
-        <div class="update-time" id="forexTime">Son güncelleme: -</div>
     </div>
 
     <!-- Altın -->
@@ -114,40 +102,63 @@
                 <tr><td>Altın (ONS)</td><td id="goldPrice">Yükleniyor...</td><td id="goldTl">Yükleniyor...</td></tr>
             </tbody>
         </table>
-        <div class="update-time" id="goldTime">Son güncelleme: -</div>
     </div>
 
-    <!-- Kripto -->
+    <!-- Metaller -->
     <div class="section">
-        <h2>₿ Kripto Paralar</h2>
+        <h2>🥈 Diğer Metaller</h2>
         <table>
-            <thead><tr><th>Coin</th><th>Fiyat (USD)</th><th>24s Değişim</th></tr></thead>
+            <thead><tr><th>Emtia</th><th>Fiyat (USD)</th><th>Fiyat (TL)</th></tr></thead>
             <tbody>
-                <tr><td>Bitcoin (BTC)</td><td id="btcPrice">Yükleniyor...</td><td id="btcChange">-</td></tr>
-                <tr><td>Ethereum (ETH)</td><td id="ethPrice">Yükleniyor...</td><td id="ethChange">-</td></tr>
-                <tr><td>Binance Coin (BNB)</td><td id="bnbPrice">Yükleniyor...</td><td id="bnbChange">-</td></tr>
-                <tr><td>Solana (SOL)</td><td id="solPrice">Yükleniyor...</td><td id="solChange">-</td></tr>
-                <tr><td>Ripple (XRP)</td><td id="xrpPrice">Yükleniyor...</td><td id="xrpChange">-</td></tr>
-                <tr><td>Dogecoin (DOGE)</td><td id="dogePrice">Yükleniyor...</td><td id="dogeChange">-</td></tr>
-                <tr><td>Cardano (ADA)</td><td id="adaPrice">Yükleniyor...</td><td id="adaChange">-</td></tr>
+                <tr><td>Gümüş</td><td id="silverPrice">Yükleniyor...</td><td id="silverTl">Yükleniyor...</td></tr>
+                <tr><td>Platin</td><td id="platinumPrice">Yükleniyor...</td><td id="platinumTl">Yükleniyor...</td></tr>
+                <tr><td>Paladyum</td><td id="palladiumPrice">Yükleniyor...</td><td id="palladiumTl">Yükleniyor...</td></tr>
+                <tr><td>Bakır</td><td id="copperPrice">Yükleniyor...</td><td id="copperTl">Yükleniyor...</td></tr>
             </tbody>
         </table>
-        <div class="update-time" id="cryptoTime">Son güncelleme: -</div>
+    </div>
+
+    <!-- Gıda Emtiaları -->
+    <div class="section">
+        <h2>🌾 Gıda Emtiaları</h2>
+        <table>
+            <thead><tr><th>Emtia</th><th>Birim</th><th>Fiyat (USD)</th><th>Fiyat (TL)</th></tr></thead>
+            <tbody>
+                <tr><td>Buğday</td><td>Bushel</td><td id="wheatPrice">Yükleniyor...</td><td id="wheatTl">Yükleniyor...</td></tr>
+                <tr><td>Mısır</td><td>Bushel</td><td id="cornPrice">Yükleniyor...</td><td id="cornTl">Yükleniyor...</td></tr>
+                <tr><td>Kahve</td><td>Lb</td><td id="coffeePrice">Yükleniyor...</td><td id="coffeeTl">Yükleniyor...</td></tr>
+            </tbody>
+        </table>
     </div>
 
     <!-- Borsalar -->
     <div class="section">
         <h2>📈 Borsalar</h2>
         <table>
-            <thead><tr><th>Borsa</th><th>Endeks</th><th>Değişim</th></tr></thead>
+            <thead><tr><th>Borsa</th><th>Endeks</th></tr></thead>
             <tbody>
-                <tr><td>BIST 100</td><td id="bistPrice">Yükleniyor...</td><td id="bistChange">-</td></tr>
-                <tr><td>S&P 500</td><td id="spPrice">Yükleniyor...</td><td id="spChange">-</td></tr>
-                <tr><td>Nasdaq</td><td id="nasdaqPrice">Yükleniyor...</td><td id="nasdaqChange">-</td></tr>
-                <tr><td>Dow Jones</td><td id="dowPrice">Yükleniyor...</td><td id="dowChange">-</td></tr>
+                <tr><td>BIST 100</td><td id="bistPrice">Yükleniyor...</td></tr>
+                <tr><td>S&P 500</td><td id="spPrice">Yükleniyor...</td></tr>
+                <tr><td>Nasdaq</td><td id="nasdaqPrice">Yükleniyor...</td></tr>
             </tbody>
         </table>
-        <div class="update-time" id="stockTime">Son güncelleme: -</div>
+    </div>
+
+    <!-- Kripto -->
+    <div class="section">
+        <h2>₿ Kripto Paralar</h2>
+        <table>
+            <thead><tr><th>Coin</th><th>Fiyat (USD)</th></tr></thead>
+            <tbody>
+                <tr><td>Bitcoin (BTC)</td><td id="btcPrice">Yükleniyor...</td></tr>
+                <tr><td>Ethereum (ETH)</td><td id="ethPrice">Yükleniyor...</td></tr>
+                <tr><td>Binance Coin (BNB)</td><td id="bnbPrice">Yükleniyor...</td></tr>
+                <tr><td>Solana (SOL)</td><td id="solPrice">Yükleniyor...</td></tr>
+                <tr><td>Ripple (XRP)</td><td id="xrpPrice">Yükleniyor...</td></tr>
+                <tr><td>Dogecoin (DOGE)</td><td id="dogePrice">Yükleniyor...</td></tr>
+                <tr><td>Cardano (ADA)</td><td id="adaPrice">Yükleniyor...</td></tr>
+            </tbody>
+        </table>
     </div>
 
     <!-- Hesaplayıcı -->
@@ -187,7 +198,6 @@
     // ---- Değişkenler ----
     let usdRate = 0;
     let goldOunceUsd = 0;
-    let lastUpdate = {};
 
     // ---- Yardımcı: Veriyi güncelle ----
     function updateCell(id, value, prefix = '', suffix = '') {
@@ -195,46 +205,22 @@
         if (el) el.innerText = value ? prefix + value + suffix : 'Veri yok';
     }
 
-    function updateTime(id) {
-        const now = new Date();
-        const timeStr = now.toLocaleTimeString('tr-TR');
-        const el = document.getElementById(id);
-        if (el) el.innerText = `Son güncelleme: ${timeStr}`;
-    }
-
-    function showStatus(message, isError = false) {
-        const status = document.getElementById('updateStatus');
-        status.innerText = message;
-        status.className = 'show' + (isError ? ' error' : '');
-        setTimeout(() => { status.className = ''; }, 3000);
-    }
-
-    // ---- 1. Döviz (Fixer.io - Ücretsiz) ----
+    // ---- 1. Döviz (Frankfurter) ----
     async function fetchForex() {
         try {
-            // Fixer.io ücretsiz API (günlük 100 istek)
-            const res = await fetch('https://api.fixer.io/latest?base=USD&symbols=TRY,EUR,GBP');
+            const res = await fetch('https://api.frankfurter.app/latest?from=USD&to=TRY,EUR,GBP');
             const data = await res.json();
-            
-            if (data.rates) {
-                const rates = data.rates;
-                usdRate = rates.TRY || 0;
-                
-                updateCell('usdBuy', usdRate.toFixed(4));
-                updateCell('usdSell', (usdRate * 1.002).toFixed(4));
-                updateCell('eurBuy', rates.EUR?.toFixed(4) || 'Veri yok');
-                updateCell('eurSell', rates.EUR ? (rates.EUR * 1.002).toFixed(4) : 'Veri yok');
-                updateCell('gbpBuy', rates.GBP?.toFixed(4) || 'Veri yok');
-                updateCell('gbpSell', rates.GBP ? (rates.GBP * 1.002).toFixed(4) : 'Veri yok');
-                
-                updateTime('forexTime');
-                return true;
-            }
-            return false;
-        } catch (e) {
-            console.error('Forex hatası:', e);
-            return false;
-        }
+            const rates = data.rates;
+            usdRate = rates.TRY || 0;
+
+            updateCell('usdBuy', rates.TRY?.toFixed(4));
+            updateCell('usdSell', (rates.TRY * 1.002)?.toFixed(4));
+            updateCell('eurBuy', rates.EUR?.toFixed(4));
+            updateCell('eurSell', (rates.EUR * 1.002)?.toFixed(4));
+            updateCell('gbpBuy', rates.GBP?.toFixed(4));
+            updateCell('gbpSell', (rates.GBP * 1.002)?.toFixed(4));
+            return true;
+        } catch (e) { return false; }
     }
 
     // ---- 2. Altın (Gold-API) ----
@@ -242,136 +228,99 @@
         try {
             const res = await fetch('https://www.gold-api.com/price/XAU');
             const data = await res.json();
-            
             if (data.price) {
                 goldOunceUsd = data.price;
                 updateCell('goldPrice', '$', goldOunceUsd.toFixed(2));
                 const tl = usdRate ? goldOunceUsd * usdRate : 0;
                 updateCell('goldTl', tl ? tl.toFixed(2) + ' TL' : 'Veri yok');
-                updateTime('goldTime');
                 return true;
             }
             return false;
-        } catch (e) {
-            console.error('Gold hatası:', e);
+        } catch (e) { return false; }
+    }
+
+    // ---- 3. Metaller (Metals-API) ----
+    async function fetchMetals() {
+        try {
+            const res = await fetch('https://api.metals-api.com/v1/latest?access_key=demo&base=USD&symbols=XAG,XPT,XPD,XCU');
+            const data = await res.json();
+            if (data.rates) {
+                const metals = { silver: 'XAG', platinum: 'XPT', palladium: 'XPD', copper: 'XCU' };
+                Object.entries(metals).forEach(([id, symbol]) => {
+                    const price = data.rates[symbol];
+                    if (price) {
+                        updateCell(id + 'Price', '$', price.toFixed(2));
+                        const tl = usdRate ? price * usdRate : 0;
+                        updateCell(id + 'Tl', tl ? tl.toFixed(2) + ' TL' : 'Veri yok');
+                    }
+                });
+                return true;
+            }
             return false;
+        } catch (e) { return false; }
+    }
+
+    // ---- 4. Gıda Emtiaları (Yahoo Finance) ----
+    async function fetchFood() {
+        const symbols = { wheat: 'ZW=F', corn: 'ZC=F', coffee: 'KC=F' };
+        for (const [id, symbol] of Object.entries(symbols)) {
+            try {
+                const res = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${symbol}`);
+                const data = await res.json();
+                const price = data?.chart?.result?.[0]?.meta?.regularMarketPrice;
+                if (price) {
+                    updateCell(id + 'Price', '$', price.toFixed(2));
+                    const tl = usdRate ? price * usdRate : 0;
+                    updateCell(id + 'Tl', tl ? tl.toFixed(2) + ' TL' : 'Veri yok');
+                }
+            } catch (e) { /* sessizce geç */ }
         }
     }
 
-    // ---- 3. Kripto (CoinGecko) ----
+    // ---- 5. Borsalar (Yahoo Finance) ----
+    async function fetchStocks() {
+        const symbols = { bist: 'XU100.IS', sp: '^GSPC', nasdaq: '^IXIC' };
+        for (const [id, symbol] of Object.entries(symbols)) {
+            try {
+                const res = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${symbol}`);
+                const data = await res.json();
+                const price = data?.chart?.result?.[0]?.meta?.regularMarketPrice;
+                if (price) updateCell(id + 'Price', '', price.toFixed(2));
+            } catch (e) { /* sessizce geç */ }
+        }
+    }
+
+    // ---- 6. Kripto (CoinGecko) ----
     async function fetchCrypto() {
         try {
             const ids = 'bitcoin,ethereum,binancecoin,solana,ripple,dogecoin,cardano';
-            const res = await fetch(
-                `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`
-            );
+            const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd`);
             const data = await res.json();
-            
-            const map = { 
-                btc: 'bitcoin', eth: 'ethereum', bnb: 'binancecoin', 
-                sol: 'solana', xrp: 'ripple', doge: 'dogecoin', ada: 'cardano' 
-            };
-            
+            const map = { btc: 'bitcoin', eth: 'ethereum', bnb: 'binancecoin', sol: 'solana', xrp: 'ripple', doge: 'dogecoin', ada: 'cardano' };
             Object.entries(map).forEach(([id, coin]) => {
                 const price = data[coin]?.usd;
-                const change = data[coin]?.usd_24h_change;
-                if (price) {
-                    updateCell(id + 'Price', '$', price.toFixed(2));
-                    if (change !== undefined) {
-                        const changeEl = document.getElementById(id + 'Change');
-                        if (changeEl) {
-                            const changeStr = change.toFixed(2) + '%';
-                            changeEl.innerText = changeStr;
-                            changeEl.style.color = change >= 0 ? '#28a745' : '#dc3545';
-                        }
-                    }
-                }
+                if (price) updateCell(id + 'Price', '$', price.toFixed(2));
             });
-            
-            updateTime('cryptoTime');
             return true;
-        } catch (e) {
-            console.error('Crypto hatası:', e);
-            return false;
-        }
-    }
-
-    // ---- 4. Borsalar (Alpha Vantage - Ücretsiz) ----
-    async function fetchStocks() {
-        try {
-            // BIST 100 - Gerçek veri için API anahtarı gerekli, demo veri gösteriyoruz
-            const stocks = {
-                bist: { symbol: 'XU100.IS', name: 'BIST 100' },
-                sp: { symbol: 'SPX', name: 'S&P 500' },
-                nasdaq: { symbol: 'IXIC', name: 'Nasdaq' },
-                dow: { symbol: 'DJI', name: 'Dow Jones' }
-            };
-            
-            // Yahoo Finance üzerinden deneyelim (bazen CORS hatası verir)
-            for (const [id, stock] of Object.entries(stocks)) {
-                try {
-                    const res = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${stock.symbol}`);
-                    const data = await res.json();
-                    const result = data?.chart?.result?.[0];
-                    const meta = result?.meta;
-                    const price = meta?.regularMarketPrice;
-                    const change = meta?.regularMarketChangePercent;
-                    
-                    if (price) {
-                        updateCell(id + 'Price', '', price.toFixed(2));
-                        if (change !== undefined) {
-                            const changeEl = document.getElementById(id + 'Change');
-                            if (changeEl) {
-                                const changeStr = change.toFixed(2) + '%';
-                                changeEl.innerText = changeStr;
-                                changeEl.style.color = change >= 0 ? '#28a745' : '#dc3545';
-                            }
-                        }
-                    }
-                } catch (e) {
-                    // Yahoo Finance genellikle CORS hatası verir, sessizce geç
-                    console.log(`${stock.name} verisi alınamadı`);
-                }
-            }
-            
-            updateTime('stockTime');
-            return true;
-        } catch (e) {
-            console.error('Stock hatası:', e);
-            return false;
-        }
+        } catch (e) { return false; }
     }
 
     // ---- Ana Veri Çekme ----
     async function fetchAllData() {
         const status = document.getElementById('updateStatus');
         status.classList.add('show');
-        status.innerText = '🔄 Veriler güncelleniyor...';
 
         try {
-            // Sırayla dene, biri başarısız olursa diğerleri çalışsın
-            const results = await Promise.allSettled([
-                fetchForex(),
-                fetchGold(),
-                fetchCrypto(),
-                fetchStocks()
-            ]);
-            
-            const successCount = results.filter(r => r.status === 'fulfilled' && r.value === true).length;
-            const totalCount = results.length;
-            
-            if (successCount === 0) {
-                showStatus('⚠️ Veriler alınamadı, lütfen daha sonra tekrar deneyin', true);
-            } else {
-                showStatus(`✅ ${successCount}/${totalCount} veri kaynağı güncellendi`);
-            }
+            await fetchForex();
+            await fetchGold();
+            await fetchMetals();
+            await fetchFood();
+            await fetchStocks();
+            await fetchCrypto();
         } catch (e) {
-            console.error('Genel hata:', e);
-            showStatus('❌ Veri güncelleme hatası', true);
+            console.error('Hata:', e);
         } finally {
-            setTimeout(() => {
-                status.classList.remove('show');
-            }, 2000);
+            status.classList.remove('show');
         }
     }
 
@@ -383,38 +332,30 @@
         if (calcType === 'gold') {
             const gram = parseFloat(document.getElementById('gramAmount').value);
             if (isNaN(gram) || gram <= 0) {
-                resultDiv.innerText = '❌ Lütfen geçerli bir gram değeri girin.';
-                return;
-            }
-            if (!goldOunceUsd) {
-                resultDiv.innerText = '❌ Altın fiyatı alınamadı, lütfen sayfayı yenileyin.';
+                resultDiv.innerText = 'Lütfen geçerli bir gram değeri girin.';
                 return;
             }
             const gramPrice = goldOunceUsd / 31.1035;
             const totalUsd = gram * gramPrice;
             const totalTl = totalUsd * usdRate;
-            resultDiv.innerText = `💰 ${gram} gram Altın = $${totalUsd.toFixed(2)} (≈ ${totalTl.toFixed(2)} TL)`;
+            resultDiv.innerText = `${gram} gram Altın = $${totalUsd.toFixed(2)} (≈ ${totalTl.toFixed(2)} TL)`;
         } else if (calcType === 'dollar') {
             const usd = parseFloat(document.getElementById('usdAmount').value);
             if (isNaN(usd) || usd <= 0) {
-                resultDiv.innerText = '❌ Lütfen geçerli bir USD değeri girin.';
+                resultDiv.innerText = 'Lütfen geçerli bir USD değeri girin.';
                 return;
             }
-            if (!usdRate) {
-                resultDiv.innerText = '❌ Dolar kuru alınamadı, lütfen sayfayı yenileyin.';
-                return;
-            }
-            resultDiv.innerText = `💵 ${usd} USD = ${(usd * usdRate).toFixed(2)} TL`;
+            resultDiv.innerText = `${usd} USD = ${(usd * usdRate).toFixed(2)} TL`;
         } else if (calcType === 'interest') {
             const principal = parseFloat(document.getElementById('principal').value);
             const rate = parseFloat(document.getElementById('rate').value);
             const days = parseFloat(document.getElementById('days').value);
             if (isNaN(principal) || principal <= 0 || isNaN(rate) || rate <= 0 || isNaN(days) || days <= 0) {
-                resultDiv.innerText = '❌ Lütfen tüm alanları doldurun.';
+                resultDiv.innerText = 'Lütfen tüm alanları doldurun.';
                 return;
             }
             const interest = principal * (rate / 100) * (days / 365);
-            resultDiv.innerText = `📈 Faiz getirisi: ${interest.toFixed(2)} TL (Toplam: ${(principal + interest).toFixed(2)} TL)`;
+            resultDiv.innerText = `Faiz getirisi: ${interest.toFixed(2)} TL (Toplam: ${(principal + interest).toFixed(2)} TL)`;
         }
     }
 
@@ -428,21 +369,14 @@
     // ---- Yorum Formu ----
     document.getElementById('commentForm').addEventListener('submit', function(e) {
         e.preventDefault();
-        alert('✅ Yorumunuz için teşekkürler!');
+        alert('Yorumunuz için teşekkürler!');
         this.reset();
     });
 
-    // ---- Sayfa Yüklenince ve Periyodik Güncelleme ----
-    // İlk yükleme
+    // ---- Sayfa Yüklenince Verileri Getir ----
     fetchAllData();
-    
     // Her 60 saniyede bir güncelle
     setInterval(fetchAllData, 60000);
-    
-    // Her 5 dakikada bir otomatik yenileme (sayfa tamamen)
-    setTimeout(() => {
-        location.reload();
-    }, 300000);
     </script>
 </body>
 </html>
