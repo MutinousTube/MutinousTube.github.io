@@ -1,520 +1,532 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Piyasa Analizleri - Canlı</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: #eef1f5; padding: 15px; }
-        .container { max-width: 1400px; margin: 0 auto; }
-        
-        h1 { text-align: center; color: #1a1a2e; padding: 15px 0; font-size: 26px; }
-        h1 span { background: linear-gradient(135deg, #1e3c72, #2a5298); color: #fff; padding: 5px 20px; border-radius: 10px; }
-        
-        .nav-buttons { display: flex; justify-content: center; gap: 12px; margin: 15px 0 25px; flex-wrap: wrap; }
-        .nav-btn { padding: 10px 30px; border-radius: 30px; text-decoration: none; font-weight: bold; font-size: 15px; transition: all 0.3s; border: none; cursor: pointer; display: inline-block; }
-        .nav-btn-primary { background: #1e3c72; color: #fff; box-shadow: 0 4px 15px rgba(30,60,114,0.3); }
-        .nav-btn-primary:hover { background: #2a4f8a; transform: scale(1.05); }
-        .nav-btn-secondary { background: #e0e7f0; color: #1e3c72; }
-        .nav-btn-secondary:hover { background: #cbd5e1; transform: scale(1.05); }
-        
-        .section { background: #fff; margin: 15px 0; padding: 18px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
-        .section h2 { color: #1e3c72; border-bottom: 3px solid #1e3c72; padding-bottom: 8px; margin-bottom: 12px; font-size: 20px; display: flex; align-items: center; gap: 10px; }
-        
-        table { width: 100%; border-collapse: collapse; font-size: 14px; }
-        th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #eee; }
-        th { background: #f8f9fa; font-weight: 600; color: #1a1a2e; font-size: 13px; }
-        tr:hover { background: #f8f9fa; }
-        
-        .price-up { color: #28a745; font-weight: 600; }
-        .price-down { color: #dc3545; font-weight: 600; }
-        
-        #updateStatus {
-            position: fixed; top: 10px; right: 15px;
-            background: #333; color: #fff;
-            padding: 8px 18px; border-radius: 25px;
-            font-size: 13px; opacity: 0;
-            transition: opacity 0.4s; z-index: 999;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-        #updateStatus.show { opacity: 1; }
-        #updateStatus.success { background: #28a745; }
-        #updateStatus.error { background: #dc3545; }
-        
-        .update-time { text-align: right; font-size: 11px; color: #999; margin-top: 6px; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
-        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
-        
-        .calculator { background: #f8f9fa; padding: 18px; border-radius: 10px; }
-        .calculator input, .calculator select, .calculator button {
-            padding: 10px 15px; margin: 5px 0; font-size: 15px;
-            border: 1px solid #ddd; border-radius: 8px; width: 100%;
-        }
-        .calculator button { background: #1e3c72; color: #fff; border: none; cursor: pointer; font-weight: bold; }
-        .calculator button:hover { background: #2a4f8a; }
-        #result { padding: 15px; background: #fff; border-radius: 8px; margin-top: 10px; font-weight: bold; border: 1px solid #ddd; }
-        
-        .comment-form input, .comment-form textarea {
-            width: 100%; padding: 10px; margin: 5px 0;
-            border: 1px solid #ddd; border-radius: 8px; font-size: 14px;
-        }
-        .comment-form textarea { height: 80px; resize: vertical; }
-        .comment-form button { padding: 10px 30px; background: #1e3c72; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
-        .comment-form button:hover { background: #2a4f8a; }
-        .loading-text { color: #999; font-style: italic; }
-    </style>
-</head>
-<body>
-    <div id="updateStatus">🔄 Güncelleniyor...</div>
-    
-    <div class="container">
-        <div class="nav-buttons">
-            <a href="index.html" class="nav-btn nav-btn-secondary">🏠 Ana Sayfa</a>
-            <a href="kampanyalar.html" class="nav-btn nav-btn-primary">🏦 Banka Kampanyaları</a>
-        </div>
-        
-        <h1><span>📊 Piyasa Analizleri</span> <small style="font-size:14px;color:#666;">Canlı Veriler</small></h1>
-        
-        <!-- DÖVİZ -->
-        <div class="section">
-            <h2>💱 Döviz Piyasası (Canlı)</h2>
-            <div class="grid-2">
-                <table>
-                    <thead><tr><th>Para Birimi</th><th>Alış</th><th>Satış</th></tr></thead>
-                    <tbody id="forex1"><tr><td colspan="3" class="loading-text">Yükleniyor...</td></tr></tbody>
-                </table>
-                <table>
-                    <thead><tr><th>Para Birimi</th><th>Alış</th><th>Satış</th></tr></thead>
-                    <tbody id="forex2"><tr><td colspan="3" class="loading-text">Yükleniyor...</td></tr></tbody>
-                </table>
-            </div>
-            <div class="update-time" id="forexTime">Son güncelleme: -</div>
-        </div>
-        
-        <!-- METALLER -->
-        <div class="section">
-            <h2>🥇 Kıymetli ve Sanayi Metalleri</h2>
-            <div class="grid-3">
-                <table>
-                    <thead><tr><th>Metal</th><th>Ons (USD)</th><th>Gram (TL)</th></tr></thead>
-                    <tbody id="metal1"><tr><td colspan="3" class="loading-text">Yükleniyor...</td></tr></tbody>
-                </table>
-                <table>
-                    <thead><tr><th>Metal</th><th>Ons/Ton (USD)</th><th>Gram/Birim (TL)</th></tr></thead>
-                    <tbody id="metal2"><tr><td colspan="3" class="loading-text">Yükleniyor...</td></tr></tbody>
-                </table>
-                <table>
-                    <thead><tr><th>Metal</th><th>Ton (USD)</th><th>Birim (TL)</th></tr></thead>
-                    <tbody id="metal3"><tr><td colspan="3" class="loading-text">Yükleniyor...</td></tr></tbody>
-                </table>
-            </div>
-            <div class="update-time" id="metalTime">Son güncelleme: -</div>
-        </div>
-        
-        <!-- GIDA -->
-        <div class="section">
-            <h2>🌾 Gıda Emtiaları</h2>
-            <div class="grid-2">
-                <table>
-                    <thead><tr><th>Emtia</th><th>Birim</th><th>Fiyat (USD)</th></tr></thead>
-                    <tbody id="food1"><tr><td colspan="3" class="loading-text">Yükleniyor...</td></tr></tbody>
-                </table>
-                <table>
-                    <thead><tr><th>Emtia</th><th>Birim</th><th>Fiyat (USD)</th></tr></thead>
-                    <tbody id="food2"><tr><td colspan="3" class="loading-text">Yükleniyor...</td></tr></tbody>
-                </table>
-            </div>
-            <div class="update-time" id="foodTime">Son güncelleme: -</div>
-        </div>
-        
-        <!-- BORSALAR -->
-        <div class="section">
-            <h2>📈 Dünya Borsaları</h2>
-            <div class="grid-2">
-                <table>
-                    <thead><tr><th>Borsa</th><th>Endeks</th><th>Değişim (24s)</th></tr></thead>
-                    <tbody id="stock1"><tr><td colspan="3" class="loading-text">Yükleniyor...</td></tr></tbody>
-                </table>
-                <table>
-                    <thead><tr><th>Borsa</th><th>Endeks</th><th>Değişim (24s)</th></tr></thead>
-                    <tbody id="stock2"><tr><td colspan="3" class="loading-text">Yükleniyor...</td></tr></tbody>
-                </table>
-            </div>
-            <div class="update-time" id="stockTime">Son güncelleme: -</div>
-        </div>
-        
-        <!-- KRİPTO -->
-        <div class="section">
-            <h2>₿ Kripto Paralar</h2>
-            <div class="grid-2">
-                <table>
-                    <thead><tr><th>Coin</th><th>Fiyat (USD)</th><th>24s Değişim</th></tr></thead>
-                    <tbody id="crypto1"><tr><td colspan="3" class="loading-text">Yükleniyor...</td></tr></tbody>
-                </table>
-                <table>
-                    <thead><tr><th>Coin</th><th>Fiyat (USD)</th><th>24s Değişim</th></tr></thead>
-                    <tbody id="crypto2"><tr><td colspan="3" class="loading-text">Yükleniyor...</td></tr></tbody>
-                </table>
-            </div>
-            <div class="update-time" id="cryptoTime">Son güncelleme: -</div>
-        </div>
-        
-        <!-- HESAPLAYICI -->
-        <div class="section">
-            <h2>🧮 Hesaplayıcı</h2>
-            <div class="calculator">
-                <select id="calcType">
-                    <option value="gold">Altın Hesaplayıcı</option>
-                    <option value="dollar">Dolar/TL Çevirici</option>
-                    <option value="interest">Faiz Hesaplayıcı</option>
-                </select>
-                <div id="goldInput"><input type="number" id="gramAmount" placeholder="Gram altın miktarını girin"></div>
-                <div id="dollarInput" style="display:none;"><input type="number" id="usdAmount" placeholder="USD miktarı girin"></div>
-                <div id="interestInput" style="display:none;">
-                    <input type="number" id="principal" placeholder="Ana para (TL)">
-                    <input type="number" id="rate" placeholder="Yıllık Faiz Oranı %">
-                    <input type="number" id="days" placeholder="Vade (Gün)">
-                </div>
-                <button onclick="calculate()">Hesapla</button>
-                <div id="result">Sonuç: -</div>
-            </div>
-        </div>
-        
-        <!-- YORUM -->
-        <div class="section">
-            <h2>✍️ Yorum Yap</h2>
-            <form id="commentForm" class="comment-form">
-                <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                    <input type="text" name="ad" placeholder="Adınız" required style="flex:1;min-width:150px;">
-                    <input type="text" name="soyad" placeholder="Soyadınız" required style="flex:1;min-width:150px;">
-                </div>
-                <input type="text" name="sehir" placeholder="Şehir">
-                <textarea name="yorum" placeholder="Yorumunuz..." required></textarea>
-                <button type="submit">Gönder</button>
-            </form>
-        </div>
-        
-        <div style="text-align:center;padding:20px;color:#999;font-size:13px;">
-            © 2026 Piyasa Analizleri | Veriler 60 saniyede bir otomatik güncellenir
-        </div>
-    </div>
-
-    <script>
-    // Global Değişkenler
-    let usdRate = 34.50; 
-    let goldOunceUsd = 2650; 
-    let mockMarketTrends = {}; 
-
-    function setHTML(id, html) {
-        const el = document.getElementById(id);
-        if (el) el.innerHTML = html;
-    }
-    
-    function formatPrice(val, prefix = '', suffix = '') {
-        if (!val || isNaN(val) || val === 0) return 'Veri yok';
-        return prefix + Number(val).toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + suffix;
-    }
-    
-    function formatChange(val) {
-        if (!val && val !== 0) return '-';
-        const num = Number(val);
-        const cls = num >= 0 ? 'price-up' : 'price-down';
-        const sign = num > 0 ? '+' : '';
-        return `<span class="${cls}">${sign}${num.toFixed(2)}%</span>`;
-    }
-    
-    function updateTime(id) {
-        const now = new Date();
-        const el = document.getElementById(id);
-        if (el) el.textContent = `Son güncelleme: ${now.toLocaleTimeString('tr-TR')}`;
-    }
-    
-    function showStatus(msg, type = '') {
-        const el = document.getElementById('updateStatus');
-        if(!el) return;
-        el.textContent = msg;
-        el.className = 'show ' + type;
-        setTimeout(() => { el.className = ''; }, 3000);
-    }
-
-    function getTrend(key, baseChange = 0) {
-        if (!mockMarketTrends[key]) {
-            mockMarketTrends[key] = baseChange + (Math.random() * 1.6 - 0.8);
-        } else {
-            mockMarketTrends[key] += (Math.random() * 0.4 - 0.2);
-        }
-        return mockMarketTrends[key];
-    }
-    
-    // 1. DÖVİZ & METALLER
-    async function fetchForexAndMetals() {
-        try {
-            const res = await fetch('https://api.frankfurter.app/latest?from=USD');
-            const data = await res.json();
-            
-            if (!data.rates) throw new Error('Döviz verisi eksik.');
-            
-            const tryRes = await fetch('https://open.er-api.com/v6/latest/USD');
-            const tryData = await tryRes.json();
-            usdRate = tryData.rates.TRY || usdRate;
-
-            const baseRates = data.rates;
-            
-            const list1 = [
-                { code: 'USD/TRY', buy: usdRate, sell: usdRate * 1.0025 },
-                { code: 'EUR/TRY', buy: (1 / baseRates.EUR) * usdRate, sell: ((1 / baseRates.EUR) * usdRate) * 1.0028 },
-                { code: 'GBP/TRY', buy: (1 / baseRates.GBP) * usdRate, sell: ((1 / baseRates.GBP) * usdRate) * 1.0030 },
-                { code: 'JPY/TRY', buy: (1 / baseRates.JPY) * usdRate * 100, sell: ((1 / baseRates.JPY) * usdRate * 100) * 1.0035 }
-            ];
-            
-            const list2 = [
-                { code: 'CHF/TRY', buy: (1 / baseRates.CHF) * usdRate, sell: ((1 / baseRates.CHF) * usdRate) * 1.0025 },
-                { code: 'CAD/TRY', buy: (1 / baseRates.CAD) * usdRate, sell: ((1 / baseRates.CAD) * usdRate) * 1.0025 },
-                { code: 'AUD/TRY', buy: (1 / baseRates.AUD) * usdRate, sell: ((1 / baseRates.AUD) * usdRate) * 1.0025 },
-                { code: 'RUB/TRY', buy: (1 / baseRates.RUB) * usdRate, sell: ((1 / baseRates.RUB) * usdRate) * 1.0050 },
-                { code: 'CNY/TRY', buy: (1 / baseRates.CNY) * usdRate, sell: ((1 / baseRates.CNY) * usdRate) * 1.0040 }
-            ];
-            
-            let html1 = '', html2 = '';
-            list1.forEach(c => {
-                html1 += `<tr><td><strong>${c.code}</strong></td><td>${c.buy.toFixed(4)}</td><td>${c.sell.toFixed(4)}</td></tr>`;
-            });
-            list2.forEach(c => {
-                html2 += `<tr><td><strong>${c.code}</strong></td><td>${c.buy.toFixed(4)}</td><td>${c.sell.toFixed(4)}</td></tr>`;
-            });
-            
-            setHTML('forex1', html1);
-            setHTML('forex2', html2);
-            updateTime('forexTime');
-
-            // --- Metaller ---
-            goldOunceUsd = 2645.20 + (Math.random() * 6 - 3);
-            const silverOunceUsd = 31.40 + (Math.random() * 0.4 - 0.2);
-            const platinumOunceUsd = 960.00 + (Math.random() * 4 - 2);
-            const palladiumOunceUsd = 1010.00 + (Math.random() * 6 - 3);
-
-            const copperUsd = 4.15;
-            const aluminumUsd = 2450.00;
-            const ironUsd = 102.50;
-            const nickelUsd = 16100.00;
-            const zincUsd = 2820.00;
-
-            const group1 = [
-                { name: 'Altın (ONS)', usd: goldOunceUsd, tl: (goldOunceUsd / 31.1035) * usdRate },
-                { name: 'Gümüş', usd: silverOunceUsd, tl: (silverOunceUsd / 31.1035) * usdRate },
-                { name: 'Platin', usd: platinumOunceUsd, tl: (platinumOunceUsd / 31.1035) * usdRate },
-                { name: 'Paladyum', usd: palladiumOunceUsd, tl: (palladiumOunceUsd / 31.1035) * usdRate }
-            ];
-
-            const group2 = [
-                { name: 'Bakır (Ib)', usd: copperUsd, tl: copperUsd * usdRate },
-                { name: 'Alüminyum (Ton)', usd: aluminumUsd, tl: aluminumUsd * usdRate },
-                { name: 'Demir (Ton)', usd: ironUsd, tl: ironUsd * usdRate },
-                { name: 'Nikel (Ton)', usd: nickelUsd, tl: nickelUsd * usdRate }
-            ];
-
-            const group3 = [
-                { name: 'Çinko (Ton)', usd: zincUsd, tl: zincUsd * usdRate },
-                { name: 'Kurşun (Ton)', usd: 2050.00, tl: 2050.00 * usdRate },
-                { name: 'Kalay (Ton)', usd: 26800.00, tl: 26800.00 * usdRate }
-            ];
-
-            function buildMetals(items) {
-                let html = '';
-                items.forEach(item => {
-                    html += `<tr><td><strong>${item.name}</strong></td><td>${formatPrice(item.usd, '$')}</td><td>${formatPrice(item.tl, '₺')}</td></tr>`;
-                });
-                return html;
-            }
-
-            setHTML('metal1', buildMetals(group1));
-            setHTML('metal2', buildMetals(group2));
-            setHTML('metal3', buildMetals(group3));
-            updateTime('metalTime');
-
-            return true;
-        } catch (e) {
-            console.error('Döviz/Metal Hatası:', e);
-            return false;
-        }
-    }
-    
-    // 2. GIDA EMTİALARI
-    async function fetchFood() {
-        try {
-            const basePrices = { wheat: 560.25, corn: 425.50, soy: 1180.00, coffee: 2.24, sugar: 0.21, cocoa: 7850.00 };
-            
-            const foods1 = [
-                { name: 'Buğday', unit: 'Bushel', price: basePrices.wheat + getTrend('wheat', 0.1) },
-                { name: 'Mısır', unit: 'Bushel', price: basePrices.corn + getTrend('corn', -0.05) },
-                { name: 'Soya Fasulyesi', unit: 'Bushel', price: basePrices.soy + getTrend('soy', 0.2) }
-            ];
-            const foods2 = [
-                { name: 'Kahve', unit: 'Lb (Pound)', price: basePrices.coffee + (getTrend('coffee', 0.02) / 100) },
-                { name: 'Şeker', unit: 'Lb (Pound)', price: basePrices.sugar + (getTrend('sugar', -0.01) / 100) },
-                { name: 'Kakao', unit: 'Ton', price: basePrices.cocoa + getTrend('cocoa', 15.0) }
-            ];
-            
-            let html1 = '', html2 = '';
-            foods1.forEach(f => {
-                html1 += `<tr><td><strong>${f.name}</strong></td><td>${f.unit}</td><td>${formatPrice(f.price, '$')}</td></tr>`;
-            });
-            foods2.forEach(f => {
-                html2 += `<tr><td><strong>${f.name}</strong></td><td>${f.unit}</td><td>${formatPrice(f.price, '$')}</td></tr>`;
-            });
-            
-            setHTML('food1', html1);
-            setHTML('food2', html2);
-            updateTime('foodTime');
-            return true;
-        } catch (e) {
-            console.error('Gıda Emtia Hatası:', e);
-            return false;
-        }
-    }
-    
-    // 3. BORSALAR
-    async function fetchStocks() {
-        try {
-            const baseIndexes = { bist: 9850.40, sp: 5420.15, nasdaq: 19120.60, dow: 40100.25, dax: 18250.00, ftse: 8210.30, cac: 7520.45, nikkei: 38600.00 };
-
-            const stocks1 = [
-                { name: 'BIST 100', price: baseIndexes.bist + (getTrend('bist') * 15), change: getTrend('bist', 0.35) },
-                { name: 'S&P 500', price: baseIndexes.sp + getTrend('sp', 0.12), change: getTrend('sp', 0.12) },
-                { name: 'Nasdaq', price: baseIndexes.nasdaq + (getTrend('nasdaq') * 4), change: getTrend('nasdaq', -0.05) },
-                { name: 'Dow Jones', price: baseIndexes.dow + (getTrend('dow') * 5), change: getTrend('dow', 0.08) }
-            ];
-            const stocks2 = [
-                { name: 'DAX', price: baseIndexes.dax + (getTrend('dax') * 2), change: getTrend('dax', -0.15) },
-                { name: 'FTSE 100', price: baseIndexes.ftse + getTrend('ftse'), change: getTrend('ftse', 0.02) },
-                { name: 'CAC 40', price: baseIndexes.cac + getTrend('cac'), change: getTrend('cac', -0.22) },
-                { name: 'Nikkei 225', price: baseIndexes.nikkei + (getTrend('nikkei') * 10), change: getTrend('nikkei', 0.45) }
-            ];
-            
-            function buildStocks(items) {
-                let html = '';
-                items.forEach(s => {
-                    html += `<tr><td><strong>${s.name}</strong></td><td>${Number(s.price).toLocaleString('tr-TR', {maximumFractionDigits:2})}</td><td>${formatChange(s.change)}</td></tr>`;
-                });
-                return html;
-            }
-            
-            setHTML('stock1', buildStocks(stocks1));
-            setHTML('stock2', buildStocks(stocks2));
-            updateTime('stockTime');
-            return true;
-        } catch (e) {
-            console.error('Borsa Hatası:', e);
-            return false;
-        }
-    }
-    
-    // 4. KRİPTO PARALAR
-    async function fetchCrypto() {
-        try {
-            const res = await fetch('https://api.coincap.io/v2/assets?limit=14');
-            const result = await res.json();
-            const data = result.data || [];
-            
-            if(data.length === 0) throw new Error('Kripto verisi çekilemedi.');
-
-            let html1 = '', html2 = '';
-            
-            data.forEach((coin, index) => {
-                const price = parseFloat(coin.priceUsd);
-                const change = parseFloat(coin.changePercent24Hr);
-                const rowHtml = `<tr><td><strong>${coin.name}</strong> <span style="color:#999;font-size:11px;">${coin.symbol}</span></td><td>${formatPrice(price, '$')}</td><td>${formatChange(change)}</td></tr>`;
-                
-                if (index < 7) {
-                    html1 += rowHtml;
-                } else {
-                    html2 += rowHtml;
-                }
-            });
-            
-            setHTML('crypto1', html1);
-            setHTML('crypto2', html2);
-            updateTime('cryptoTime');
-            return true;
-        } catch (e) {
-            console.error('Kripto Hatası:', e);
-            return false;
-        }
-    }
-    
-    // MERKEZİ TETİKLEYİCİ
-    async function fetchAllData() {
-        showStatus('🔄 Veriler güncelleniyor...', '');
-        const results = await Promise.allSettled([
-            fetchForexAndMetals(),
-            fetchFood(),
-            fetchStocks(),
-            fetchCrypto()
-        ]);
-        
-        const successCount = results.filter(r => r.status === 'fulfilled' && r.value === true).length;
-        
-        if(successCount >= 3) {
-            showStatus(`✅ Tüm veriler başarıyla güncellendi`, 'success');
-        } else {
-            showStatus(`⚠️ Bazı veri bağlantılarında gecikme yaşandı.`, 'error');
-        }
-    }
-    
-    // HESAPLAYICI MANTIĞI
-    function calculate() {
-        const type = document.getElementById('calcType').value;
-        const result = document.getElementById('result');
-        
-        if (type === 'gold') {
-            const gram = parseFloat(document.getElementById('gramAmount').value);
-            if (!gram || gram <= 0) { result.textContent = '❌ Geçerli gram miktarı girin'; return; }
-            
-            const gramPriceUsd = goldOunceUsd / 31.1035;
-            const totalUsd = gram * gramPriceUsd;
-            const totalTl = totalUsd * usdRate;
-            
-            result.textContent = `💰 ${gram} gr Altın = $${totalUsd.toFixed(2)} (≈ ${formatPrice(totalTl, '₺')})`;
-        } 
-        else if (type === 'dollar') {
-            const usd = parseFloat(document.getElementById('usdAmount').value);
-            if (!usd || usd <= 0) { result.textContent = '❌ Geçerli USD miktarı girin'; return; }
-            
-            result.textContent = `💵 ${usd} USD = ${formatPrice(usd * usdRate, '₺')}`;
-        } 
-        else if (type === 'interest') {
-            const p = parseFloat(document.getElementById('principal').value);
-            const r = parseFloat(document.getElementById('rate').value);
-            const d = parseFloat(document.getElementById('days').value);
-            
-            if (!p || p <= 0 || !r || r <= 0 || !d || d <= 0) {
-                result.textContent = '❌ Lütfen tüm alanları eksiksiz ve pozitif doldurun';
-                return;
-            }
-            const interest = (p * r * d) / 36500;
-            result.textContent = `📈 Net Faiz Getirisi: ${formatPrice(interest, '₺')} | Vade Sonu Toplam: ${formatPrice(p + interest, '₺')}`;
-        }
-    }
-    
-    // İnput Değiştirme Dinamiği (Düzeltildi)
-    document.getElementById('calcType').addEventListener('change', function() {
-        document.getElementById('goldInput').style.display = this.value === 'gold' ? 'block' : 'none';
-        document.getElementById('dollarInput').style.display = this.value === 'dollar' ? 'block' : 'none';
-        document.getElementById('interestInput').style.display = this.value === 'interest' ? 'block' : 'none';
-    });
-    
-    // Yorum Formu Simülasyonu
-    document.getElementById('commentForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('✅ Yorumunuz incelendikten sonra başarıyla yayınlanacaktır. Teşekkürler!');
-        this.reset();
-    });
-    
-    // İlk çalıştırma ve Zamanlayıcı
-    fetchAllData();
-    setInterval(fetchAllData, 60000);
-    </script>
-</body>
-</html>
+{
+  "Update_Date": "2026-07-11 12:32:01",
+  "USD": {
+    "Buying": 46.9424,
+    "Type": "Currency",
+    "Selling": 47.0434,
+    "Change": 0.2
+  },
+  "EUR": {
+    "Buying": 53.6174,
+    "Type": "Currency",
+    "Selling": 53.7187,
+    "Change": -0.12
+  },
+  "GBP": {
+    "Buying": 62.8923,
+    "Type": "Currency",
+    "Selling": 63.0486,
+    "Change": -0.04
+  },
+  "CHF": {
+    "Buying": 58.0513,
+    "Type": "Currency",
+    "Selling": 58.2681,
+    "Change": 0.06
+  },
+  "CAD": {
+    "Buying": 33.1618,
+    "Type": "Currency",
+    "Selling": 33.2052,
+    "Change": 0.24
+  },
+  "RUB": {
+    "Buying": 0.6079,
+    "Type": "Currency",
+    "Selling": 0.6102,
+    "Change": -1.04
+  },
+  "AED": {
+    "Buying": 12.7795,
+    "Type": "Currency",
+    "Selling": 12.8219,
+    "Change": 0.25
+  },
+  "AUD": {
+    "Buying": 32.6344,
+    "Type": "Currency",
+    "Selling": 32.7234,
+    "Change": 0.38
+  },
+  "DKK": {
+    "Buying": 7.1654,
+    "Type": "Currency",
+    "Selling": 7.1938,
+    "Change": 0.11
+  },
+  "SEK": {
+    "Buying": 4.8524,
+    "Type": "Currency",
+    "Selling": 4.8772,
+    "Change": 0.25
+  },
+  "NOK": {
+    "Buying": 4.794,
+    "Type": "Currency",
+    "Selling": 4.821,
+    "Change": -0.32
+  },
+  "JPY": {
+    "Buying": 0.0029,
+    "Type": "Currency",
+    "Selling": 0.002912,
+    "Change": 0
+  },
+  "KWD": {
+    "Buying": 151.4022,
+    "Type": "Currency",
+    "Selling": 152.0881,
+    "Change": 0.23
+  },
+  "ZAR": {
+    "Buying": 2.8739,
+    "Type": "Currency",
+    "Selling": 2.8838,
+    "Change": 0.2
+  },
+  "BHD": {
+    "Buying": 124.5024,
+    "Type": "Currency",
+    "Selling": 124.7703,
+    "Change": 0.19
+  },
+  "LYD": {
+    "Buying": 7.329,
+    "Type": "Currency",
+    "Selling": 7.3448,
+    "Change": -0.66
+  },
+  "SAR": {
+    "Buying": 12.4977,
+    "Type": "Currency",
+    "Selling": 12.5254,
+    "Change": 0.22
+  },
+  "IQD": {
+    "Buying": 0.0358,
+    "Type": "Currency",
+    "Selling": 0.0359,
+    "Change": 0.27
+  },
+  "ILS": {
+    "Buying": 15.5825,
+    "Type": "Currency",
+    "Selling": 15.6161,
+    "Change": 0.23
+  },
+  "INR": {
+    "Buying": 0.4914,
+    "Type": "Currency",
+    "Selling": 0.4925,
+    "Change": 0.19
+  },
+  "MXN": {
+    "Buying": 2.687,
+    "Type": "Currency",
+    "Selling": 2.6928,
+    "Change": 0.63
+  },
+  "HUF": {
+    "Buying": 0.1507,
+    "Type": "Currency",
+    "Selling": 0.151,
+    "Change": 0.44
+  },
+  "NZD": {
+    "Buying": 27.0546,
+    "Type": "Currency",
+    "Selling": 27.1128,
+    "Change": 0.35
+  },
+  "BRL": {
+    "Buying": 9.188,
+    "Type": "Currency",
+    "Selling": 9.2078,
+    "Change": 0.35
+  },
+  "IDR": {
+    "Buying": 0.0026,
+    "Type": "Currency",
+    "Selling": 0.0026,
+    "Change": 0.08
+  },
+  "CZK": {
+    "Buying": 2.209,
+    "Type": "Currency",
+    "Selling": 2.2137,
+    "Change": 0.05
+  },
+  "PLN": {
+    "Buying": 12.379,
+    "Type": "Currency",
+    "Selling": 12.4056,
+    "Change": 0.11
+  },
+  "RON": {
+    "Buying": 10.2261,
+    "Type": "Currency",
+    "Selling": 10.2605,
+    "Change": 0.13
+  },
+  "CNY": {
+    "Buying": 6.9207,
+    "Type": "Currency",
+    "Selling": 6.9443,
+    "Change": 0.46
+  },
+  "ARS": {
+    "Buying": 0.0316,
+    "Type": "Currency",
+    "Selling": 0.0316,
+    "Change": 0.2
+  },
+  "ALL": {
+    "Buying": 0.5711,
+    "Type": "Currency",
+    "Selling": 0.5724,
+    "Change": 0.07
+  },
+  "AZN": {
+    "Buying": 27.6132,
+    "Type": "Currency",
+    "Selling": 27.6726,
+    "Change": 0.2
+  },
+  "BAM": {
+    "Buying": 27.434,
+    "Type": "Currency",
+    "Selling": 27.4931,
+    "Change": -1.96
+  },
+  "CLP": {
+    "Buying": 0.0508,
+    "Type": "Currency",
+    "Selling": 0.0509,
+    "Change": 0.66
+  },
+  "COP": {
+    "Buying": 0.0144,
+    "Type": "Currency",
+    "Selling": 0.0145,
+    "Change": 1.5
+  },
+  "CRC": {
+    "Buying": 0.103,
+    "Type": "Currency",
+    "Selling": 0.1032,
+    "Change": 0.01
+  },
+  "DZD": {
+    "Buying": 0.3524,
+    "Type": "Currency",
+    "Selling": 0.3532,
+    "Change": 0.16
+  },
+  "EGP": {
+    "Buying": 0.9462,
+    "Type": "Currency",
+    "Selling": 0.9483,
+    "Change": 0.22
+  },
+  "HKD": {
+    "Buying": 5.9879,
+    "Type": "Currency",
+    "Selling": 6.0008,
+    "Change": 0.15
+  },
+  "ISK": {
+    "Buying": 0.3736,
+    "Type": "Currency",
+    "Selling": 0.3744,
+    "Change": 0.05
+  },
+  "KRW": {
+    "Buying": 0.0313,
+    "Type": "Currency",
+    "Selling": 0.0314,
+    "Change": 0.57
+  },
+  "KZT": {
+    "Buying": 0.0989,
+    "Type": "Currency",
+    "Selling": 0.0991,
+    "Change": -1.59
+  },
+  "LBP": {
+    "Buying": 0.0005,
+    "Type": "Currency",
+    "Selling": 0.0005,
+    "Change": 0.2
+  },
+  "LKR": {
+    "Buying": 0.1399,
+    "Type": "Currency",
+    "Selling": 0.1402,
+    "Change": 0.15
+  },
+  "MAD": {
+    "Buying": 5.0239,
+    "Type": "Currency",
+    "Selling": 5.0347,
+    "Change": 0.32
+  },
+  "MDL": {
+    "Buying": 2.6901,
+    "Type": "Currency",
+    "Selling": 2.6959,
+    "Change": 0.28
+  },
+  "MKD": {
+    "Buying": 0.8708,
+    "Type": "Currency",
+    "Selling": 0.8726,
+    "Change": 0.21
+  },
+  "MYR": {
+    "Buying": 11.5338,
+    "Type": "Currency",
+    "Selling": 11.5586,
+    "Change": 0.37
+  },
+  "OMR": {
+    "Buying": 122.09,
+    "Type": "Currency",
+    "Selling": 122.3527,
+    "Change": 0.2
+  },
+  "PEN": {
+    "Buying": 13.8392,
+    "Type": "Currency",
+    "Selling": 13.8689,
+    "Change": 0.46
+  },
+  "PHP": {
+    "Buying": 0.764,
+    "Type": "Currency",
+    "Selling": 0.7657,
+    "Change": 0.5
+  },
+  "PKR": {
+    "Buying": 0.1685,
+    "Type": "Currency",
+    "Selling": 0.1695,
+    "Change": 0.24
+  },
+  "QAR": {
+    "Buying": 12.8745,
+    "Type": "Currency",
+    "Selling": 12.9339,
+    "Change": 0.33
+  },
+  "RSD": {
+    "Buying": 0.4562,
+    "Type": "Currency",
+    "Selling": 0.4582,
+    "Change": -0.09
+  },
+  "SGD": {
+    "Buying": 36.3444,
+    "Type": "Currency",
+    "Selling": 36.4226,
+    "Change": 0.25
+  },
+  "SYP": {
+    "Buying": 0.3849,
+    "Type": "Currency",
+    "Selling": 0.3858,
+    "Change": 0.2
+  },
+  "THB": {
+    "Buying": 1.4106,
+    "Type": "Currency",
+    "Selling": 1.4136,
+    "Change": 0.51
+  },
+  "TWD": {
+    "Buying": 1.4624,
+    "Type": "Currency",
+    "Selling": 1.4655,
+    "Change": 0.38
+  },
+  "UAH": {
+    "Buying": 1.0548,
+    "Type": "Currency",
+    "Selling": 1.057,
+    "Change": 0.18
+  },
+  "UYU": {
+    "Buying": 1.164,
+    "Type": "Currency",
+    "Selling": 1.1665,
+    "Change": -0.13
+  },
+  "GEL": {
+    "Buying": 17.7476,
+    "Type": "Currency",
+    "Selling": 17.7858,
+    "Change": 1.71
+  },
+  "TND": {
+    "Buying": 15.875,
+    "Type": "Currency",
+    "Selling": 15.9092,
+    "Change": -0.28
+  },
+  "BGN": {
+    "Buying": 27.3403,
+    "Type": "Currency",
+    "Selling": 27.6148,
+    "Change": 0.14
+  },
+  "GRA": {
+    "Selling": 6225.55,
+    "Type": "Gold",
+    "Name": "GRAMALTIN",
+    "Change": 0.12,
+    "Buying": 6224.7
+  },
+  "XU100": {
+    "Selling": 14321.19,
+    "Type": "Gold",
+    "Name": "XU100",
+    "Change": 1.53
+  },
+  "DBITCOIN": {
+    "Selling": 0,
+    "Type": "Gold",
+    "Name": "DBITCOIN",
+    "Change": -0.23
+  },
+  "GUMUS": {
+    "Selling": 90.48,
+    "Type": "Gold",
+    "Name": "GUMUS",
+    "Change": 0.03,
+    "Buying": 90.38
+  },
+  "BRENT": {
+    "Selling": 0,
+    "Type": "Gold",
+    "Name": "BRENT",
+    "Change": 0.03
+  },
+  "ONS": {
+    "Buying": 0,
+    "Type": "Gold",
+    "Name": "ONS",
+    "Selling": 0,
+    "Change": -0.07
+  },
+  "HAS": {
+    "Buying": 6193.58,
+    "Type": "Gold",
+    "Name": "GRAMHASALTIN",
+    "Selling": 6194.42,
+    "Change": 0.12
+  },
+  "CEYREKALTIN": {
+    "Buying": 9887.48,
+    "Type": "Gold",
+    "Name": "CEYREKALTIN",
+    "Selling": 10113.63,
+    "Change": -0.72
+  },
+  "YARIMALTIN": {
+    "Buying": 19713.17,
+    "Type": "Gold",
+    "Name": "YARIMALTIN",
+    "Selling": 20227.26,
+    "Change": -0.72
+  },
+  "TAMALTIN": {
+    "Buying": 39549.93,
+    "Type": "Gold",
+    "Name": "TAMALTIN",
+    "Selling": 40330.8,
+    "Change": -0.72
+  },
+  "CUMHURIYETALTINI": {
+    "Buying": 40985,
+    "Type": "Gold",
+    "Name": "CUMHURIYETALTINI",
+    "Selling": 41606,
+    "Change": -0.5
+  },
+  "ATAALTIN": {
+    "Buying": 40785.87,
+    "Type": "Gold",
+    "Name": "ATAALTIN",
+    "Selling": 41815.37,
+    "Change": -0.72
+  },
+  "14AYARALTIN": {
+    "Buying": 3522.42,
+    "Type": "Gold",
+    "Name": "14AYARALTIN",
+    "Selling": 3525.85,
+    "Change": -0.72
+  },
+  "18AYARALTIN": {
+    "Buying": 4511.16,
+    "Type": "Gold",
+    "Name": "18AYARALTIN",
+    "Selling": 4515.56,
+    "Change": -0.72
+  },
+  "YIA": {
+    "Buying": 5635.87,
+    "Type": "Gold",
+    "Name": "22AYARBILEZIK",
+    "Selling": 5641.36,
+    "Change": -0.72
+  },
+  "IKIBUCUKALTIN": {
+    "Buying": 98874.83,
+    "Type": "Gold",
+    "Name": "IKIBUCUKALTIN",
+    "Selling": 100455.85,
+    "Change": -0.72
+  },
+  "BESLIALTIN": {
+    "Buying": 200221.53,
+    "Type": "Gold",
+    "Name": "BESLIALTIN",
+    "Selling": 204128.27,
+    "Change": -0.72
+  },
+  "GREMSEALTIN": {
+    "Buying": 98874.83,
+    "Type": "Gold",
+    "Name": "GREMSEALTIN",
+    "Selling": 101136.28,
+    "Change": -0.72
+  },
+  "RESATALTIN": {
+    "Buying": 40785.87,
+    "Type": "Gold",
+    "Name": "RESATALTIN",
+    "Selling": 41815.37,
+    "Change": -0.72
+  },
+  "HAMITALTIN": {
+    "Buying": 40785.87,
+    "Type": "Gold",
+    "Name": "HAMITALTIN",
+    "Selling": 41815.37,
+    "Change": -0.72
+  },
+  "GPL": {
+    "Buying": 2463.46,
+    "Type": "Platinum",
+    "Name": "GRAMPLATIN",
+    "Selling": 2474.68,
+    "Change": 1.25
+  },
+  "PAL": {
+    "Buying": 1922.21,
+    "Type": "Palladium",
+    "Name": "GRAMPALADYUM",
+    "Selling": 1945.26,
+    "Change": 2.4
+  }
+}
