@@ -1,68 +1,78 @@
-<!-- 1. ZARİF, MİNİMALİST VE KİBAR CSS TASARIMI -->
+<!-- 1. ELİT, KİBAR VE SÜPER MODERM CSS TASARIMI -->
 <style>
-  /* Menü Genel Alanı (Kaba kutu yerine ince, modern ve şeffaf alt çizgili minimalist hat) */
+  /* Menü Ana Gövdesi - Havada uçan, incecik çizgili cam kapsül */
   .custom-nav {
-    display: flex;
+    display: inline-flex;
     flex-wrap: wrap;
-    gap: 24px;
-    padding: 12px 0;
-    background-color: transparent;
-    border-bottom: 1px solid #e2e8f0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    margin-bottom: 30px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(12px); /* Arkadaki içeriği hafifçe bulanıklaştıran modern cam efekti */
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 30px; /* Tam yuvarlatılmış kibar kapsül hatları */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.02);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 20px auto;
+    max-width: fit-content;
   }
 
-  /* Kibar Link Tasarımı (Arka plan dolgusu yerine sadece zarif bir yazı) */
+  /* Zarif İnce Link Tasarımı */
   .custom-nav a {
     text-decoration: none;
-    color: #718096;
-    padding: 8px 0;
+    color: #64748b; /* Kibar füme/gri tonu */
+    padding: 8px 16px;
+    border-radius: 20px;
     font-weight: 500;
-    font-size: 14px;
-    letter-spacing: -0.2px;
-    transition: color 0.2s ease, border-color 0.2s ease;
+    font-size: 13.5px;
+    letter-spacing: 0.2px; /* Harf araları hafif açılarak kibarlaştırıldı */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     display: inline-flex;
     align-items: center;
-    position: relative;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -13px; /* Alt çizgiyle tam sıfırlanma hissi için */
+    white-space: nowrap;
   }
 
-  /* Fareyle Üzerine Gelindiğinde (Yumuşak Koyu Ton Geçişi) */
+  /* Fareyle Üzerine Gelindiğinde (Yumuşak Geçiş Efekti) */
   .custom-nav a:hover {
-    color: #1a202c;
+    color: #1e293b; /* Koyu antrasit */
+    background-color: rgba(0, 0, 0, 0.03);
   }
 
-  /* Aktif Olan Sayfa Tasarımı (Zarif İnce Alt Çizgi Efekti) */
+  /* TIKLANMIŞ / AKTİF OLAN SAYFA TASARIMI */
+  /* Kaba kutular yerine, yazının arkasında hafif parlayan pastel mavi bir bulut efekti */
   .custom-nav a.active {
-    color: #3182ce;
+    color: #2563eb !important; /* Premium Canlı Mavi */
+    background-color: rgba(37, 99, 235, 0.08) !important; /* Gözü yormayan pastel mavi arka plan dolgusu */
     font-weight: 600;
-    border-bottom: 2px solid #3182ce;
   }
 </style>
 
-<!-- 2. HARF HATALARI TAMAMEN DÜZELTİLMİŞ HTML YAPISI -->
-<nav class="custom-nav">
-  <a href="index.html">Ana Sayfa</a>
-  <a href="Kampanyalar.html">Kampanyalar</a>
-  <a href="BankaKampanyalari.html">Banka Kampanyaları</a>
-  <a href="OperatorKampanyasi.html">Operatör Kampanyası</a>
-  <a href="HatKampanyasi.html">Hat Kampanyası</a>
-  <a href="interntKampanyakari.html">İnternet Kampanyaları</a> <!-- Orijinal dosya adınızla birebir eşitlendi -->
-  <a href="Piyasa.html">Piyasa Canlı Veri</a>
-  <a href="ParaKazan.html">Para Kazan</a>
-  <a href="MutinousFinance.html">Mutinous Finance</a>
-  <a href="privacy.html">Gizlilik Politikası</a>
-  <a href="Anlikcalisma.html">Anlık Çalışma</a>
-</nav>
+<!-- 2. TÜM SAYFA LİSTESİ VE HARF EŞİTLEMESİ YAPILMIŞ HTML -->
+<div style="text-align: center; width: 100%;">
+  <nav class="custom-nav">
+    <a href="index.html">Ana Sayfa</a>
+    <a href="Kampanyalar.html">Kampanyalar</a>
+    <a href="BankaKampanyalari.html">Banka Kampanyaları</a>
+    <a href="OperatorKampanyasi.html text-shadow">Operatör Kampanyası</a>
+    <a href="HatKampanyasi.html">Hat Kampanyası</a>
+    <a href="interntKampanyakari.html">İnternet Kampanyaları</a> <!-- GitHub Pages deponuzdaki tam ismiyle korundu -->
+    <a href="Piyasa.html">Piyasa Canlı Veri</a>
+    <a href="ParaKazan.html">Para Kazan</a>
+    <a href="MutinousFinance.html">Mutinous Finance</a>
+    <a href="privacy.html">Gizlilik Politikası</a>
+    <a href="Anlikcalisma.html">Anlık Çalışma</a>
+  </nav>
+</div>
 
-<!-- 3. AKILLI VE GİTHUB PAGES UYUMLU JAVASCRIPT -->
+<!-- 3. BÜYÜK/KÜÇÜK HARF DUYARLI AKILLI JAVASCRIPT BULUCU -->
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    // Tarayıcıdaki adresi al ve temizle
+    // Tarayıcıdaki adresi al, temizle ve küçük harfe zorla
     let currentPath = window.location.pathname.split("/").pop().toLowerCase();
     
-    // GitHub Pages ana dizin kontrolleri (Boş kalma durumları için)
+    // GitHub Pages ana dizin (boş kalma veya sadece eğik çizgi) kontrolleri
     if (currentPath === "" || currentPath === "/" || currentPath === "mutinoustube.github.io") {
       currentPath = "index.html";
     }
@@ -70,7 +80,7 @@
     const navLinks = document.querySelectorAll(".custom-nav a");
     
     navLinks.forEach(link => {
-      // Kod içindeki href değerini al ve küçük harfe çevirerek karşılaştır
+      // Kod içindeki href değerini al ve küçük harfe çevirerek karşılaştır (Hata payını sıfırlar)
       const linkHref = link.getAttribute("href").toLowerCase();
       
       if (linkHref === currentPath) {
