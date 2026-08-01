@@ -302,62 +302,10 @@
 
     </nav>
 
-    <!-- ============================================================ -->
-    <!-- SAYFA İÇERİK ÖRNEĞİ -->
-    <!-- ============================================================ -->
-    <div class="page-content">
-        <h2>✨ Zarif & Kibar Menü</h2>
-        <p>
-            Tek satırda, şık ve minimal. 
-            <span class="highlight">Tıkladığınızda</span> 
-            aktif sayfa mor renkle vurgulanır.
-        </p>
-        <p style="margin-top: 8px; font-size: 13px; color: #8a8aaa;">
-            ✦ Mutinous Kırmızı · Tube Mavi · Kompakt · Kalın
-        </p>
-        <p class="demo-note">
-            ← Geri butonu ile bir önceki sayfaya dönebilirsiniz
-        </p>
-        <p style="margin-top: 6px; font-size: 12px; color: #9a9aba;">
-            🎬 <strong>MutinousTube</strong> logosuna tıklayarak YouTube kanalını <strong>yeni sekmede</strong> açabilirsiniz.
-        </p>
-    </div>
-
-    <!-- ============================================================ -->
-    <!-- JAVASCRIPT -->
-    <!-- ============================================================ -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-
-            // Aktif sayfayı bul ve vurgula
-            const currentPath = window.location.pathname.split("/").pop();
-            const currentPage = currentPath || "index.html";
-
-            const navLinks = document.querySelectorAll(".mutinous-links a");
-
-            navLinks.forEach(link => {
-                const linkHref = link.getAttribute("href");
-                if (linkHref === currentPage) {
-                    link.classList.add("active");
-                }
-            });
-
-            // Tıklama ile aktifleştir
-            navLinks.forEach(link => {
-                link.addEventListener("click", function () {
-                    navLinks.forEach(l => l.classList.remove("active"));
-                    this.classList.add("active");
-                });
-            });
-
-            console.log("✨ MutinousTube Zarif Menü Aktif");
-            console.log(`📄 Mevcut Sayfa: ${currentPage}`);
-            console.log("🎬 YouTube Kanalı: https://www.youtube.com/@MutinousTube");
-        });
     </script>
 
 </body>
 </html>
 
-
+Yeniden Yapmak Kullanmak
 <iframe width="560" height="315" src="https://www.youtube.com/embed/EmN8d5sfhNs?si=91rsjj3kMAL8sQo5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
