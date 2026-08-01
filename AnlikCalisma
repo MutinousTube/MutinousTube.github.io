@@ -1,0 +1,72 @@
+<!-- 1. CSS TASARIMI (Bunu <head> içine veya stil dosyanıza ekleyin) -->
+<style>
+  /* Menü Genel Kutusu */
+  .custom-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  /* Standart Link Tasarımı */
+  .custom-nav a {
+    text-decoration: none;
+    color: #495057;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+  }
+
+  /* Fareyle Üzerine Gelindiğinde (Hover) */
+  .custom-nav a:hover {
+    background-color: #e9ecef;
+    color: #212529;
+    border-color: #ced4da;
+  }
+
+  /* Tıklanmış / Aktif Olan Sayfa Tasarımı (Mavi Renk) */
+  .custom-nav a.active {
+    background-color: #007bff;
+    color: #ffffff;
+    border-color: #007bff;
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+  }
+</style>
+
+<!-- 2. HTML MENÜ YAPISI (Bunu menünün görünmesini istediğiniz yere ekleyin) -->
+<nav class="custom-nav">
+  <a href="index.html">Ana Sayfa</a>
+  <a href="Kampanyalar.html">Kampanyalar</a>
+  <a href="BankaKampanyalari.html">Banka Kampanyaları</a>
+  <a href="OperatorKampanyasi.html">Operatör Kampanyası</a>
+  <a href="HatKampanyasi.html">Hat Kampanyası</a>
+  <a href="interntKampanyakari.html">İnternet Kampanyaları</a>
+  <a href="Piyasa.html">Piyasa Canlı Veri</a>
+  <a href="ParaKazan.html">Para Kazan</a>
+  <a href="MutinousFinance.html">Mutinous Finance</a>
+</nav>
+
+<!-- 3. JAVASCRIPT AKTİF SAYFA BULUCU (Bunu sayfanın en altına, </body> öncesine ekleyin) -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Mevcut sayfa adını URL'den alır (Örn: index.html)
+    const currentPath = window.location.pathname.split("/").pop();
+    
+    // Menüdeki tüm linkleri bulur
+    const navLinks = document.querySelectorAll(".custom-nav a");
+    
+    navLinks.forEach(link => {
+      // Eğer linkin href değeri o anki sayfa ile eşleşiyorsa ".active" yani mavi renk sınıfını ekler
+      if (link.getAttribute("href") === currentPath) {
+        link.classList.add("active");
+      }
+    });
+  });
+</script>
