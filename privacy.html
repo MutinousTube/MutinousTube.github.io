@@ -1,82 +1,76 @@
-<!-- 1. MODERN VE ŞIK CSS TASARIMI -->
+<!-- 1. ZARİF, MİNİMALİST VE KİBAR CSS TASARIMI -->
 <style>
-  /* Menü Genel Kutusu */
+  /* Menü Genel Alanı (Kaba kutu yerine ince, modern ve şeffaf alt çizgili minimalist hat) */
   .custom-nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    padding: 16px;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    gap: 24px;
+    padding: 12px 0;
+    background-color: transparent;
+    border-bottom: 1px solid #e2e8f0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
   }
 
-  /* Standart Buton Tasarımı */
+  /* Kibar Link Tasarımı (Arka plan dolgusu yerine sadece zarif bir yazı) */
   .custom-nav a {
     text-decoration: none;
-    color: #4a5568;
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-weight: 600;
+    color: #718096;
+    padding: 8px 0;
+    font-weight: 500;
     font-size: 14px;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    background-color: #f7fafc;
-    border: 1px solid #e2e8f0;
+    letter-spacing: -0.2px;
+    transition: color 0.2s ease, border-color 0.2s ease;
     display: inline-flex;
     align-items: center;
+    position: relative;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -13px; /* Alt çizgiyle tam sıfırlanma hissi için */
   }
 
-  /* Fareyle Üzerine Gelindiğinde (Hover Animasyonu) */
+  /* Fareyle Üzerine Gelindiğinde (Yumuşak Koyu Ton Geçişi) */
   .custom-nav a:hover {
-    background-color: #edf2f7;
     color: #1a202c;
-    border-color: #cbd5e0;
-    transform: translateY(-1px);
   }
 
-  /* Tıklanmış / Aktif Olan Sayfa Tasarımı (Canlı Mavi ve Hafif Parlama) */
+  /* Aktif Olan Sayfa Tasarımı (Zarif İnce Alt Çizgi Efekti) */
   .custom-nav a.active {
-    background-color: #3182ce;
-    color: #ffffff;
-    border-color: #3182ce;
-    box-shadow: 0 4px 12px rgba(49, 130, 206, 0.3);
-    transform: none;
+    color: #3182ce;
+    font-weight: 600;
+    border-bottom: 2px solid #3182ce;
   }
 </style>
 
-<!-- 2. HARF HATALARI DÜZELTİLMİŞ HTML MENÜ YAPISI -->
+<!-- 2. HARF HATALARI TAMAMEN DÜZELTİLMİŞ HTML YAPISI -->
 <nav class="custom-nav">
   <a href="index.html">Ana Sayfa</a>
   <a href="Kampanyalar.html">Kampanyalar</a>
   <a href="BankaKampanyalari.html">Banka Kampanyaları</a>
   <a href="OperatorKampanyasi.html">Operatör Kampanyası</a>
   <a href="HatKampanyasi.html">Hat Kampanyası</a>
-  <a href="internetKampanyalari.html">İnternet Kampanyaları</a> <!-- Harf hataları düzeltildi -->
+  <a href="interntKampanyakari.html">İnternet Kampanyaları</a> <!-- Orijinal dosya adınızla birebir eşitlendi -->
   <a href="Piyasa.html">Piyasa Canlı Veri</a>
   <a href="ParaKazan.html">Para Kazan</a>
   <a href="MutinousFinance.html">Mutinous Finance</a>
-  <a href="privacy.html">Gizlilik Politikası</a> <!-- İstediğiniz yeni sayfa eklendi -->
-  <a href="deneme.html">Deneme</a> <!-- Mevcut çalışma sayfası eklendi -->
+  <a href="privacy.html">Gizlilik Politikası</a>
+  <a href="Anlikcalisma.html">Anlık Çalışma</a>
 </nav>
 
-<!-- 3. GİTHUB PAGES UYUMLU AKTİF SAYFA BULUCU JAVASCRIPT -->
+<!-- 3. AKILLI VE GİTHUB PAGES UYUMLU JAVASCRIPT -->
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    // Mevcut URL yolunu al, temizle ve küçük harfe çevir
+    // Tarayıcıdaki adresi al ve temizle
     let currentPath = window.location.pathname.split("/").pop().toLowerCase();
     
-    // GitHub Pages ana sayfa yönlendirmesi için kontrol (Boşsa index.html yap)
-    if (currentPath === "" || currentPath === "/") {
+    // GitHub Pages ana dizin kontrolleri (Boş kalma durumları için)
+    if (currentPath === "" || currentPath === "/" || currentPath === "mutinoustube.github.io") {
       currentPath = "index.html";
     }
     
-    // Menüdeki tüm linkleri tara
     const navLinks = document.querySelectorAll(".custom-nav a");
     
     navLinks.forEach(link => {
-      // Linklerin href değerini küçük harfe çevirerek eşleştir
+      // Kod içindeki href değerini al ve küçük harfe çevirerek karşılaştır
       const linkHref = link.getAttribute("href").toLowerCase();
       
       if (linkHref === currentPath) {
