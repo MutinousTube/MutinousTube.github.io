@@ -1,87 +1,319 @@
-<!-- 1. MODERN VE ŞIK CSS TASARIMI -->
-<style>
-  /* Menü Genel Kutusu */
-  .custom-nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    padding: 16px;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    margin-bottom: 20px;
-  }
-
-  /* Standart Buton Tasarımı */
-  .custom-nav a {
-    text-decoration: none;
-    color: #4a5568;
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 14px;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    background-color: #f7fafc;
-    border: 1px solid #e2e8f0;
-    display: inline-flex;
-    align-items: center;
-  }
-
-  /* Fareyle Üzerine Gelindiğinde (Hover Animasyonu) */
-  .custom-nav a:hover {
-    background-color: #edf2f7;
-    color: #1a202c;
-    border-color: #cbd5e0;
-    transform: translateY(-1px);
-  }
-
-  /* Tıklanmış / Aktif Olan Sayfa Tasarımı (Canlı Mavi ve Hafif Parlama) */
-  .custom-nav a.active {
-    background-color: #3182ce;
-    color: #ffffff;
-    border-color: #3182ce;
-    box-shadow: 0 4px 12px rgba(49, 130, 206, 0.3);
-    transform: none;
-  }
-</style>
-
-<!-- 2. HARF HATALARI DÜZELTİLMİŞ HTML MENÜ YAPISI -->
-<nav class="custom-nav">
-  <a href="index.html">Ana Sayfa</a>
-  <a href="Kampanyalar.html">Kampanyalar</a>
-  <a href="BankaKampanyalari.html">Banka Kampanyaları</a>
-  <a href="OperatorKampanyasi.html">Operatör Kampanyası</a>
-  <a href="HatKampanyasi.html">Hat Kampanyası</a>
-  <a href="internetKampanyalari.html">İnternet Kampanyaları</a> <!-- Harf hataları düzeltildi -->
-  <a href="Piyasa.html">Piyasa Canlı Veri</a>
-  <a href="ParaKazan.html">Para Kazan</a>
-  <a href="MutinousFinance.html">Mutinous Finance</a>
-  <a href="privacy.html">Gizlilik Politikası</a> <!-- İstediğiniz yeni sayfa eklendi -->
-  <a href="deneme.html">Deneme</a> <!-- Mevcut çalışma sayfası eklendi -->
-</nav>
-
-<!-- 3. GİTHUB PAGES UYUMLU AKTİF SAYFA BULUCU JAVASCRIPT -->
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Mevcut URL yolunu al, temizle ve küçük harfe çevir
-    let currentPath = window.location.pathname.split("/").pop().toLowerCase();
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MutinousTube - Zarif Menü</title>
     
-    // GitHub Pages ana sayfa yönlendirmesi için kontrol (Boşsa index.html yap)
-    if (currentPath === "" || currentPath === "/") {
-      currentPath = "index.html";
-    }
-    
-    // Menüdeki tüm linkleri tara
-    const navLinks = document.querySelectorAll(".custom-nav a");
-    
-    navLinks.forEach(link => {
-      // Linklerin href değerini küçük harfe çevirerek eşleştir
-      const linkHref = link.getAttribute("href").toLowerCase();
-      
-      if (linkHref === currentPath) {
-        link.classList.add("active");
-      }
-    });
-  });
-</script>
+    <!-- ============================================================ -->
+    <!-- 1. ZARİF MENÜ TASARIMI (CSS) -->
+    <!-- ============================================================ -->
+    <style>
+        /* ===== RESET ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f0f2f5;
+            padding: 30px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ===== MENÜ KONTEYNERİ ===== */
+        .nav-container {
+            width: 100%;
+            max-width: 1200px;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 20px 28px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.02);
+            transition: all 0.3s ease;
+        }
+
+        /* ===== MENÜ BAŞLIK ===== */
+        .nav-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid #f0f0f0;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-brand .logo-icon {
+            font-size: 28px;
+        }
+
+        .nav-brand .brand-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a2e;
+            letter-spacing: -0.3px;
+        }
+
+        .nav-brand .brand-text span {
+            color: #6c63ff;
+        }
+
+        .nav-badge {
+            background: #f0f0f5;
+            color: #6c63ff;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 14px;
+            border-radius: 20px;
+            letter-spacing: 0.3px;
+        }
+
+        /* ===== MENÜ LİNKLERİ ===== */
+        .custom-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .custom-nav a {
+            text-decoration: none;
+            color: #5a5a7a;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #f8f9fc;
+            border: 1px solid transparent;
+            position: relative;
+            letter-spacing: 0.2px;
+        }
+
+        /* ===== HOVER DURUMU ===== */
+        .custom-nav a:hover {
+            background: #eef0f7;
+            color: #2d2b55;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(108, 99, 255, 0.10);
+            border-color: #e0e3ef;
+        }
+
+        /* ===== AKTİF / TIKLANMIŞ DURUMU ===== */
+        .custom-nav a.active {
+            background: linear-gradient(135deg, #6c63ff, #5a52d5);
+            color: #ffffff;
+            border-color: #6c63ff;
+            box-shadow: 0 6px 20px rgba(108, 99, 255, 0.30);
+            transform: translateY(-1px);
+        }
+
+        /* ===== AKTİF LİNK İÇİN TIKLANMA EFEKTİ ===== */
+        .custom-nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            background: #ffffff;
+            border-radius: 4px;
+            opacity: 0.6;
+        }
+
+        /* ===== TIKLANMA ANİMASYONU (Geçici Geri Bildirim) ===== */
+        .custom-nav a:active {
+            transform: scale(0.96);
+            transition-duration: 0.05s;
+        }
+
+        /* ===== İKONLU LİNKLER ===== */
+        .custom-nav a .link-icon {
+            margin-right: 6px;
+            font-size: 15px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 16px 18px;
+                border-radius: 16px;
+            }
+
+            .nav-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+
+            .custom-nav {
+                gap: 6px;
+            }
+
+            .custom-nav a {
+                padding: 8px 14px;
+                font-size: 13px;
+                border-radius: 10px;
+            }
+
+            .custom-nav a.active::after {
+                width: 14px;
+                height: 2px;
+            }
+
+            .nav-brand .brand-text {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+
+            .custom-nav a {
+                padding: 6px 12px;
+                font-size: 12px;
+                border-radius: 8px;
+            }
+
+            .nav-container {
+                padding: 12px 14px;
+            }
+        }
+
+        /* ===== SAYFA İÇERİK ÖRNEĞİ ===== */
+        .page-content {
+            margin-top: 30px;
+            max-width: 800px;
+            text-align: center;
+            color: #4a4a6a;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .page-content h2 {
+            color: #1a1a2e;
+            font-weight: 600;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .page-content p {
+            color: #6a6a8a;
+        }
+
+        .page-content .highlight {
+            display: inline-block;
+            background: #f0f0f5;
+            padding: 2px 12px;
+            border-radius: 6px;
+            color: #6c63ff;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================================ -->
+    <!-- 2. ZARİF MENÜ HTML YAPISI -->
+    <!-- ============================================================ -->
+    <div class="nav-container">
+        
+        <!-- Menü Başlık / Logo -->
+        <div class="nav-header">
+            <div class="nav-brand">
+                <span class="logo-icon">✨</span>
+                <span class="brand-text">Mutinous<span>Tube</span></span>
+            </div>
+            <span class="nav-badge">✦ Keşfet</span>
+        </div>
+
+        <!-- Menü Linkleri -->
+        <nav class="custom-nav">
+            <a href="index.html"><span class="link-icon">🏠</span> Ana Sayfa</a>
+            <a href="Kampanyalar.html"><span class="link-icon">🎯</span> Kampanyalar</a>
+            <a href="BankaKampanyalari.html"><span class="link-icon">🏦</span> Banka Kampanyaları</a>
+            <a href="OperatorKampanyasi.html"><span class="link-icon">📱</span> Operatör Kampanyası</a>
+            <a href="HatKampanyasi.html"><span class="link-icon">📄</span> Hat Kampanyası</a>
+            <a href="interntKampanyakari.html"><span class="link-icon">🌐</span> İnternet Kampanyaları</a>
+            <a href="Piyasa.html"><span class="link-icon">📊</span> Piyasa Canlı Veri</a>
+            <a href="ParaKazan.html"><span class="link-icon">💰</span> Para Kazan</a>
+            <a href="MutinousFinance.html"><span class="link-icon">📈</span> Mutinous Finance</a>
+        </nav>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 3. SAYFA İÇERİK ÖRNEĞİ (Menünün altında gösterim için) -->
+    <!-- ============================================================ -->
+    <div class="page-content">
+        <h2>✨ Hoş Geldiniz</h2>
+        <p>
+            Yukarıdaki menüden bir sayfa seçin. 
+            <span class="highlight">Tıkladığınızda</span> 
+            aktif sayfa mavi renkle vurgulanır.
+        </p>
+        <p style="margin-top: 8px; font-size: 13px; color: #8a8aaa;">
+            ✦ Zarif ve kibar tasarım · Yumuşak geçişler · Modern görünüm
+        </p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 4. JAVASCRIPT - AKTİF SAYFAYI BUL VE VURGULA -->
+    <!-- ============================================================ -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Mevcut sayfa adını URL'den al (örn: index.html)
+            const currentPath = window.location.pathname.split("/").pop();
+
+            // Eğer ana dizinde ise (path boşsa) index.html olarak ata
+            const currentPage = currentPath || "index.html";
+
+            // Menüdeki tüm linkleri bul
+            const navLinks = document.querySelectorAll(".custom-nav a");
+
+            navLinks.forEach(link => {
+                // Linkin href değerini al
+                const linkHref = link.getAttribute("href");
+
+                // Eğer linkin href'i mevcut sayfa ile eşleşiyorsa "active" sınıfını ekle
+                if (linkHref === currentPage) {
+                    link.classList.add("active");
+                }
+            });
+
+            // ===== TIKLAMA EFEKTİ (Ekstra Geri Bildirim) =====
+            navLinks.forEach(link => {
+                link.addEventListener("click", function (e) {
+                    // Tüm linklerden active sınıfını kaldır
+                    navLinks.forEach(l => l.classList.remove("active"));
+
+                    // Tıklanan linke active sınıfını ekle
+                    this.classList.add("active");
+
+                    // (İsteğe bağlı) Sayfa yönlendirmesi yapılacaksa burada kalır
+                });
+            });
+        });
+
+        // ===== KONSOLA BİLGİ MESAJI (Geliştirici için) =====
+        console.log("✨ MutinousTube Zarif Menü Aktif");
+        console.log(`📄 Mevcut Sayfa: ${window.location.pathname.split("/").pop() || "index.html"}`);
+    </script>
+
+</body>
+</html>
