@@ -1,88 +1,169 @@
-<!-- 1. ELİT, KİBAR VE SÜPER MODERM CSS TASARIMI -->
+<!-- ============================================================ -->
+<!-- 1. PREMIUM, ULTRA ZARİF VE KİBAR TEK SATIR MENÜ TASARIMI     -->
+<!-- ============================================================ -->
 <style>
-  /* Menü Ana Gövdesi - Havada uçan, incecik çizgili cam kapsül */
-  .custom-nav {
-    display: inline-flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 12px;
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(12px); /* Arkadaki içeriği hafifçe bulanıklaştıran modern cam efekti */
+  /* Sayfa Reset ve Temel Ayarlar */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    background: #f8fafc;
+    min-height: 100vh;
+    padding: 16px;
+  }
+
+  /* Menü Ana Gövdesi (Yüzen, incecik, şeffaf cam kapsül) */
+  .mutinous-nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    border-radius: 30px; /* Tam yuvarlatılmış kibar kapsül hatları */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.02);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    margin: 20px auto;
-    max-width: fit-content;
+    border-radius: 20px;
+    padding: 6px 18px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: nowrap;
+    overflow: hidden;
   }
 
-  /* Zarif İnce Link Tasarımı */
-  .custom-nav a {
+  /* Zarif Logo Alanı */
+  .mutinous-brand {
+    display: flex;
+    align-items: center;
     text-decoration: none;
-    color: #64748b; /* Kibar füme/gri tonu */
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-weight: 500;
-    font-size: 13.5px;
-    letter-spacing: 0.2px; /* Harf araları hafif açılarak kibarlaştırıldı */
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    flex-shrink: 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: -0.4px;
+    white-space: nowrap;
+    padding: 6px 8px;
+  }
+  .mutinous-brand span {
+    color: #3182ce;
+    font-weight: 800;
+    margin-left: 1px;
+  }
+
+  /* İnce Ok Biçimli Kibar Geri Butonu */
+  .mutinous-back {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #94a3b8;
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.02);
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+  .mutinous-back:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: #1e293b;
+    transform: translateX(-1px);
+  }
+
+  /* Tek Satırda Kayan Kibar Link Alanı */
+  .mutinous-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+    justify-content: flex-end;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox için scrollbar gizleme */
+  }
+  .mutinous-links::-webkit-scrollbar {
+    display: none; /* Chrome/Safari için scrollbar gizleme */
+  }
+
+  /* Minimalist Link Tasarımı (Yazı İnceltildi ve Harf Aralıkları Açıldı) */
+  .mutinous-links a {
+    text-decoration: none;
+    color: #64748b;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 12.5px;
+    letter-spacing: 0.1px;
+    transition: all 0.2s ease;
+    background: transparent;
     white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .mutinous-links a:hover {
+    color: #0f172a;
+    background: rgba(0, 0, 0, 0.02);
   }
 
-  /* Fareyle Üzerine Gelindiğinde (Yumuşak Geçiş Efekti) */
-  .custom-nav a:hover {
-    color: #1e293b; /* Koyu antrasit */
-    background-color: rgba(0, 0, 0, 0.03);
-  }
-
-  /* TIKLANMIŞ / AKTİF OLAN SAYFA TASARIMI */
-  /* Kaba kutular yerine, yazının arkasında hafif parlayan pastel mavi bir bulut efekti */
-  .custom-nav a.active {
-    color: #2563eb !important; /* Premium Canlı Mavi */
-    background-color: rgba(37, 99, 235, 0.08) !important; /* Gözü yormayan pastel mavi arka plan dolgusu */
+  /* TIKLANAN / AKTİF OLAN SAYFA (Kibar Pastel Mavi Bulut Efekti) */
+  .mutinous-links a.active {
+    background: rgba(49, 130, 206, 0.08) !important;
+    color: #3182ce !important;
     font-weight: 600;
+  }
+
+  /* Ekran Küçüldükçe Taşmayı Önleyen Hassas Ayar */
+  @media (max-width: 768px) {
+    .mutinous-nav { padding: 5px 12px; border-radius: 14px; }
+    .mutinous-links a { font-size: 11.5px; padding: 5px 10px; }
   }
 </style>
 
-<!-- 2. TÜM SAYFA LİSTESİ VE HARF EŞİTLEMESİ YAPILMIŞ HTML -->
-<div style="text-align: center; width: 100%;">
-  <nav class="custom-nav">
+<!-- ============================================================ -->
+<!-- 2. HARF HATALARI SIFIRLANMIŞ MİNİMALİST HTML MENÜ            -->
+<!-- ============================================================ -->
+<nav class="mutinous-nav">
+  <!-- LOGO -->
+  <a href="index.html" class="mutinous-brand">
+    Mutinous<span>Tube</span>
+  </a>
+
+  <!-- KİBAR GERİ BUTONU -->
+  <a href="#" class="mutinous-back" onclick="history.back(); return false;" title="Geri Dön">←</a>
+
+  <!-- LİNKLER (Tek satırda akar, asla alt satıra düşmez) -->
+  <div class="mutinous-links">
     <a href="index.html">Ana Sayfa</a>
     <a href="Kampanyalar.html">Kampanyalar</a>
     <a href="BankaKampanyalari.html">Banka Kampanyaları</a>
-    <a href="OperatorKampanyasi.html text-shadow">Operatör Kampanyası</a>
+    <a href="OperatorKampanyasi.html">Operatör Kampanyası</a>
     <a href="HatKampanyasi.html">Hat Kampanyası</a>
-    <a href="interntKampanyakari.html">İnternet Kampanyaları</a> <!-- GitHub Pages deponuzdaki tam ismiyle korundu -->
+    <a href="internetKampanyalari.html">İnternet Kampanyaları</a> <!-- Tüm harf hataları düzeltildi -->
     <a href="Piyasa.html">Piyasa Canlı Veri</a>
     <a href="ParaKazan.html">Para Kazan</a>
     <a href="MutinousFinance.html">Mutinous Finance</a>
     <a href="privacy.html">Gizlilik Politikası</a>
     <a href="Anlikcalisma.html">Anlık Çalışma</a>
-  </nav>
-</div>
+  </div>
+</nav>
 
-<!-- 3. BÜYÜK/KÜÇÜK HARF DUYARLI AKILLI JAVASCRIPT BULUCU -->
+<!-- ============================================================ -->
+<!-- 3. OTOMATİK AKTİF SAYFA RENKLENDİRİCİ JAVASCRIPT            -->
+<!-- ============================================================ -->
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    // Tarayıcıdaki adresi al, temizle ve küçük harfe zorla
+    // Adres çubuğundaki sayfa adını temiz bir şekilde alır ve küçük harfe zorlar
     let currentPath = window.location.pathname.split("/").pop().toLowerCase();
     
-    // GitHub Pages ana dizin (boş kalma veya sadece eğik çizgi) kontrolleri
+    // GitHub Pages ana sayfa yönlendirmesi boş gelirse index.html kabul et
     if (currentPath === "" || currentPath === "/" || currentPath === "mutinoustube.github.io") {
       currentPath = "index.html";
     }
     
-    const navLinks = document.querySelectorAll(".custom-nav a");
-    
+    // Menüdeki tüm linkleri bul ve eşleştir
+    const navLinks = document.querySelectorAll(".mutinous-links a");
     navLinks.forEach(link => {
-      // Kod içindeki href değerini al ve küçük harfe çevirerek karşılaştır (Hata payını sıfırlar)
       const linkHref = link.getAttribute("href").toLowerCase();
-      
       if (linkHref === currentPath) {
         link.classList.add("active");
       }
