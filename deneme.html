@@ -13,43 +13,46 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #f5f7fa;
             min-height: 100vh;
-            padding: 12px;
+            padding: 10px;
         }
 
-        /* ===== MENÜ - TEK SATIR ===== */
+        /* ===== MENÜ - TEK SATIR KOMPAKT ===== */
         .mutinous-nav {
             max-width: 1200px;
             margin: 0 auto;
             background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border-radius: 14px;
-            padding: 6px 16px;
-            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
+            border-radius: 12px;
+            padding: 4px 12px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.3);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 6px;
+            gap: 2px;
             flex-wrap: nowrap;
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
+        }
+
+        .mutinous-nav::-webkit-scrollbar {
+            display: none;
         }
 
         /* ===== LOGO ===== */
         .mutinous-brand {
             display: flex;
             align-items: center;
-            gap: 4px;
             text-decoration: none;
             flex-shrink: 0;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             color: #1a1a2e;
             letter-spacing: -0.3px;
             white-space: nowrap;
-            padding: 4px 6px;
-            border-radius: 8px;
+            padding: 3px 6px;
+            border-radius: 6px;
             transition: background 0.2s ease;
         }
 
@@ -64,19 +67,19 @@
             background-clip: text;
         }
 
-        /* ===== GERİ BUTONU (Küçük) ===== */
+        /* ===== GERİ BUTONU ===== */
         .mutinous-back {
             display: flex;
             align-items: center;
-            gap: 2px;
+            gap: 1px;
             text-decoration: none;
             color: #8a8aaa;
             font-size: 12px;
             font-weight: 500;
-            padding: 3px 10px;
-            border-radius: 16px;
-            background: rgba(108, 99, 255, 0.05);
-            border: 1px solid rgba(108, 99, 255, 0.06);
+            padding: 2px 8px;
+            border-radius: 14px;
+            background: rgba(108, 99, 255, 0.04);
+            border: 1px solid rgba(108, 99, 255, 0.05);
             transition: all 0.25s ease;
             flex-shrink: 0;
             white-space: nowrap;
@@ -89,7 +92,7 @@
         }
 
         .mutinous-back .back-icon {
-            font-size: 13px;
+            font-size: 12px;
             transition: transform 0.25s ease;
         }
 
@@ -97,11 +100,11 @@
             transform: translateX(-3px);
         }
 
-        /* ===== MENÜ LİNKLERİ (Tek Satır) ===== */
+        /* ===== MENÜ LİNKLERİ ===== */
         .mutinous-links {
             display: flex;
             align-items: center;
-            gap: 2px;
+            gap: 1px;
             flex: 1;
             justify-content: flex-end;
             overflow-x: auto;
@@ -116,8 +119,8 @@
         .mutinous-links a {
             text-decoration: none;
             color: #5a5a7a;
-            padding: 4px 12px;
-            border-radius: 16px;
+            padding: 3px 10px;
+            border-radius: 14px;
             font-weight: 500;
             font-size: 12px;
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -138,7 +141,7 @@
             background: linear-gradient(135deg, #6c63ff, #5a52d5);
             color: #ffffff;
             border-color: #6c63ff;
-            box-shadow: 0 3px 12px rgba(108, 99, 255, 0.20);
+            box-shadow: 0 2px 10px rgba(108, 99, 255, 0.18);
         }
 
         .mutinous-links a:active {
@@ -147,51 +150,33 @@
         }
 
         .mutinous-links a .link-icon {
-            margin-right: 3px;
-            font-size: 12px;
-        }
-
-        /* ===== MOBİL HAMBURGER (Gizli - Tek satırda gözükmez) ===== */
-        .mutinous-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 18px;
-            cursor: pointer;
-            color: #1a1a2e;
-            padding: 2px 6px;
-            border-radius: 6px;
-            transition: background 0.25s ease;
-            flex-shrink: 0;
-        }
-
-        .mutinous-toggle:hover {
-            background: rgba(0, 0, 0, 0.04);
+            margin-right: 2px;
+            font-size: 11px;
         }
 
         /* ============================================================ */
-        /* RESPONSIVE - DAR EKRANLARDA KAYDIRMA */
+        /* RESPONSIVE - DAR EKRANLAR */
         /* ============================================================ */
         @media (max-width: 900px) {
             .mutinous-nav {
-                padding: 4px 12px;
-                border-radius: 12px;
-                gap: 4px;
+                padding: 3px 10px;
+                border-radius: 10px;
+                gap: 1px;
             }
 
             .mutinous-brand {
                 font-size: 13px;
-                padding: 3px 4px;
+                padding: 2px 4px;
             }
 
             .mutinous-links a {
                 font-size: 11px;
-                padding: 3px 10px;
+                padding: 2px 8px;
             }
 
             .mutinous-back {
                 font-size: 11px;
-                padding: 2px 8px;
+                padding: 2px 6px;
             }
 
             .mutinous-back .back-text {
@@ -201,13 +186,13 @@
 
         @media (max-width: 600px) {
             body {
-                padding: 6px;
+                padding: 5px;
             }
 
             .mutinous-nav {
-                padding: 3px 8px;
-                border-radius: 10px;
-                gap: 3px;
+                padding: 2px 8px;
+                border-radius: 8px;
+                gap: 0px;
             }
 
             .mutinous-brand {
@@ -217,30 +202,30 @@
 
             .mutinous-links a {
                 font-size: 10px;
-                padding: 2px 8px;
-                border-radius: 12px;
+                padding: 2px 6px;
+                border-radius: 10px;
             }
 
             .mutinous-links a .link-icon {
                 font-size: 10px;
-                margin-right: 2px;
+                margin-right: 1px;
             }
 
             .mutinous-back {
                 font-size: 10px;
-                padding: 2px 6px;
-                border-radius: 12px;
+                padding: 1px 5px;
+                border-radius: 10px;
             }
 
             .mutinous-back .back-icon {
-                font-size: 11px;
+                font-size: 10px;
             }
         }
 
         /* ===== SAYFA İÇERİK ÖRNEĞİ ===== */
         .page-content {
             max-width: 800px;
-            margin: 30px auto 0;
+            margin: 25px auto 0;
             text-align: center;
             color: #4a4a6a;
             font-size: 15px;
@@ -280,16 +265,16 @@
 <body>
 
     <!-- ============================================================ -->
-    <!-- 2. TEK SATIR MENÜ HTML -->
+    <!-- KOMPAKT TEK SATIR MENÜ -->
     <!-- ============================================================ -->
     <nav class="mutinous-nav">
 
-        <!-- LOGO (Tıklanabilir) -->
+        <!-- LOGO -->
         <a href="https://mutinoustube.github.io/" class="mutinous-brand" title="MutinousTube Ana Sayfa">
             Mutinous<span>Tube</span>
         </a>
 
-        <!-- GERİ BUTONU (Küçük) -->
+        <!-- GERİ BUTONU -->
         <a href="#" class="mutinous-back" onclick="history.back(); return false;" title="Geri Dön">
             <span class="back-icon">←</span>
             <span class="back-text">Geri</span>
@@ -311,7 +296,7 @@
     </nav>
 
     <!-- ============================================================ -->
-    <!-- 3. SAYFA İÇERİK ÖRNEĞİ -->
+    <!-- SAYFA İÇERİK ÖRNEĞİ -->
     <!-- ============================================================ -->
     <div class="page-content">
         <h2>✨ Zarif & Kibar Menü</h2>
@@ -321,7 +306,7 @@
             aktif sayfa mor renkle vurgulanır.
         </p>
         <p style="margin-top: 8px; font-size: 13px; color: #8a8aaa;">
-            ✦ Kaydırılabilir · Mobil uyumlu · Az yer kaplar
+            ✦ Kompakt · Kaydırılabilir · Mobil uyumlu
         </p>
         <p class="demo-note">
             ← Geri butonu ile bir önceki sayfaya dönebilirsiniz
@@ -329,7 +314,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- 4. JAVASCRIPT -->
+    <!-- JAVASCRIPT -->
     <!-- ============================================================ -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
