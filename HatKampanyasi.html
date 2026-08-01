@@ -3,6 +3,311 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MutinousTube - Zarif Menü</title>
+    
+    <style>
+        /* ===== RESET ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            padding: 8px;
+        }
+
+        /* ===== MENÜ - TEK SATIR KOMPAKT ===== */
+        .mutinous-nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 10px;
+            padding: 2px 6px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1px;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .mutinous-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* ===== LOGO - KIRMIZI / MAVİ (Yeni Sekmede Açılır) ===== */
+        .mutinous-brand {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            flex-shrink: 0;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            white-space: nowrap;
+            padding: 2px 4px;
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+
+        .mutinous-brand:hover {
+            background: rgba(0, 0, 0, 0.04);
+        }
+
+        .mutinous-brand .mutinous {
+            color: #dc2626;
+        }
+
+        .mutinous-brand .tube {
+            color: #2563eb;
+        }
+
+        /* ===== GERİ BUTONU ===== */
+        .mutinous-back {
+            display: flex;
+            align-items: center;
+            gap: 0px;
+            text-decoration: none;
+            color: #8a8aaa;
+            font-size: 11px;
+            font-weight: 500;
+            padding: 1px 5px;
+            border-radius: 12px;
+            background: rgba(108, 99, 255, 0.03);
+            border: 1px solid rgba(108, 99, 255, 0.04);
+            transition: all 0.25s ease;
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
+
+        .mutinous-back:hover {
+            background: rgba(108, 99, 255, 0.08);
+            color: #5a52d5;
+            transform: translateX(-2px);
+        }
+
+        .mutinous-back .back-icon {
+            font-size: 11px;
+            transition: transform 0.25s ease;
+        }
+
+        .mutinous-back:hover .back-icon {
+            transform: translateX(-3px);
+        }
+
+        .mutinous-back .back-text {
+            font-size: 10px;
+        }
+
+        /* ===== MENÜ LİNKLERİ ===== */
+        .mutinous-links {
+            display: flex;
+            align-items: center;
+            gap: 1px;
+            flex: 1;
+            justify-content: flex-end;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .mutinous-links::-webkit-scrollbar {
+            display: none;
+        }
+
+        .mutinous-links a {
+            text-decoration: none;
+            color: #5a5a7a;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 11px;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            background: transparent;
+            border: 1px solid transparent;
+            white-space: nowrap;
+            letter-spacing: 0.1px;
+            flex-shrink: 0;
+        }
+
+        .mutinous-links a:hover {
+            background: rgba(108, 99, 255, 0.06);
+            color: #2d2b55;
+            border-color: rgba(108, 99, 255, 0.08);
+        }
+
+        .mutinous-links a.active {
+            background: linear-gradient(135deg, #6c63ff, #5a52d5);
+            color: #ffffff;
+            border-color: #6c63ff;
+            box-shadow: 0 2px 8px rgba(108, 99, 255, 0.15);
+        }
+
+        .mutinous-links a:active {
+            transform: scale(0.94);
+            transition-duration: 0.05s;
+        }
+
+        .mutinous-links a .link-icon {
+            margin-right: 1px;
+            font-size: 10px;
+        }
+
+        /* ============================================================ */
+        /* RESPONSIVE */
+        /* ============================================================ */
+        @media (max-width: 900px) {
+            .mutinous-nav {
+                padding: 2px 4px;
+                border-radius: 8px;
+            }
+
+            .mutinous-brand {
+                font-size: 12px;
+                padding: 1px 3px;
+            }
+
+            .mutinous-links a {
+                font-size: 10px;
+                padding: 1px 6px;
+            }
+
+            .mutinous-back {
+                font-size: 10px;
+                padding: 1px 4px;
+            }
+
+            .mutinous-back .back-text {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 4px;
+            }
+
+            .mutinous-nav {
+                padding: 1px 4px;
+                border-radius: 6px;
+                gap: 0px;
+            }
+
+            .mutinous-brand {
+                font-size: 10px;
+                padding: 1px 2px;
+            }
+
+            .mutinous-links a {
+                font-size: 9px;
+                padding: 1px 4px;
+                border-radius: 8px;
+            }
+
+            .mutinous-links a .link-icon {
+                font-size: 9px;
+                margin-right: 0px;
+            }
+
+            .mutinous-back {
+                font-size: 9px;
+                padding: 1px 3px;
+                border-radius: 8px;
+            }
+
+            .mutinous-back .back-icon {
+                font-size: 9px;
+            }
+        }
+
+        /* ===== SAYFA İÇERİK ÖRNEĞİ ===== */
+        .page-content {
+            max-width: 800px;
+            margin: 20px auto 0;
+            text-align: center;
+            color: #4a4a6a;
+            font-size: 15px;
+            line-height: 1.7;
+            padding: 20px;
+        }
+
+        .page-content h2 {
+            color: #1a1a2e;
+            font-weight: 600;
+            font-size: 22px;
+            margin-bottom: 6px;
+        }
+
+        .page-content p {
+            color: #6a6a8a;
+        }
+
+        .page-content .highlight {
+            display: inline-block;
+            background: #f0f0f5;
+            padding: 2px 12px;
+            border-radius: 6px;
+            color: #6c63ff;
+            font-weight: 600;
+        }
+
+        .demo-note {
+            margin-top: 12px;
+            font-size: 12px;
+            color: #9a9aba;
+            letter-spacing: 0.3px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================================ -->
+    <!-- KOMPAKT TEK SATIR MENÜ -->
+    <!-- ============================================================ -->
+    <nav class="mutinous-nav">
+
+        <!-- LOGO - Yeni Sekmede YouTube Kanalı Açar -->
+        <a href="https://www.youtube.com/@MutinousTube" target="_blank" rel="noopener noreferrer" class="mutinous-brand" title="MutinousTube YouTube Kanalı (Yeni Sekmede Açılır)">
+            <span class="mutinous">Mutinous</span><span class="tube">Tube</span>
+        </a>
+
+        <!-- GERİ BUTONU -->
+        <a href="#" class="mutinous-back" onclick="history.back(); return false;" title="Geri Dön">
+            <span class="back-icon">←</span>
+            <span class="back-text">Geri</span>
+        </a>
+
+        <!-- MENÜ LİNKLERİ -->
+        <div class="mutinous-links">
+            <a href="index.html"><span class="link-icon">🏠</span> Ana</a>
+            <a href="Videolar.html"><span class="link-icon">🎬</span> Videolar</a>
+            <a href="Programlar.html"><span class="link-icon">📦</span> Program</a>
+            <a href="Fotograf.html"><span class="link-icon">🖼️</span> Fotoğraf</a>
+            <a href="Yazilim.html"><span class="link-icon">💻</span> Yazılım</a>
+            <a href="Kampanyalar.html"><span class="link-icon">🎯</span> Kampanya</a>
+            <a href="BankaKampanyalari.html"><span class="link-icon">🏦</span> Banka</a>
+            <a href="OperatorKampanyasi.html"><span class="link-icon">📱</span> Operatör</a>
+            <a href="HatKampanyasi.html"><span class="link-icon">📄</span> Hat</a>
+            <a href="interntKampanyakari.html"><span class="link-icon">🌐</span> İnternet</a>
+            <a href="Piyasa.html"><span class="link-icon">📊</span> Piyasa</a>
+            <a href="ParaKazan.html"><span class="link-icon">💰</span> Kazan</a>
+            <a href="MutinousFinance.html"><span class="link-icon">📈</span> Finance</a>
+        </div>
+
+    </nav>
+    
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vodafone Özel Kampanya Fırsatları</title>
     <!-- Google Fonts ve FontAwesome Fırsat İkonları İçin -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
